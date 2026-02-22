@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Public Profile - Ina</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-gradient-btn {
+            background: linear-gradient(90deg, #ec5b13 0%, #ff7e5f 100%);
+        }
+        .glass-header {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<!-- Sticky Top Navigation Overlay -->
+<div class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 glass-header">
+<button class="flex items-center justify-center size-10 rounded-full bg-black/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full bg-black/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Main Content Scroll Area -->
+<main class="pb-32">
+<!-- Photo Gallery Section -->
+<div class="relative w-full aspect-[3/4] overflow-hidden">
+<img alt="Portrait of a young woman smiling outdoors" class="w-full h-full object-cover" data-alt="Close-up portrait of Meera smiling in natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TIUmnEvQhAowHN9Yk1Lam1UjgtzDSUSOc-HO-JOfaAWIYt-_l54h4T80OQjzdqzIBIO_HlE-MSWG7_wmBhYyCS3VZoreVGg0FD3ydlqhtzgyYuL6P2DAr8Mc1wI31OQ_EJ45tE6gTRoxGBYcVrtPRjL_gXwWn39FitYSEICTuUhaiaRUjN3YGX5yJZUjB9IEfgfT6nOwq1f-Q_W62HNGFZ6i8kAesZPJpZXgKIXak4EQ7N58ZCwJdKnnTFb_LMk_rD4QQMCsk4Nl"/>
+<!-- Pagination Indicators -->
+<div class="absolute top-20 left-0 right-0 flex justify-center gap-1.5 px-4">
+<div class="h-1 w-8 rounded-full bg-white"></div>
+<div class="h-1 w-8 rounded-full bg-white/30"></div>
+<div class="h-1 w-8 rounded-full bg-white/30"></div>
+<div class="h-1 w-8 rounded-full bg-white/30"></div>
+</div>
+<!-- Gradient bottom overlay for text readability -->
+<div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent"></div>
+</div>
+<!-- Profile Basic Info -->
+<div class="px-6 -mt-10 relative z-10">
+<div class="flex items-center gap-2">
+<h1 class="text-3xl font-bold tracking-tight">Meera, 24</h1>
+<span class="material-symbols-outlined text-blue-500 text-[24px]" style="font-variation-settings: 'FILL' 1">verified</span>
+</div>
+<div class="mt-2 flex flex-col gap-1 text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+<span>3 km away</span>
+<span class="mx-1">•</span>
+<span class="material-symbols-outlined text-green-500 text-lg">schedule</span>
+<span>Active now</span>
+</div>
+</div>
+</div>
+<!-- Mutual Interests Callout -->
+<div class="px-6 mt-8">
+<div class="bg-primary/10 border border-primary/20 rounded-xl p-5">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl">🌟</span>
+<h3 class="text-lg font-bold text-primary">You have 8 interests in common!</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium flex items-center gap-1">
+                        🎨 Art
+                    </span>
+<span class="px-3 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium flex items-center gap-1">
+                        🍿 Movies
+                    </span>
+<span class="px-3 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium flex items-center gap-1">
+                        ✈️ Travel
+                    </span>
+<span class="px-3 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium">
+                        +5 more
+                    </span>
+</div>
+</div>
+</div>
+<!-- Bio Section -->
+<div class="px-6 mt-10">
+<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-pink-500 mb-3">About Me</h4>
+<p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+                Lover of aesthetic cafes, independent cinema, and weekend getaways. Looking for someone who can debate over the best filter coffee in town. ☕️✨
+            </p>
+</div>
+<!-- Details Grid -->
+<div class="px-6 mt-10 space-y-4">
+<div class="flex items-center gap-4 py-2">
+<span class="material-symbols-outlined text-slate-400">school</span>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px]">Education</p>
+<p class="font-medium">Masters in Fine Arts</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-2 border-t border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400">work</span>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px]">Profession</p>
+<p class="font-medium">Senior Graphic Designer</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-2 border-t border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400">straighten</span>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px]">Height</p>
+<p class="font-medium">165 cm</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-2 border-t border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400">language</span>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px]">Languages</p>
+<p class="font-medium">Malayalam, English</p>
+</div>
+</div>
+</div>
+<!-- Location Preview (Minimal) -->
+<div class="px-6 mt-10">
+<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-pink-500 mb-4">Location</h4>
+<div class="rounded-xl overflow-hidden h-32 relative group">
+<img alt="Map view placeholder" class="w-full h-full object-cover brightness-75 grayscale-[0.2]" data-alt="Abstract map background showing Kochi area" data-location="Kochi, Kerala" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy5Rtq9niQLlPMBYrYu8fER0dRrqRW-tiiuv97aKXU4U9sh85guxXOzMTLZODgpyGy6QwiKrEwTIrFwZfsLkvv3cPhPsUWWiT0lIzxMQKS7Hp6tiEjufoOiA3tfvziV0T2W3634x_vSgjyiLCMcnYvDv3Mma6Xbc5ECZGfKWep2BKVaiaYXWg_3Vd6jfvmUWWapnKDchMJeqDVTBzdwvfDXhgkQIBVflW75l5iO90BXQyv2C3cu7uT0i658mthBJLuq-w86HtPxHHF"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary/90 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                        3 km away
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent backdrop-blur-sm z-50">
+<div class="max-w-md mx-auto flex gap-3">
+<button class="flex-1 custom-gradient-btn h-14 rounded-xl flex items-center justify-center gap-2 text-white font-bold text-lg shadow-xl active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+                Message
+            </button>
+<button class="size-14 rounded-xl border-2 border-primary/40 flex items-center justify-center text-primary active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[28px]">call</span>
+</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Verify Your Number</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E91E8C",
+                        "accent": "#FF6B6B",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .otp-glow:focus {
+            box-shadow: 0 0 15px rgba(233, 30, 140, 0.4);
+            border-color: #E91E8C;
+        }
+        .bg-romantic-gradient {
+            background: linear-gradient(135deg, #E91E8C 0%, #FF6B6B 100%);
+        }
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D0D0D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center px-6 pt-8 pb-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800/40 text-slate-100 hover:bg-slate-700/60 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col items-center px-6 max-w-md mx-auto w-full">
+<!-- Large Illustrated Phone Icon Section -->
+<div class="relative flex flex-col items-center justify-center py-10 w-full">
+<!-- Background Glow -->
+<div class="absolute w-48 h-48 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<div class="relative flex flex-col items-center">
+<!-- Phone Icon -->
+<div class="w-24 h-24 bg-slate-800/50 rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl relative overflow-visible">
+<span class="material-symbols-outlined text-5xl text-slate-300">smartphone</span>
+<!-- Animated Pink Signal Waves (Static UI representation) -->
+<div class="absolute -top-4 -right-4">
+<span class="material-symbols-outlined text-primary text-4xl opacity-80" style="transform: rotate(45deg);">sensors</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Heading & Sub-heading -->
+<div class="text-center mt-4">
+<h1 class="font-serif text-[32px] leading-tight text-white mb-3">Verify Your Number</h1>
+<p class="text-slate-400 text-base font-normal leading-relaxed">
+                We sent a 6-digit code to <span class="font-bold text-slate-100">+91 98765 43210</span>
+</p>
+</div>
+<!-- OTP Input Grid -->
+<div class="mt-12 w-full">
+<div class="flex justify-center gap-[10px]">
+<!-- Each box is 48x56px -->
+<input class="w-[48px] h-[56px] text-center text-2xl font-semibold bg-slate-800/40 border-2 border-transparent rounded-lg text-white focus:outline-none otp-glow transition-all duration-300" maxlength="1" placeholder="•" type="text"/>
+<input class="w-[48px] h-[56px] text-center text-2xl font-semibold bg-slate-800/40 border-2 border-transparent rounded-lg text-white focus:outline-none otp-glow transition-all duration-300" maxlength="1" placeholder="•" type="text"/>
+<input class="w-[48px] h-[56px] text-center text-2xl font-semibold bg-slate-800/40 border-2 border-transparent rounded-lg text-white focus:outline-none otp-glow transition-all duration-300" maxlength="1" placeholder="•" type="text"/>
+<input class="w-[48px] h-[56px] text-center text-2xl font-semibold bg-slate-800/40 border-2 border-transparent rounded-lg text-white focus:outline-none otp-glow transition-all duration-300" maxlength="1" placeholder="•" type="text"/>
+<input class="w-[48px] h-[56px] text-center text-2xl font-semibold bg-slate-800/40 border-2 border-transparent rounded-lg text-white focus:outline-none otp-glow transition-all duration-300" maxlength="1" placeholder="•" type="text"/>
+<input class="w-[48px] h-[56px] text-center text-2xl font-semibold bg-slate-800/40 border-2 border-transparent rounded-lg text-white focus:outline-none otp-glow transition-all duration-300" maxlength="1" placeholder="•" type="text"/>
+</div>
+</div>
+<!-- Timer / Resend Section -->
+<div class="mt-8 text-center">
+<p class="text-slate-500 text-sm">
+                Resend code in <span class="text-slate-400 font-medium">00:45</span>
+</p>
+</div>
+<!-- Bottom Verify Button -->
+<div class="mt-auto pb-12 w-full pt-10">
+<button class="w-full h-14 bg-romantic-gradient rounded-full text-white font-bold text-lg shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                Verify
+                <span class="material-symbols-outlined text-xl">verified</span>
+</button>
+</div>
+</main>
+<!-- Branding Footer -->
+<footer class="text-center pb-6">
+<p class="text-slate-600 text-xs font-medium tracking-widest uppercase">ഇണ • Ina</p>
+</footer>
+</body></html>

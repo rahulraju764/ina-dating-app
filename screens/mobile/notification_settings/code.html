@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="ml"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "card-dark": "#1A1A2E",
+                        "border-dark": "#2A2A3E",
+                        "muted-text": "#94a3b8"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-slate-100 antialiased">
+<div class="mx-auto max-w-md min-h-screen flex flex-col pb-10">
+<!-- App Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-4 py-6 bg-background-dark/80 backdrop-blur-md">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-100">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Notifications</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex-1 px-4 space-y-6">
+<!-- Branding (Optional Header) -->
+<div class="flex items-center gap-2 mb-2">
+<span class="text-primary text-2xl font-bold">ഇണ</span>
+<span class="text-xs uppercase tracking-[0.2em] text-muted-text font-semibold">Settings</span>
+</div>
+<!-- Master Toggle Card -->
+<section class="bg-card-dark border border-border-dark rounded-xl p-5 shadow-xl">
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1">
+<h2 class="text-lg font-bold">Push Notifications</h2>
+<p class="text-sm text-muted-text">Turn on to never miss a match</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<!-- Grouped Section: Matches & Discovery -->
+<section class="space-y-3">
+<h3 class="text-xs font-bold uppercase tracking-widest text-muted-text px-1">Matches &amp; Discovery</h3>
+<div class="bg-card-dark border border-border-dark rounded-xl divide-y divide-border-dark overflow-hidden">
+<!-- Row 1 -->
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined filled-icon">favorite</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">New Matches</p>
+<p class="text-xs text-muted-text">When you find a perfect match</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">Likes &amp; Super Likes</p>
+<p class="text-xs text-muted-text">See who's interested in you</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">near_me</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-1">
+<p class="text-[15px] font-semibold">Someone Nearby</p>
+<span class="material-symbols-outlined text-xs text-primary cursor-help">info</span>
+</div>
+<p class="text-xs text-muted-text">Discover matches in your area</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Grouped Section: Messages -->
+<section class="space-y-3">
+<h3 class="text-xs font-bold uppercase tracking-widest text-muted-text px-1">Messages</h3>
+<div class="bg-card-dark border border-border-dark rounded-xl divide-y divide-border-dark overflow-hidden">
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">New Messages</p>
+<p class="text-xs text-muted-text">Direct chat notifications</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">featured_seasonal_and_gifts</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">Gifts Received</p>
+<p class="text-xs text-muted-text">Digital gifts and tokens</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Grouped Section: Calls -->
+<section class="space-y-3">
+<h3 class="text-xs font-bold uppercase tracking-widest text-muted-text px-1">Calls</h3>
+<div class="bg-card-dark border border-border-dark rounded-xl overflow-hidden">
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">Incoming Calls</p>
+<p class="text-xs text-muted-text">Video and voice call alerts</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Grouped Section: App Updates -->
+<section class="space-y-3">
+<h3 class="text-xs font-bold uppercase tracking-widest text-muted-text px-1">App Updates</h3>
+<div class="bg-card-dark border border-border-dark rounded-xl divide-y divide-border-dark overflow-hidden">
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">Promotions &amp; Offers</p>
+<p class="text-xs text-muted-text">Discounts on premium features</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center p-4 gap-4">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">update</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-[15px] font-semibold">App Updates</p>
+<p class="text-xs text-muted-text">New features and improvements</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer scale-90">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Footer Note -->
+<footer class="pt-6 pb-8 text-center space-y-4">
+<p class="text-sm text-muted-text px-8">
+                    Notifications are also controlled by your device settings.
+                </p>
+<a class="inline-flex items-center text-primary font-semibold hover:underline decoration-primary underline-offset-4" href="#">
+                    Open Device Settings
+                    <span class="material-symbols-outlined text-base ml-1">arrow_forward</span>
+</a>
+</footer>
+</main>
+<!-- Bottom Nav Simulation (To match common mobile layout) -->
+<nav class="sticky bottom-0 border-t border-border-dark bg-background-dark/95 backdrop-blur-md px-6 py-3 flex justify-between items-center mt-auto">
+<a class="flex flex-col items-center text-muted-text" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center text-muted-text" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] mt-1">Likes</span>
+</a>
+<a class="flex flex-col items-center text-muted-text" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-[10px] mt-1">Messages</span>
+</a>
+<a class="flex flex-col items-center text-primary" href="#">
+<span class="material-symbols-outlined filled-icon">person</span>
+<span class="text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

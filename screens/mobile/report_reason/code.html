@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Report User - Ina</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#120d0b",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .radio-custom:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-background-light dark:bg-background-dark shadow-xl">
+<!-- Top App Bar -->
+<header class="flex items-center px-4 py-4 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back</span>
+</button>
+<h1 class="ml-4 text-lg font-bold tracking-tight">Report User</h1>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-5 py-2">
+<h2 class="text-2xl font-bold leading-tight mb-6 mt-2 text-slate-900 dark:text-slate-50">
+                Why are you reporting Meera?
+            </h2>
+<!-- Report Reasons List -->
+<div class="flex flex-col gap-2">
+<!-- Selected Reason Example -->
+<label class="flex items-center gap-4 rounded-xl border border-primary/30 bg-primary/10 p-4 cursor-pointer transition-all">
+<div class="flex grow flex-col">
+<span class="text-sm font-medium">Fake profile / Impersonation</span>
+</div>
+<input checked="" class="radio-custom h-5 w-5 border-2 border-primary bg-primary text-primary focus:ring-offset-0 focus:ring-0 rounded-full" name="report_reason" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-800 p-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">
+<div class="flex grow flex-col">
+<span class="text-sm font-medium">Inappropriate photos</span>
+</div>
+<input class="radio-custom h-5 w-5 border-2 border-slate-400 dark:border-slate-600 bg-transparent text-primary focus:ring-offset-0 focus:ring-0 rounded-full" name="report_reason" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-800 p-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">
+<div class="flex grow flex-col">
+<span class="text-sm font-medium">Harassment or spam</span>
+</div>
+<input class="radio-custom h-5 w-5 border-2 border-slate-400 dark:border-slate-600 bg-transparent text-primary focus:ring-offset-0 focus:ring-0 rounded-full" name="report_reason" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-800 p-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">
+<div class="flex grow flex-col">
+<span class="text-sm font-medium">Scam or fraud</span>
+</div>
+<input class="radio-custom h-5 w-5 border-2 border-slate-400 dark:border-slate-600 bg-transparent text-primary focus:ring-offset-0 focus:ring-0 rounded-full" name="report_reason" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-800 p-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">
+<div class="flex grow flex-col">
+<span class="text-sm font-medium">Underage user</span>
+</div>
+<input class="radio-custom h-5 w-5 border-2 border-slate-400 dark:border-slate-600 bg-transparent text-primary focus:ring-offset-0 focus:ring-0 rounded-full" name="report_reason" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-800 p-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">
+<div class="flex grow flex-col">
+<span class="text-sm font-medium">Other</span>
+</div>
+<input class="radio-custom h-5 w-5 border-2 border-slate-400 dark:border-slate-600 bg-transparent text-primary focus:ring-offset-0 focus:ring-0 rounded-full" name="report_reason" type="radio"/>
+</label>
+</div>
+<!-- Optional Details -->
+<div class="mt-8 mb-4">
+<label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Add details (optional)</label>
+<textarea class="w-full rounded-xl bg-slate-100 dark:bg-slate-900 border-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100 p-4 min-h-[120px] placeholder:text-slate-500 text-sm transition-all" placeholder="Provide more information about your report..."></textarea>
+<p class="text-right text-[10px] mt-1 text-slate-500">Max 300 characters</p>
+</div>
+</main>
+<!-- Footer Actions -->
+<footer class="p-5 flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold h-14 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center">
+                Submit Report
+            </button>
+<button class="w-full text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-medium py-3 text-sm transition-colors text-center">
+                Cancel
+            </button>
+</footer>
+<!-- Bottom Spacer for Mobile Browsers -->
+<div class="h-6"></div>
+</div>
+</body></html>

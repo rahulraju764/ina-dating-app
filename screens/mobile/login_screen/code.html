@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ml"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;1,700&amp;family=DM+Sans:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "brand-pink": "#E91E8C",
+                        "brand-purple": "#9B1FDB",
+                        "dark-card": "#0D0D0D",
+                        "muted-text": "#B0B0C3",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card-top": "32px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-header {
+            background: linear-gradient(135deg, #E91E8C 0%, #9B1FDB 100%);
+        }
+        .btn-gradient {
+            background: linear-gradient(90deg, #E91E8C 0%, #ec5b13 100%);
+        }
+        .custom-shadow {
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Header Panel (Top 35%) -->
+<div class="gradient-header relative flex h-[35vh] w-full flex-col items-center justify-center text-white">
+<div class="text-center">
+<h1 class="text-6xl font-bold tracking-tight mb-2 drop-shadow-md">ഇണ</h1>
+<p class="text-lg font-medium opacity-90 tracking-wide">ഇണയെ കണ്ടെത്തൂ</p>
+</div>
+<!-- Abstract background pattern decoration -->
+<div class="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+<div class="absolute -top-10 -left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+<div class="absolute top-1/2 -right-20 w-64 h-64 bg-white rounded-full blur-[100px]"></div>
+</div>
+</div>
+<!-- Bottom 65% Main Card Container -->
+<div class="relative -mt-8 flex-1 bg-dark-card rounded-t-card-top custom-shadow px-6 pt-10 pb-12 flex flex-col max-w-lg mx-auto w-full">
+<!-- Heading & Subtext -->
+<div class="mb-8">
+<h2 class="font-serif italic text-3xl text-white mb-2">Welcome Back 👋</h2>
+<p class="font-sans text-[15px] text-muted-text">Sign in to continue your journey</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-5">
+<!-- Email Field -->
+<div class="space-y-2">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-muted-text text-[20px]">mail</span>
+<input class="w-full bg-[#1A1A1A] border-none text-white placeholder:text-muted-text/50 rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-brand-pink transition-all duration-200" placeholder="Email Address" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-muted-text text-[20px]">lock</span>
+<input class="w-full bg-[#1A1A1A] border-none text-white placeholder:text-muted-text/50 rounded-xl py-4 pl-12 pr-12 focus:ring-2 focus:ring-brand-pink transition-all duration-200" placeholder="Password" type="password"/>
+<button class="absolute right-4 text-muted-text hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Forgot Password -->
+<div class="flex justify-end">
+<a class="text-brand-pink text-sm font-medium hover:underline" href="#">Forgot Password?</a>
+</div>
+<!-- Sign In Button -->
+<button class="btn-gradient w-full py-4 rounded-xl text-white font-bold text-lg shadow-lg hover:opacity-90 active:scale-[0.98] transition-all duration-200" type="submit">
+                    Sign In
+                </button>
+</form>
+<!-- Divider -->
+<div class="flex items-center my-8">
+<div class="flex-1 border-t border-white/10"></div>
+<span class="px-4 text-muted-text text-sm font-sans">or</span>
+<div class="flex-1 border-t border-white/10"></div>
+</div>
+<!-- Social Sign-in -->
+<div class="grid grid-cols-3 gap-3 mb-10">
+<button class="flex items-center justify-center py-3 px-2 border border-white/10 rounded-full hover:bg-white/5 transition-colors">
+<img class="w-6 h-6" data-alt="Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeYv75wZxh7l49Pyw-4GjzJt8aYHPwJB3fOd7jl30JgLHEDmgE-ft2aL5sD5voi6dZ_SQUURaDYg0iWjFlp44zFAT3XcB6LA3q_xvRx5Q6sdV15rfG1voENrUGSIYlO7rDmvaRV5LHzQWXkaVUt4j86l6OxIFgn_7lj8jtQuyYyGJUinKNLhIfX2HIHSSfiFLhaNqLvxkWVuPergN_bJyApMmkfgaDMwmIHB6q6xNKwToxXvvW1LbyvtgBqdc3CzKvTGcoS6kZQo6Y"/>
+</button>
+<button class="flex items-center justify-center py-3 px-2 border border-white/10 rounded-full hover:bg-white/5 transition-colors">
+<img class="w-6 h-6 invert" data-alt="Apple logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw9WidjnAaOST1BNr9kOdNKEXad6oHxdGVQ8_ueAe0l8SUseYUcNnpC63qoA4HBg_UQtECCv2yecLyiTItCFoavWHJyynkzBWO39TG7UnqnmOK1KxgjnJoivXgpE1ZIhCYHnrsA4hSitM_H0w3egIJIxoZsASkLrxh93cTvHGBW2gH5Z1QuNZ1Pc2pSAhf7ZwaOdzzEveq5pbHdaVYmxsvbxGHPez0Smk4jrK-rifexwSwLQO0ZeSqwflruL-H_mS-3qj-lJNbRTKZ"/>
+</button>
+<button class="flex items-center justify-center py-3 px-2 border border-white/10 rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-white text-[24px]">phone_iphone</span>
+</button>
+</div>
+<!-- Footer -->
+<div class="mt-auto text-center">
+<p class="text-muted-text text-sm">
+                    New to ഇണ? 
+                    <a class="text-brand-pink font-bold ml-1 hover:underline" href="#">Create Account</a>
+</p>
+</div>
+</div>
+</div>
+<!-- Background Decoration for Luxury Cinematic Feel -->
+<div class="fixed inset-0 pointer-events-none z-[-1] bg-dark-card">
+<div class="absolute top-0 left-0 w-full h-full opacity-30">
+<div class="absolute top-[20%] left-[10%] w-[300px] h-[300px] bg-brand-purple rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[10%] right-[10%] w-[250px] h-[250px] bg-brand-pink rounded-full blur-[100px]"></div>
+</div>
+</div>
+</body></html>

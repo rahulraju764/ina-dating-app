@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Sticker &amp; Gift Picker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "accent-pink": "#ff2d55",
+                        "gold": "#FFD700",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #1a1a1a; /* Visual container background */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex items-center justify-center min-h-screen p-4">
+<!-- Bottom Sheet Container -->
+<div class="relative w-full max-w-md h-[80vh] bg-background-dark dark:bg-background-dark rounded-t-[32px] overflow-hidden flex flex-col shadow-2xl border-t border-white/5">
+<!-- Drag Handle Section -->
+<div class="flex flex-col items-center pt-3 pb-2">
+<div class="h-1.5 w-12 rounded-full bg-slate-700/50"></div>
+</div>
+<!-- Branding & Tab Bar -->
+<div class="px-6 py-2 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h1 class="text-white text-xl font-bold tracking-tight">ഇണ <span class="text-xs font-normal text-slate-400 ml-1">Express</span></h1>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- Pill Style Tab Bar -->
+<div class="flex bg-slate-800/40 p-1 rounded-full w-full">
+<button class="flex-1 py-2 text-sm font-semibold rounded-full bg-accent-pink text-white shadow-lg transition-all">Stickers</button>
+<button class="flex-1 py-2 text-sm font-semibold text-slate-400 hover:text-slate-200 transition-colors">Gifts</button>
+<button class="flex-1 py-2 text-sm font-semibold text-slate-400 hover:text-slate-200 transition-colors">GIFs</button>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto hide-scrollbar pb-24">
+<!-- Sticker Pack Selector (Horizontal Scroll) -->
+<div class="flex items-center gap-6 px-6 py-4 overflow-x-auto hide-scrollbar border-b border-white/5">
+<div class="flex flex-col items-center gap-2 relative min-w-fit">
+<div class="w-12 h-12 rounded-full border-2 border-accent-pink p-0.5">
+<div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Sticker pack icon showing cute heart characters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBId11EL0Foe_nTizh3IpyrK_8x-57edKxjZ4BMEyYA59ZS8DAfS-kVxdb4Rux4HtiNn5a-hRG1iNpT8gAnFkkvuMHD0hiwTo7hgJGX0FS4DBHU5kIz3Q4uCnqrmHRt6vzEISlSMSt5Asr2RoID28llNf_USvik5RjRtgyj80tedf_fnu9zv1yUSlm_A0VZDr1-wMngG8J0awX2ZVPevCTYmRhw2fDfu036Ghie3efK3-A4mn2kGyF5Q8XrxHbQmhaFNPKXt8HD7-38"/>
+</div>
+</div>
+<div class="absolute -bottom-4 w-8 h-1 bg-accent-pink rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-fit grayscale opacity-60">
+<div class="w-12 h-12 rounded-full border-2 border-transparent p-0.5">
+<div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Sticker pack icon showing emoji faces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkgRjzWuKkUPRNA4O7CC4wrcJhRakgM6WDFo0OHtCFsCwItWchbEc2qc5H63hiMkvDKnTVc7A0Cxa16VKKysn6nR83LxV1Xpfc3AicqU09NsZLP383TeRmb2oI8yJnzcuuFbSbGGEh6efWuQ_NS_rktdis6_vvX0q2ly89ntRX-KKE4XpSLdRdp3IE3wVpZnDv1h3M_2PHlNha0_RiJs7uptH9meu469me3NAdtSSQ9YNU92k4anjEJjHYnrg9M-h3331k0_88Iex_"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-fit grayscale opacity-60">
+<div class="w-12 h-12 rounded-full border-2 border-transparent p-0.5">
+<div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Sticker pack icon showing floral designs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABPG0XsF07VkCL6FoPem7IKB9ses8UDJmlznSATo3sO5rYDEazSjpROWTQ2uIkwXCheeNKGK5i4qmxMj_F8KVbxOLU41bK8yCYPQmh3TAAksHu1m4yjm7QJPe50-AivENv3NQLLlHtBtPJbYzxdXnnwONtvQVOUZvfGTdc_YXuFWsl9RrZ12Y4ZNWM1slV8v37Nf8OA6pfw_PczFmrggfmcCCWWcWqxNppj5rFeVKYuatxe4OHeFVJ12043b2o6F3IcCbRhd6paJuR"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-fit grayscale opacity-60">
+<div class="w-12 h-12 rounded-full border-2 border-transparent p-0.5">
+<div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Sticker pack icon showing gold patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV4hJytxtvFpJhqLwHmFGrlUTO-ReR3QCipnSdCEDZDQe6hpKOtxxVgK7uYW1m6F_jfitTWd-mWzRp-LMxzoAOIw5ZiwSpRIJB1ehEMUBlMbO-FVgY-RPrZ2TUd400q0RnajynpdG0HFQah-w0oPfRCpd5FzqNCsrJYsY2S7hqqCyMItfR_EOIDTuzTMFDzpo5QuFcd5GEeTC55tsT9opQJxLmg-u34CwYgCSNfOI5eVHG1Nr41LA4KQN6y3B-AReW94DdD2GMVBeG"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Categories -->
+<div class="flex items-center gap-3 px-6 py-4 overflow-x-auto hide-scrollbar">
+<button class="px-4 py-1.5 rounded-full bg-slate-800 text-sm text-white whitespace-nowrap border border-white/10">❤️ Love</button>
+<button class="px-4 py-1.5 rounded-full bg-slate-800 text-sm text-white whitespace-nowrap border border-white/10">😂 Funny</button>
+<button class="px-4 py-1.5 rounded-full bg-slate-800 text-sm text-white whitespace-nowrap border border-white/10">🌹 Flowers</button>
+<button class="px-4 py-1.5 rounded-full bg-slate-800 text-sm text-white whitespace-nowrap border border-white/10">🔥 Trending</button>
+</div>
+<!-- Recently Used Section -->
+<div class="px-6 py-2">
+<h3 class="text-slate-400 text-[10px] uppercase font-bold tracking-widest mb-3">Recently Used</h3>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+<div class="min-w-[70px] h-[70px] bg-slate-800/50 rounded-xl flex items-center justify-center p-2 group hover:bg-slate-700/50 transition-colors">
+<img class="w-full h-full" data-alt="Recently used heart sticker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDvBTxf9oEN_n7MyI9ZeI3EiP8_ZcUfXgA9aD1SUomH6M8Guh68dsFbDgAoPEJ_1i35DlrfNMDDuDF82eRZDU7mV0vUKa2j6evSrewzb8xoRZFFRxUiq6XOrN3px9huhPpp15mQK3XEng6CEEH6MUipusftciwMaC-m3WsqXZ_3dDeC5TAv_ltqTfezepUfWTUp0qj54LJe-PUYQxsDu2TWtB3VQD4mdX7F8axwUknphNRP6EVwB7Sv4txh3nVePIXjPRIjeZTyrNv"/>
+</div>
+<div class="min-w-[70px] h-[70px] bg-slate-800/50 rounded-xl flex items-center justify-center p-2 group hover:bg-slate-700/50 transition-colors">
+<img class="w-full h-full" data-alt="Recently used funny sticker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRkT5L5KJKO2pWaHpO_kwNC8oihIj7_SO4-9ygdC2U33h_Z8kvcu3AfOhSWAYTrAySdJQdWD3mi39Dk443RCIhMMO6vGltIgIFR53LlpRofOJbWMugeTGkP0SH9gd7_a3k_K82ELZOJvh2hghzzQmToinjJg3FpiQHG2GUNXIQIMDUa84M8Vj-7v1ngCuE48S7ZGbDFB9iyL_dE_ieAE5p5vTon6qVtALLzAMvU9ZDBDtj08xewnUeNM4Wx6_rKd2QOBG9CaukiWhP"/>
+</div>
+<div class="min-w-[70px] h-[70px] bg-slate-800/50 rounded-xl flex items-center justify-center p-2 group hover:bg-slate-700/50 transition-colors">
+<img class="w-full h-full" data-alt="Recently used flower sticker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK2n9D4DZqIXRhaJV9HbBFZBJr-msZRfieIpn4BrJZYAoUCSAMnGHhkPRL5o6hSh9T4a52rVAYuu-6kMmtQUBXZgRPD_Mtth_2Z6lRclx01fw61Cp0LZNA68Vf5A3hUdtK7ywz9TK_8sHGQ7bzHNIXxIq7lAVUluXJ-8FZd3WCA_QdcQbWEEhPEnWRTgutr68O085KYQvuoRPhBuGkeWy-K_PGtKbKDNIPkfSdkNOVNoQzUiZctYaMYSiaqmwgoN0IWDqbyvq2n8_R"/>
+</div>
+<div class="min-w-[70px] h-[70px] bg-slate-800/50 rounded-xl flex items-center justify-center p-2 group hover:bg-slate-700/50 transition-colors">
+<img class="w-full h-full" data-alt="Recently used trending sticker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP8mUrYAdkfpA0zHyXsxZLMXpSVdCRtWB44RZ9XZ2bdkBHJZx7O4ZUI0mRAVZ576Ct2QoFucB9l6tGd9iXtkq6iKFtJr9IIyA-9NJvJOEFxW8Ie7FKagJBOmC9nHqzavt5n1jNALR_Vbq3aKnP72OFHD7WE02Sj4EwW5wwqzE1cox3Zg5zVAZbYZ7tAL5OnVbFxIZtGcfUuAW8CaAyjswRe-otvjm7KemqLMFQYjtszCot0ahitpRO7Aq_WhpIYeiOFSwsmAzgW3ID"/>
+</div>
+</div>
+</div>
+<!-- Main Sticker Grid -->
+<div class="px-6 py-4">
+<h3 class="text-slate-400 text-[10px] uppercase font-bold tracking-widest mb-3">All Stickers</h3>
+<div class="grid grid-cols-4 gap-4">
+<!-- Sticker Item 1 -->
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full" data-alt="Sticker of a blushing face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlmdeocFDV3W7OJAUy5KumP8HK0IzqUDo2x9BNzaP7PdhlAKMu65-EuMJePU9jiGRjbRu2bp2x8vr_MQrCw6NHkM7_VLqVZx1NAWM6h_vnZdVSv-NxTxV4hfFcRZvpb8obHcT8TS5wn1JfgV606e3BsISAVjCkUo7i_PDkI7Lc_tpivNvMnJyLrYHtLSE5YKMDrMCtKBwYgaH1LtFHIwxC_n_Za-is5kj5xBwRdT3nZXU6HgEeqyf2IRWzl0I5iICKfdI3Pg3-WY20"/>
+</div>
+<!-- Sticker Item 2 (Gold Locked) -->
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full opacity-40 grayscale" data-alt="Sticker of a premium crown" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwWT-e-S5P3HQ_dlVAzpmKC6TNQd3TfyBIEQLXyXHWmftuat8LbQJR8XwTyvAqAIzOXM3vwIkJwceLHEmb3Ol23bBGc_C5msyFKrDsX9y2XFJDlSuXO_9mJXL1CVCqoqVZZ5V_h1fbu2ttPPiVr9DE8mlLZm96kbmkxupqA6ca4600AmuNZrSaJ0LSzA9KEpZ1jdyZ_9PkKs6GF39kzgBFoyv8NbLgVNevglhGRJW9ZMbo-rhGAyrLtj1vC2eJTSL6ofSJ9g0YqiI-"/>
+<div class="absolute top-1 right-1 bg-gold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-[12px] text-background-dark font-bold">lock</span>
+</div>
+</div>
+<!-- Sticker Item 3 -->
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full" data-alt="Sticker of two hearts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi-ysLuMIFe6lB_3yrvw5Ca2AlgeEUA8VmlJWhSe-uuYH3fCB0VKwk3JuGSAicCs_i-H2rsY9-vS_c7hqJTmCRBypAz4nvz4e0Ge3GO1ymMsVCZzrL_d7LQasQAVV6ocUNfD116XOyEoavx4ygw9Uno9D_cO8264wA3JgwiOZSoR9KcEIGDdD2uG04df7iVjR1QD0nCCoWVN8etA3JlM87tLkvhnFPsh4FCeS-eUt8AcplE3hmbdvD3pVFW71LHPTNjts1kZrWorDu"/>
+</div>
+<!-- Sticker Item 4 (Gold Locked) -->
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full opacity-40 grayscale" data-alt="Sticker of a diamond ring" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxpa5fcQhPr6dnNmDF9No4CH-EAKwXH4gKMYsFDJmK0MyVk9ZWAPMqQpt_SdzhzRVBbG2nlQnLt56xLeYahX5-jL2U8Ec0Mc1XfdEy5LKn5k5wChiacv85AyWfpn_PLTQjLJktGHu4cBP4PSpGwO6oXASCQ3qg0UYJWbeO05G2J9uoJgn6p4Y1KpA82n_VmQVeVtfYGOXOZVfZraoZtL-2giCQ6PH6BNPpSmPzDiWeDmzNPTNq_zC_UQVWFVQIARqpQq-ooA_xVbFT"/>
+<div class="absolute top-1 right-1 bg-gold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-[12px] text-background-dark font-bold">lock</span>
+</div>
+</div>
+<!-- Repeat for more rows -->
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full" data-alt="Sticker of a bouquet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqtRfTYBMuhLrLUGDfHEd2SltexoLXmWE9SJakyCDK2sJbiMp9Yvywfl-2CFr6E2-rtakRqVB8ebkSDgwPF_u00TAKWCW_7RS-QvfLMEcFsBmvalbTVsFilA-PXKVAUPPIopV8pRCk99AEHHzn7KOwaOl3-1ZuYr8fBj4SAkRTa6gaKiqA9FoioBg64F8dMXtBFp_2xoLY2NUppu6ssKmLrTs-v51fel-7QpmCQHfeYVxfGBRJ8DvwI2KbVSZHbSN06wQPswMhye0N"/>
+</div>
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full" data-alt="Sticker of a laughing emoji" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBadGuOPC_R_ufLjqrCdnTzI568w1wkmLlSDIDhU_OsXVkEqNs9RbMod8QP-0-X3_ELl8dWlqE6Ug1Wxd3MTq0pqbJHO1nGlDr-D6JY8CYiLVd0ipMYTIJvdcGYIcFngMQIT-fM7MraBZ1aVPJsSPxBRqEuZ6qhwvh5sipD16kuuLwQphvGSm7seDiFh_GwkDSxtEqQN3xm2mtGMcDmuFQTgdY1E13AnRHN3FbpmNwHUQvmLd1wUUQoScTw2UF3DlyCpA4C-PpjSuQi"/>
+</div>
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full" data-alt="Sticker of a cute cat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6_e8D06pqCltMVjONzDwiEQ3ffGl7FHtAys2NOysIAUV6c68EpUxfSN1BSTEToc3ISThzisb1SLwh3jiZmj_EHMn0J-XOs7iWw3EAsB0Xyo_TgpHH2Q-_qJbnIIhUK8sYmd894scPVzs2SY2qUSH25Xc_cz0js0UDN0dca2QGIjXODIJgHxoP1RpI5quZZ_udSDM0CjDZU1Dtbfhrg_NOeHAkdkbeQWkarZiWtAepoHqk_yGXzkDb76YyNgp3Zt08mAiukD4jIUM"/>
+</div>
+<div class="w-[70px] h-[70px] bg-slate-800/30 rounded-xl flex items-center justify-center p-2 relative group cursor-pointer hover:scale-105 transition-transform">
+<img class="w-full h-full" data-alt="Sticker of a party popper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCekzPRGyvMthQBmkLppJBTQqEj0YjMHMFfOFhxhgsHr27pTF1yCTWSD-JYWB78jEyGQbjEO4_sdfkF3LyLPwA1T1iJbR6j7CA25rUO8EyFq6AfIFQUhZHa_r1F4zPNadt_-YWD615ZjaPXhyXt_juLN0YZIBH7tZnDBWIVXIZ4mkPADeRkzotMxawj2ovnfXfGOqLVbEmHoF9P3F2CyZomi2EJx5CAWecF8xAXOup5XXuEp9HNzchCFNHYzay-20l3QNZZn_AufD8O"/>
+</div>
+</div>
+</div>
+<!-- Preview of Gift Section Logic (Normally toggled) -->
+<div class="px-6 py-4 mt-4 border-t border-white/5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">Premium Gifts</h3>
+<button class="text-primary text-xs font-bold hover:underline">Buy Sparks</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-800/30 rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/5 hover:border-accent-pink/50 transition-all cursor-pointer">
+<span class="text-3xl">🌹</span>
+<p class="text-white text-sm font-medium">Single Rose</p>
+<p class="text-slate-400 text-xs">Free</p>
+</div>
+<div class="bg-slate-800/30 rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/5 hover:border-accent-pink/50 transition-all cursor-pointer">
+<span class="text-3xl">💝</span>
+<p class="text-white text-sm font-medium">Heart Box</p>
+<p class="text-primary text-xs font-bold">💎 50 Sparks</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Send Button & Bottom Fade -->
+<div class="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-background-dark via-background-dark/90 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-6 right-6">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-accent-pink text-white font-bold shadow-xl shadow-primary/20 hover:scale-105 transition-transform active:scale-95 pointer-events-auto">
+<span>Send</span>
+<span class="text-xl">🎁</span>
+</button>
+</div>
+</div>
+</body></html>

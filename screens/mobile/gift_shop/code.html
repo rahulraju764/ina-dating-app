@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ina Gift Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=DM+Sans:wght@400;500;700&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "card-dark": "#1A1A2E",
+                        "accent-pink": "#ff63b9",
+                        "gold": "#FFD700"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "dm": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-slate-200 dark:border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined cursor-pointer text-slate-900 dark:text-slate-100">arrow_back</span>
+<h1 class="font-serif text-[26px] leading-tight text-slate-900 dark:text-white">🎁 Gift Shop</h1>
+</div>
+<div class="bg-gradient-to-r from-amber-400 to-gold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-gold/20">
+<span class="material-symbols-outlined text-sm font-bold text-background-dark" style="font-variation-settings: 'FILL' 1">diamond</span>
+<span class="text-background-dark text-sm font-bold tracking-tight">150 Sparks</span>
+</div>
+</header>
+<!-- Scrollable Tab Bar -->
+<nav class="flex overflow-x-auto no-scrollbar border-b border-slate-200 dark:border-white/5 px-4 sticky top-[74px] z-40 bg-background-light dark:bg-background-dark">
+<a class="flex-none px-4 py-4 border-b-2 border-accent-pink text-accent-pink font-bold text-sm" href="#">All</a>
+<a class="flex-none px-4 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm" href="#">Stickers</a>
+<a class="flex-none px-4 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm" href="#">Roses</a>
+<a class="flex-none px-4 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm" href="#">Hearts</a>
+<a class="flex-none px-4 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm" href="#">Animated</a>
+<a class="flex-none px-4 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm" href="#">Premium</a>
+</nav>
+<!-- Featured Banner -->
+<section class="p-4">
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#ff0080] via-[#7928ca] to-[#ff0080] p-6 shadow-xl shadow-accent-pink/20">
+<!-- Sparkle effects representation -->
+<div class="absolute top-2 left-1/4 w-1 h-1 bg-white rounded-full animate-pulse opacity-60"></div>
+<div class="absolute bottom-4 right-10 w-2 h-2 bg-white rounded-full animate-pulse opacity-40"></div>
+<div class="absolute top-1/2 right-4 w-1.5 h-1.5 bg-white rounded-full animate-pulse opacity-70"></div>
+<div class="relative z-10 max-w-[80%]">
+<h2 class="text-white text-xl font-bold leading-tight mb-2">💝 Valentine's Special Gifts — Limited Time</h2>
+<p class="text-white/80 text-sm font-medium">Sparkle effects applied to all premium hearts</p>
+</div>
+<!-- Decorative Icon -->
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-[120px] text-white">auto_awesome</span>
+</div>
+</div>
+</section>
+<!-- Gift Grid -->
+<section class="px-4 pb-8">
+<div class="grid grid-cols-2 gap-4">
+<!-- Gift Card 1 -->
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 flex flex-col items-center border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="w-20 h-20 mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-red-500" style="font-variation-settings: 'FILL' 1">sword_rose</span>
+</div>
+<p class="font-dm text-sm text-slate-900 dark:text-slate-100 mb-2">Basic Rose</p>
+<span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Free</span>
+</div>
+<!-- Gift Card 2 -->
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 flex flex-col items-center border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="w-20 h-20 mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-accent-pink" style="font-variation-settings: 'FILL' 1">favorite</span>
+</div>
+<p class="font-dm text-sm text-slate-900 dark:text-slate-100 mb-2">Animated Heart</p>
+<div class="flex items-center gap-1 text-gold text-sm font-bold">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1">diamond</span>
+                    100
+                </div>
+</div>
+<!-- Gift Card 3 -->
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 flex flex-col items-center border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="w-20 h-20 mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings: 'FILL' 1">diamond</span>
+</div>
+<p class="font-dm text-sm text-slate-900 dark:text-slate-100 mb-2">Diamond Ring</p>
+<div class="flex items-center gap-1 text-gold text-sm font-bold">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1">diamond</span>
+                    500
+                </div>
+</div>
+<!-- Gift Card 4 -->
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 flex flex-col items-center border border-slate-200 dark:border-white/5 shadow-sm opacity-90">
+<div class="w-20 h-20 mb-3 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-5xl text-gold" style="font-variation-settings: 'FILL' 1">workspace_premium</span>
+<div class="absolute inset-0 bg-background-dark/40 backdrop-blur-[2px] rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">lock</span>
+</div>
+</div>
+<p class="font-dm text-sm text-slate-900 dark:text-slate-100 mb-2">Gold Crown</p>
+<p class="text-gold text-[10px] font-bold uppercase">Gold Required</p>
+</div>
+<!-- Gift Card 5 -->
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 flex flex-col items-center border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="w-20 h-20 mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-blue-400">front_hand</span>
+</div>
+<p class="font-dm text-sm text-slate-900 dark:text-slate-100 mb-2">Friendly Wave</p>
+<span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Free</span>
+</div>
+<!-- Gift Card 6 -->
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 flex flex-col items-center border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="w-20 h-20 mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-purple-400" style="font-variation-settings: 'FILL' 1">magic_button</span>
+</div>
+<p class="font-dm text-sm text-slate-900 dark:text-slate-100 mb-2">Magic Wand</p>
+<div class="flex items-center gap-1 text-gold text-sm font-bold">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1">diamond</span>
+                    50
+                </div>
+</div>
+</div>
+</section>
+<!-- Sparks Shop Section -->
+<section class="p-4 bg-slate-100 dark:bg-card-dark/50 border-t border-slate-200 dark:border-white/5">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+            Need more Sparks? <span class="text-gold material-symbols-outlined" style="font-variation-settings: 'FILL' 1">diamond</span>
+</h3>
+<div class="space-y-3">
+<!-- Package 1 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-gold" style="font-variation-settings: 'FILL' 1">diamond</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white font-bold">100 Sparks</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Starter Pack</p>
+</div>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-full text-sm shadow-lg shadow-primary/20 hover:scale-105 transition-transform active:scale-95">
+                    Buy
+                </button>
+</div>
+<!-- Package 2 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-background-dark rounded-xl border-2 border-primary/50 relative">
+<div class="absolute -top-2 right-4 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Best Value</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-gold" style="font-variation-settings: 'FILL' 1">diamond</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white font-bold">500 Sparks</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Popular Choice</p>
+</div>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-full text-sm shadow-lg shadow-primary/20">
+                    Buy
+                </button>
+</div>
+<!-- Package 3 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-gold" style="font-variation-settings: 'FILL' 1">diamond</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white font-bold">1500 Sparks</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Mega Bundle</p>
+</div>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-full text-sm shadow-lg shadow-primary/20">
+                    Buy
+                </button>
+</div>
+</div>
+</section>
+<!-- Bottom Nav Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50">
+<div class="flex gap-2 border-t border-slate-200 dark:border-white/10 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl px-4 pb-6 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium leading-normal">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">explore</span>
+<p class="text-[10px] font-medium leading-normal">Discover</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">featured_seasonal_and_gifts</span>
+<p class="text-[10px] font-bold leading-normal">Gifts</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<p class="text-[10px] font-medium leading-normal">Messages</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-medium leading-normal">Profile</p>
+</a>
+</div>
+</div>
+</body></html>

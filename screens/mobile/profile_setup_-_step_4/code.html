@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Profile Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "brand-pink": "#E91E8C",
+                        "brand-coral": "#FF6B6B",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "body": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .brand-gradient {
+            background: linear-gradient(135deg, #E91E8C 0%, #FF6B6B 100%);
+        }
+        .brand-gradient-text {
+            background: linear-gradient(135deg, #E91E8C 0%, #FF6B6B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark text-slate-100 font-display min-h-screen flex flex-col">
+<!-- Header & Progress -->
+<header class="pt-8 px-6 pb-4 sticky top-0 bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center justify-between mb-6">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">arrow_back_ios</span>
+<h2 class="text-xl font-bold tracking-tight brand-gradient-text">ഇണ</h2>
+<div class="w-6"></div> <!-- Spacer for symmetry -->
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="text-xs font-semibold uppercase tracking-widest text-slate-500">Profile Setup</span>
+<span class="text-xs font-bold text-brand-pink">Step 4 of 5</span>
+</div>
+<div class="flex gap-1.5 h-1.5 w-full">
+<div class="flex-1 rounded-full brand-gradient"></div>
+<div class="flex-1 rounded-full brand-gradient"></div>
+<div class="flex-1 rounded-full brand-gradient"></div>
+<div class="flex-1 rounded-full brand-gradient"></div>
+<div class="flex-1 rounded-full bg-slate-800"></div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 pb-32">
+<!-- Title Section -->
+<section class="mt-6 mb-8">
+<h1 class="font-serif text-3xl text-white mb-2 leading-tight">Who are you looking for? 🔍</h1>
+<p class="font-body text-slate-400 text-sm">These filter your discovery feed</p>
+</section>
+<!-- Show Me Section -->
+<section class="mb-10">
+<h3 class="text-white text-sm font-semibold uppercase tracking-wider mb-4">Show Me</h3>
+<div class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
+<button class="px-6 py-2.5 rounded-full text-sm font-medium border border-slate-800 bg-slate-900/50 text-slate-300 hover:border-brand-pink/50 transition-colors">Men</button>
+<button class="px-6 py-2.5 rounded-full text-sm font-medium brand-gradient text-white shadow-lg shadow-brand-pink/20">Women</button>
+<button class="px-6 py-2.5 rounded-full text-sm font-medium border border-slate-800 bg-slate-900/50 text-slate-300 hover:border-brand-pink/50 transition-colors">Everyone</button>
+</div>
+</section>
+<!-- Age Range Section -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-white text-sm font-semibold uppercase tracking-wider">Age Range</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-slate-900 rounded-lg text-brand-pink font-bold border border-brand-pink/20">22</span>
+<span class="text-slate-600">-</span>
+<span class="px-3 py-1 bg-slate-900 rounded-lg text-brand-pink font-bold border border-brand-pink/20">32</span>
+</div>
+</div>
+<div class="relative w-full h-12 flex items-center px-2">
+<!-- Track -->
+<div class="absolute w-full h-1.5 bg-slate-800 rounded-full"></div>
+<!-- Active Track -->
+<div class="absolute left-[25%] right-[40%] h-1.5 brand-gradient rounded-full"></div>
+<!-- Handles -->
+<div class="absolute left-[25%] -translate-x-1/2 w-6 h-6 bg-white border-4 border-brand-pink rounded-full shadow-lg cursor-pointer"></div>
+<div class="absolute right-[40%] translate-x-1/2 w-6 h-6 bg-white border-4 border-brand-pink rounded-full shadow-lg cursor-pointer"></div>
+</div>
+<p class="text-slate-500 text-xs mt-2 italic">You'll see profiles aged 22 to 32</p>
+</section>
+<!-- Maximum Distance Section -->
+<section class="mb-10">
+<h3 class="text-white text-sm font-semibold uppercase tracking-wider mb-4">Maximum Distance</h3>
+<div class="grid grid-cols-5 gap-1 p-1 bg-slate-900 rounded-xl border border-slate-800">
+<button class="py-2 text-[10px] font-bold text-slate-400">5 km</button>
+<button class="py-2 text-[10px] font-bold text-slate-400">10 km</button>
+<button class="py-2 text-[10px] font-bold brand-gradient text-white rounded-lg shadow-sm">25 km</button>
+<button class="py-2 text-[10px] font-bold text-slate-400">50 km</button>
+<button class="py-2 text-[10px] font-bold text-slate-400">🌍 Global</button>
+</div>
+</section>
+<!-- Settings Toggles -->
+<section class="mb-8 space-y-3">
+<div class="flex items-center justify-between p-4 bg-slate-900/40 rounded-xl border border-slate-800/50">
+<div>
+<p class="text-sm font-medium text-slate-200">Show my distance</p>
+<p class="text-xs text-slate-500">Visible to others in feed</p>
+</div>
+<div class="w-11 h-6 bg-brand-pink rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-900/40 rounded-xl border border-slate-800/50">
+<div>
+<p class="text-sm font-medium text-slate-200">Show my age</p>
+<p class="text-xs text-slate-500">Public on your profile</p>
+</div>
+<div class="w-11 h-6 bg-brand-pink rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-900/40 rounded-xl border border-slate-800/50">
+<div>
+<p class="text-sm font-medium text-slate-200">Proximity alerts</p>
+<p class="text-xs text-slate-500">Notify when matches are near</p>
+</div>
+<div class="w-11 h-6 bg-slate-700 rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+</section>
+<!-- Info Box -->
+<div class="p-4 rounded-xl bg-brand-pink/5 border border-brand-pink/10 flex gap-3 items-start">
+<span class="material-symbols-outlined text-brand-pink text-xl">lightbulb</span>
+<p class="text-xs text-slate-400 leading-relaxed">
+                You can change these anytime in <span class="text-brand-pink font-semibold">Settings</span>. These preferences help us find your perfect match.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation Component -->
+<div class="fixed bottom-0 left-0 w-full bg-background-dark/95 backdrop-blur-xl border-t border-slate-800/50 p-6 z-20">
+<button class="w-full h-14 brand-gradient rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-brand-pink/30 active:scale-[0.98] transition-transform">
+            Next
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</body></html>

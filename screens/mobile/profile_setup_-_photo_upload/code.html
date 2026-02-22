@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E91E8C",
+                        "coral": "#FF6B6B",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto min-h-screen flex flex-col p-6">
+<!-- Header & Progress Bar -->
+<header class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<span class="text-primary font-bold text-xl tracking-tight">ഇണ <span class="text-xs font-normal opacity-70">(Ina)</span></span>
+<span class="text-sm font-medium opacity-60">Step 5 of 5</span>
+</div>
+<div class="flex gap-1.5 h-1.5 w-full">
+<div class="flex-1 rounded-full bg-gradient-to-r from-primary to-coral"></div>
+<div class="flex-1 rounded-full bg-gradient-to-r from-primary to-coral"></div>
+<div class="flex-1 rounded-full bg-gradient-to-r from-primary to-coral"></div>
+<div class="flex-1 rounded-full bg-gradient-to-r from-primary to-coral"></div>
+<div class="flex-1 rounded-full bg-gradient-to-r from-primary to-coral"></div>
+</div>
+</header>
+<!-- Main Heading Section -->
+<section class="mb-6">
+<h1 class="text-[28px] font-bold leading-tight mb-2">Add your photos 📸</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base">Profiles with 3+ photos get 5x more matches</p>
+</section>
+<!-- Photo Grid Layout (2 columns, 3 rows) -->
+<div class="grid grid-cols-2 gap-3 mb-8">
+<!-- Slot 1: Main Photo (Spans 2 rows) -->
+<div class="row-span-2 relative aspect-[3/4] rounded-xl border-2 border-dashed border-primary/50 bg-primary/5 flex flex-col items-center justify-center text-center p-4 group cursor-pointer overflow-hidden">
+<!-- If empty state -->
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-4xl">add_circle</span>
+<span class="text-sm font-semibold text-primary">Add Main Photo</span>
+</div>
+<!-- Background Image Placeholder (Dashed border implies empty but styled for the request) -->
+<div class="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity" data-alt="Placeholder for profile main photo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6HKtEgcoKrjrvKj_w4N9_7kFaQ8E6YzBtqc6OUFYp-Ye_ykVnByVxuIR_JZKlW68PXcy_8yzUa_XlRW7ATP-Uo8YcUg_LWJFu0QUkKq_ufZGGSmd1sIHQPQdmsO_E6bFnjr4v1rrKXMWKjSp3NZsgnnD5_d3sbjkDumITzK5jXR1RgzENm1-xvGYL_oS8qoCcUumJoM4SM-S5QN9aSnbiZiXQeJIH6OwZIEILoC7ouCcmyTbuHhM359DN-o0ax_9Cnxbp8_ZmAKKr')"></div>
+</div>
+<!-- Slot 2: Filled -->
+<div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800 border border-slate-700/50">
+<img alt="Profile photo 2" class="w-full h-full object-cover" data-alt="Stylish person portrait for dating profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-vlGVs2_fDDT8jlxBgRtSTf-mFKmimVRFjHymrq01GgdcAzeEgUUKPjmgWgJvnT-jE1vR0sjmG-CeiDzc9X617O_elCDbxRxF2C7gqfHg-TAupAepIh5zhplqGHhIoQkDOgZ29tQjnj4k39fpT2mGBNYbTHgTlvsgnxARnD8QZn16COZbov6vTQq8Pp_MFdtrjd4MwgFLussW5M7toF8ZYpT-QkRAM8ltO_DB0L7vWAg9E-O-gysV5fuWXqCHlBTYpwXsnK2zroXd"/>
+<button class="absolute top-2 right-2 w-6 h-6 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Slot 3: Filled -->
+<div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800 border border-slate-700/50">
+<img alt="Profile photo 3" class="w-full h-full object-cover" data-alt="Candid outdoor portrait of a young adult" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlV2WZaceOaHDp7gN6awwPbP0q_GlNrMLdT86EaW-uCvRv8zIZELx0CPXIU8jyLVstXyDg0Sa58P7Br1wsEyvD5bMW0FyaKgRh-gZS4BuIz85zwHM0tL0m_P51a-JGGstlwi_cE8kvhDpGRI9g3-BSjmKJA4o8MMSf-3MOyxGTjCCUlhW5kRkC6Evr1sC0-TwyxaTQC3vLoS1lkfSLWkhk2KgBrWQBfxCZuGM3Rtqijzx9pf2640ZVqgjb80wVK6C86usx57mYyhoP"/>
+<button class="absolute top-2 right-2 w-6 h-6 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Slot 4: Filled -->
+<div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800 border border-slate-700/50">
+<img alt="Profile photo 4" class="w-full h-full object-cover" data-alt="Close-up portrait with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSbiUZXcKAO7COWwfnIjq0Lx_7wiHiEQV06AAOIEXGuC2honhH_bh9J8_4YfJ3vbmK_hONW-KQPe7pj7HedvN_G8yuYgV0TU1HLhQ_inwDYLPB3zIZlTY4rn0RupHgulzOTms4--m8VSv-0D-prDbV5lhdY4oJITClCFwoU9hEzR-jiAuwc7kcLO2x3lbgI_A-Rzg60PvGcrJVm_9HoW_jRv8MbNZxJv5HEN_pUm4GAFQmZ7a41ORmA8i4k8Q_yGh37bc_rOC7Hw5v"/>
+<button class="absolute top-2 right-2 w-6 h-6 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Slot 5: Empty -->
+<div class="relative aspect-square rounded-xl border-2 border-dashed border-slate-700 bg-slate-800/20 flex items-center justify-center cursor-pointer hover:bg-slate-800/40 transition-colors">
+<span class="material-symbols-outlined text-slate-500">add</span>
+</div>
+<!-- Slot 6: Empty -->
+<div class="relative aspect-square rounded-xl border-2 border-dashed border-slate-700 bg-slate-800/20 flex items-center justify-center cursor-pointer hover:bg-slate-800/40 transition-colors">
+<span class="material-symbols-outlined text-slate-500">add</span>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="flex flex-col items-center gap-3 mb-8">
+<p class="text-sm font-medium text-slate-400">3 of 6 photos added</p>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-slate-700"></div>
+<div class="w-2 h-2 rounded-full bg-slate-700"></div>
+<div class="w-2 h-2 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<!-- Tip Card -->
+<div class="bg-slate-900/50 border border-slate-800 rounded-xl p-4 mb-6">
+<div class="flex gap-3">
+<span class="text-xl">✨</span>
+<p class="text-sm leading-relaxed text-slate-300">
+<span class="font-semibold text-white">Tip:</span> Your first photo is what people see first. Make it count! High quality portraits work best.
+                </p>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-auto space-y-4">
+<div class="flex items-center justify-center gap-2 text-slate-500">
+<span class="material-symbols-outlined text-sm">shield</span>
+<p class="text-[11px] uppercase tracking-wider font-medium">Photos are checked for community guidelines</p>
+</div>
+<button class="w-full h-14 rounded-xl bg-gradient-to-r from-primary to-coral text-white font-bold text-lg shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all">
+                Complete Profile 🎉
+            </button>
+</div>
+</div>
+</body></html>

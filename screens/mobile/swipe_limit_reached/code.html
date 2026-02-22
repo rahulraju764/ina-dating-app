@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1A1A2E",
+                        "premium-dark": "#1A1A2E",
+                        "accent-pink": "#FF4D6D",
+                        "accent-coral": "#FF758C"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "mono": ["monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .bottom-sheet-gradient {
+            background: linear-gradient(180deg, #1A1A2E 0%, #161625 100%);
+        }
+        .blur-backdrop {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-200 font-display">
+<!-- Background Discovery Screen (Blurred) -->
+<div class="fixed inset-0 z-0 flex flex-col items-center justify-center overflow-hidden">
+<div class="relative w-full max-w-md h-full bg-white shadow-2xl overflow-hidden">
+<!-- Mock Dating App Background -->
+<div class="p-4 flex justify-between items-center bg-white/80 backdrop-blur-sm absolute top-0 w-full z-10">
+<h1 class="text-2xl font-bold text-primary">ഇണ</h1>
+<span class="material-symbols-outlined text-slate-400">tune</span>
+</div>
+<div class="h-full w-full relative">
+<img class="w-full h-full object-cover grayscale-[0.2] opacity-50 blur-sm" data-alt="A portrait of a smiling person outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMSO1d3KpS1X2z1MR6y6AHdm_gR0w5tkCCkv7wDFDb0yR0gfvspUcWzVQGx4lk1HbZsok0ZNVf-IbKRamKK-MaS1V3fwrx__s3WLKUvxQjASNFff2xWNxHIeOrHYi0MWLbgEs3eqXwyqcuZH13SVFPc7smDI7GM4DflF3F1OiLnk2wQAmvkEr2tqyCG5eJ1I4EAT1f0VxzDqfjDbQnGrP02vw0ugIEb9V2tVzsPUyv1obulCsK-s9NmHOzXdnLf3f6vKjXe-s01tzz"/>
+<div class="absolute bottom-10 left-6 text-slate-800 blur-sm">
+<h2 class="text-3xl font-bold">Anjali, 24</h2>
+<p class="text-lg">Kochi • Creative Designer</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet Overlay -->
+<div class="fixed inset-0 z-50 flex items-end justify-center bg-black/40 blur-backdrop">
+<!-- The Sheet Container -->
+<div class="relative w-full max-w-md h-[80%] bottom-sheet-gradient rounded-t-2xl shadow-2xl flex flex-col overflow-hidden border-t border-white/10">
+<!-- BottomSheetHandle -->
+<div class="flex flex-col items-center pt-3 pb-2">
+<div class="h-1.5 w-12 rounded-full bg-white/20"></div>
+</div>
+<div class="flex-1 overflow-y-auto px-6 pb-8">
+<!-- Limit Illustration -->
+<div class="flex flex-col items-center text-center mt-4">
+<div class="relative mb-6">
+<div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full"></div>
+<div class="relative w-20 h-20 bg-gradient-to-tr from-primary to-accent-pink rounded-full flex items-center justify-center shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1">hourglass_empty</span>
+</div>
+</div>
+<h2 class="text-white text-2xl font-bold leading-tight mb-2">
+                        You've used all your swipes today ⏰
+                    </h2>
+<p class="text-slate-400 text-sm font-normal mb-6 leading-relaxed max-w-[280px]">
+                        Free members get 10 swipes per day. Your daily limit resets at midnight.
+                    </p>
+<!-- Countdown Timer -->
+<div class="bg-white/5 border border-white/10 rounded-xl px-6 py-3 inline-flex flex-col items-center mb-8">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Resets In</p>
+<p class="text-white font-mono text-3xl font-bold tracking-tighter">06:42:18</p>
+</div>
+</div>
+<!-- Separator -->
+<div class="relative flex items-center mb-8">
+<div class="flex-grow border-t border-white/10"></div>
+<span class="px-3 text-slate-500 text-sm font-medium">or</span>
+<div class="flex-grow border-t border-white/10"></div>
+</div>
+<!-- Upgrade Section -->
+<div class="flex flex-col">
+<h3 class="text-white text-lg font-bold mb-5 flex items-center gap-2">
+                        Get Unlimited Swipes with Gold <span class="text-yellow-400 material-symbols-outlined fill-1 text-xl">star</span>
+</h3>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-4 text-slate-200">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">bolt</span>
+</div>
+<span class="text-sm font-medium">Unlimited swipes every day</span>
+</li>
+<li class="flex items-center gap-4 text-slate-200">
+<div class="w-8 h-8 rounded-full bg-accent-pink/20 flex items-center justify-center text-accent-pink">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</div>
+<span class="text-sm font-medium">See who liked you</span>
+</li>
+<li class="flex items-center gap-4 text-slate-200">
+<div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+<span class="material-symbols-outlined text-xl">videocam</span>
+</div>
+<span class="text-sm font-medium">Video &amp; voice calls</span>
+</li>
+</ul>
+<!-- CTA Button -->
+<button class="w-full bg-gradient-to-r from-accent-pink to-primary hover:opacity-90 transition-opacity text-white py-4 rounded-xl font-bold text-lg shadow-xl shadow-primary/20 mb-3">
+                        Upgrade to Gold
+                    </button>
+<p class="text-slate-500 text-xs text-center mb-6">
+                        $9.99/month · Cancel anytime
+                    </p>
+<button class="w-full py-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
+                        Come back tomorrow
+                    </button>
+</div>
+</div>
+<!-- Bottom Indicator for Mobile -->
+<div class="h-6 w-full flex items-center justify-center pb-2">
+<div class="h-1 w-32 bg-white/10 rounded-full"></div>
+</div>
+</div>
+</div>
+</body></html>

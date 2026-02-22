@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #0D0D0D;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark text-slate-100 font-display">
+<div class="max-w-md mx-auto min-h-screen flex flex-col pb-20">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-background-dark/95 backdrop-blur-md border-b border-slate-800/50 p-4 flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-100">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-slate-100">Settings</h1>
+</header>
+<!-- User Profile Card -->
+<div class="p-4">
+<div class="bg-slate-900/40 border border-slate-800/50 rounded-xl p-4 flex items-center gap-4">
+<div class="relative">
+<img alt="Anjali's profile photo" class="w-16 h-16 rounded-full object-cover border-2 border-primary" data-alt="Circular profile photo of a young woman named Anjali" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrCBOuHEi2VvMuBcRsS-ns4xJiKQJc0N8nKBfiJLm6qo3KJ2aGz3k51FArGfh3XvUO1zN7pr41n9zU9Mo5V1SUVgjU5Liu8U9y8Twc7og_oN8wbaQnLDXBXO2w-uqiHz-6OsNiQ-yu9Fn5ItFy9OCjtkn2VtdFeejqnsNIKAzzWWpggSFHwKK9qRqXwBwRqyI26u89nGijSGQjrbdmDWvSK99FMTyJD2wasHRaNtQlEsCe89Tq1USU0Hh7ft3BRwuqKkyvNFo10TgG"/>
+</div>
+<div class="flex-1">
+<h2 class="text-lg font-bold text-slate-100">Anjali</h2>
+<p class="text-sm text-slate-400">anjali@example.com</p>
+<button class="mt-1 text-primary text-sm font-semibold flex items-center gap-1 hover:underline">
+                        Edit Profile <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Settings Groups -->
+<main class="flex-1 px-4 space-y-6">
+<!-- Account Section -->
+<section>
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 mb-2">Account</h3>
+<div class="bg-slate-900/30 rounded-xl overflow-hidden divide-y divide-slate-800/50 border border-slate-800/50">
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">lock</span>
+<span class="flex-1 text-base">Privacy Settings</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="flex-1 text-base">Notification Settings</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">language</span>
+<div class="flex-1 flex justify-between items-center">
+<span class="text-base">Language</span>
+<span class="text-sm text-primary font-medium">Malayalam</span>
+</div>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="flex-1 text-base">Location Settings</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Subscription Section -->
+<section>
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 mb-2">Subscription</h3>
+<div class="bg-slate-900/30 rounded-xl overflow-hidden divide-y divide-slate-800/50 border border-slate-800/50">
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">star</span>
+<div class="flex-1 flex justify-between items-center">
+<span class="text-base">My Plan</span>
+<span class="text-sm bg-primary/20 text-primary px-2 py-0.5 rounded-full font-bold">Free</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-yellow-500">diamond</span>
+<span class="flex-1 text-base font-semibold">Buy Sparks</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+<span class="flex-1 text-base">Purchase History</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">refresh</span>
+<span class="flex-1 text-base">Restore Purchases</span>
+</div>
+</div>
+</section>
+<!-- Safety Section -->
+<section>
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 mb-2">Safety</h3>
+<div class="bg-slate-900/30 rounded-xl overflow-hidden divide-y divide-slate-800/50 border border-slate-800/50">
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">shield</span>
+<span class="flex-1 text-base">Block List</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">warning</span>
+<span class="flex-1 text-base">Safety Tips</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">assignment</span>
+<span class="flex-1 text-base">Community Guidelines</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Support Section -->
+<section>
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 mb-2">Support</h3>
+<div class="bg-slate-900/30 rounded-xl overflow-hidden divide-y divide-slate-800/50 border border-slate-800/50">
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">help</span>
+<span class="flex-1 text-base">Help Centre</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+<span class="flex-1 text-base">Contact Support</span>
+<span class="material-symbols-outlined text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">star</span>
+<span class="flex-1 text-base">Rate ഇണ on App Store</span>
+<span class="material-symbols-outlined text-slate-600">open_in_new</span>
+</div>
+</div>
+</section>
+<!-- Legal Section -->
+<section>
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 mb-2">Legal</h3>
+<div class="bg-slate-900/30 rounded-xl overflow-hidden divide-y divide-slate-800/50 border border-slate-800/50">
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">article</span>
+<span class="flex-1 text-base">Terms of Service</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-800/50 cursor-pointer">
+<span class="material-symbols-outlined text-primary">policy</span>
+<span class="flex-1 text-base">Privacy Policy</span>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="pt-4">
+<div class="bg-slate-900/30 rounded-xl p-4 border border-slate-800/50 mb-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-base font-medium">Pause Profile (Snooze)</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<p class="text-xs text-slate-500">Your profile won't appear in discovery while snoozed</p>
+</div>
+<button class="w-full p-4 text-rose-500 font-bold hover:bg-rose-500/10 rounded-xl transition-colors border border-rose-500/20">
+                    Delete Account
+                </button>
+</section>
+<!-- Footer -->
+<footer class="py-8 text-center space-y-2">
+<p class="text-sm text-slate-600 font-medium tracking-tight">
+                    ഇണ v1.0.0
+                </p>
+<p class="text-xs text-slate-700">
+                    Made with ❤️ in Kerala
+                </p>
+</footer>
+</main>
+</div>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-background-dark/80 backdrop-blur-xl border-t border-slate-800/50 flex justify-around p-2">
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium">Discover</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-medium">Matches</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-[10px] font-medium">Messages</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">person</span>
+<span class="text-[10px] font-bold">Settings</span>
+</a>
+</nav>
+</body></html>

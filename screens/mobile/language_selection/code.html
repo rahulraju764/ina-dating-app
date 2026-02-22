@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ina - Choose Your Language</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "brand-pink": "#E91E8C",
+                        "brand-coral": "#FF6B6B",
+                        "card-border": "#2A2A3E",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "heading": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .radio-custom:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+            background-color: #E91E8C;
+            border-color: #E91E8C;
+        }
+        .gradient-btn {
+            background: linear-gradient(90deg, #E91E8C 0%, #FF6B6B 100%);
+        }
+        .selected-card {
+            border-left: 4px solid #E91E8C !important;
+            background-color: rgba(233, 30, 140, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation / Logo Section -->
+<header class="flex flex-col items-center pt-12 pb-8 px-6">
+<div class="size-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-brand-pink text-3xl" style="font-variation-settings: 'FILL' 1">person_heart</span>
+</div>
+<h1 class="font-heading text-[28px] text-white font-bold leading-tight text-center">
+            Choose Your Language
+        </h1>
+<p class="text-slate-400 text-base font-normal mt-2 text-center">
+            നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കൂ
+        </p>
+</header>
+<!-- Language Selection List -->
+<main class="flex-1 px-6 space-y-4 max-w-md mx-auto w-full">
+<!-- Malayalam - Pre-selected -->
+<label class="relative flex items-center h-[72px] px-5 rounded-2xl border border-card-border selected-card cursor-pointer group transition-all">
+<div class="flex items-center gap-4 flex-1">
+<span class="text-2xl">🇮🇳</span>
+<div class="flex flex-col">
+<span class="text-white font-semibold text-base leading-tight">Malayalam (മലയാളം)</span>
+<span class="text-slate-500 text-sm">Default language</span>
+</div>
+</div>
+<input checked="" class="radio-custom h-6 w-6 rounded-full border-2 border-slate-600 bg-transparent focus:ring-0 focus:ring-offset-0" name="language" type="radio"/>
+</label>
+<!-- English -->
+<label class="relative flex items-center h-[72px] px-5 rounded-2xl border border-card-border hover:border-slate-500 cursor-pointer group transition-all">
+<div class="flex items-center gap-4 flex-1">
+<span class="text-2xl">🇺🇸</span>
+<div class="flex flex-col">
+<span class="text-white font-semibold text-base leading-tight">English</span>
+</div>
+</div>
+<input class="radio-custom h-6 w-6 rounded-full border-2 border-slate-600 bg-transparent focus:ring-0 focus:ring-offset-0" name="language" type="radio"/>
+</label>
+<!-- Hindi -->
+<label class="relative flex items-center h-[72px] px-5 rounded-2xl border border-card-border hover:border-slate-500 cursor-pointer group transition-all">
+<div class="flex items-center gap-4 flex-1">
+<span class="text-2xl">🇮🇳</span>
+<div class="flex flex-col">
+<span class="text-white font-semibold text-base leading-tight">Hindi (हिंदी)</span>
+</div>
+</div>
+<input class="radio-custom h-6 w-6 rounded-full border-2 border-slate-600 bg-transparent focus:ring-0 focus:ring-offset-0" name="language" type="radio"/>
+</label>
+<!-- Tamil -->
+<label class="relative flex items-center h-[72px] px-5 rounded-2xl border border-card-border hover:border-slate-500 cursor-pointer group transition-all">
+<div class="flex items-center gap-4 flex-1">
+<span class="text-2xl">🇮🇳</span>
+<div class="flex flex-col">
+<span class="text-white font-semibold text-base leading-tight">Tamil (தமிழ்)</span>
+</div>
+</div>
+<input class="radio-custom h-6 w-6 rounded-full border-2 border-slate-600 bg-transparent focus:ring-0 focus:ring-offset-0" name="language" type="radio"/>
+</label>
+</main>
+<!-- Sticky Footer CTA -->
+<footer class="p-6 max-w-md mx-auto w-full mt-auto mb-4">
+<button class="gradient-btn w-full h-14 rounded-full text-white font-bold text-lg shadow-lg active:scale-[0.98] transition-transform">
+            Continue
+        </button>
+<p class="text-center text-slate-500 text-xs mt-6 px-4">
+            By continuing, you agree to our Terms of Service and Privacy Policy.
+        </p>
+</footer>
+</body></html>

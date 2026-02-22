@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Profile Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700&amp;family=Noto+Sans+Malayalam:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#E91E8C",
+            "secondary": "#FF6B6B",
+            "background-light": "#f8f6f6",
+            "background-dark": "#0D0D0D",
+            "muted-text": "#B0B0C3",
+          },
+          fontFamily: {
+            "display": ["Public Sans", "Noto Sans Malayalam", "sans-serif"],
+            "serif": ["Playfair Display", "serif"],
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #0D0D0D;
+    }
+    .brand-gradient-bg {
+      background: linear-gradient(135deg, #E91E8C 0%, #FF6B6B 100%);
+    }
+    .brand-gradient-text {
+      background: linear-gradient(135deg, #E91E8C 0%, #FF6B6B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .height-ruler {
+      background-image: repeating-linear-gradient(90deg, #333 0, #333 1px, transparent 1px, transparent 20px);
+      height: 40px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display text-slate-100 bg-background-dark min-h-screen flex flex-col">
+<!-- Header & Progress Bar -->
+<header class="sticky top-0 z-20 bg-background-dark/80 backdrop-blur-md px-6 pt-8 pb-4">
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="text-sm font-medium text-slate-400">Step 3 of 5</span>
+<span class="text-sm font-bold brand-gradient-text">60% Complete</span>
+</div>
+<div class="flex gap-1.5 h-1.5 w-full">
+<div class="flex-1 rounded-full brand-gradient-bg"></div>
+<div class="flex-1 rounded-full brand-gradient-bg"></div>
+<div class="flex-1 rounded-full brand-gradient-bg"></div>
+<div class="flex-1 rounded-full bg-slate-800"></div>
+<div class="flex-1 rounded-full bg-slate-800"></div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 pb-40">
+<!-- Intro Section -->
+<section class="mt-6 mb-10">
+<h1 class="text-3xl font-bold text-white mb-2">A few more things 📋</h1>
+<p class="text-muted-text text-base">Optional but helps find better matches</p>
+</section>
+<!-- Height Section -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-6">
+<div>
+<label class="text-sm font-semibold uppercase tracking-wider text-slate-400 block mb-1">Height</label>
+<div class="flex items-baseline gap-2">
+<span class="font-serif text-5xl brand-gradient-text">174 cm</span>
+<span class="text-muted-text text-lg">5'8"</span>
+</div>
+</div>
+<!-- Toggle Switch -->
+<div class="flex items-center bg-slate-900 p-1 rounded-full border border-slate-800">
+<button class="px-3 py-1 text-xs font-bold rounded-full bg-slate-800 text-white">cm</button>
+<button class="px-3 py-1 text-xs font-medium rounded-full text-slate-500">ft</button>
+</div>
+</div>
+<!-- Custom Slider UI Mock -->
+<div class="relative w-full h-20 flex flex-col justify-center">
+<div class="height-ruler w-full opacity-50"></div>
+<div class="absolute left-1/2 -translate-x-1/2 w-1 h-12 brand-gradient-bg rounded-full shadow-[0_0_15px_rgba(233,30,140,0.5)]"></div>
+<input class="absolute inset-0 w-full opacity-0 cursor-pointer" max="220" min="140" type="range" value="174"/>
+</div>
+</section>
+<!-- Occupation Section -->
+<section class="mb-10">
+<label class="text-sm font-semibold uppercase tracking-wider text-slate-400 block mb-3">Occupation (Optional)</label>
+<div class="relative group">
+<input class="w-full bg-slate-900 border-slate-800 rounded-xl px-4 py-4 text-white placeholder:text-slate-600 focus:ring-primary focus:border-primary transition-all" placeholder="What do you do?" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-600">work</span>
+</div>
+<div class="flex flex-wrap gap-2 mt-4">
+<button class="px-4 py-2 rounded-full border border-slate-800 bg-slate-900/50 text-slate-300 text-sm hover:border-primary/50 transition-colors">Engineer</button>
+<button class="px-4 py-2 rounded-full border border-slate-800 bg-slate-900/50 text-slate-300 text-sm hover:border-primary/50 transition-colors">Doctor</button>
+<button class="px-4 py-2 rounded-full border border-slate-800 bg-slate-900/50 text-slate-300 text-sm hover:border-primary/50 transition-colors">Student</button>
+<button class="px-4 py-2 rounded-full border border-slate-800 bg-slate-900/50 text-slate-300 text-sm hover:border-primary/50 transition-colors">Designer</button>
+<button class="px-4 py-2 rounded-full border border-slate-800 bg-slate-900/50 text-slate-300 text-sm hover:border-primary/50 transition-colors">Teacher</button>
+</div>
+</section>
+<!-- Education Section -->
+<section class="mb-10">
+<label class="text-sm font-semibold uppercase tracking-wider text-slate-400 block mb-3">Education (Optional)</label>
+<div class="relative">
+<select class="w-full bg-slate-900 border-slate-800 rounded-xl px-4 py-4 text-slate-400 appearance-none focus:ring-primary focus:border-primary transition-all">
+<option disabled="" selected="" value="">Select your education</option>
+<option>High School</option>
+<option>Bachelor's Degree</option>
+<option>Master's Degree</option>
+<option>Doctorate</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none">expand_more</span>
+</div>
+</section>
+<!-- Languages Section -->
+<section class="mb-10">
+<label class="text-sm font-semibold uppercase tracking-wider text-slate-400 block mb-3">Languages Spoken (Optional)</label>
+<div class="flex flex-wrap gap-3">
+<!-- Pre-selected Malayalam -->
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-xl brand-gradient-bg text-white font-medium shadow-lg shadow-primary/20">
+          Malayalam <span class="material-symbols-outlined text-sm">check_circle</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-medium hover:border-slate-600 transition-colors">
+          English <span class="material-symbols-outlined text-sm">add_circle</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-medium hover:border-slate-600 transition-colors">
+          Hindi <span class="material-symbols-outlined text-sm">add_circle</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-medium hover:border-slate-600 transition-colors">
+          Tamil <span class="material-symbols-outlined text-sm">add_circle</span>
+</button>
+</div>
+</section>
+<!-- Pronouns Section -->
+<section class="mb-10">
+<label class="text-sm font-semibold uppercase tracking-wider text-slate-400 block mb-3">Pronouns</label>
+<div class="grid grid-cols-2 gap-3">
+<button class="p-4 rounded-xl bg-slate-900 border-2 border-primary/40 text-white font-medium flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(233,30,140,0.1)]">
+          He/Him
+        </button>
+<button class="p-4 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-400 font-medium flex items-center justify-center gap-2 hover:border-slate-700 transition-all">
+          She/Her
+        </button>
+<button class="p-4 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-400 font-medium flex items-center justify-center gap-2 hover:border-slate-700 transition-all">
+          They/Them
+        </button>
+<button class="p-4 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-400 font-medium flex items-center justify-center gap-2 hover:border-slate-700 transition-all">
+          Other
+        </button>
+</div>
+</section>
+</main>
+<!-- Navigation -->
+<footer class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-dark via-background-dark to-transparent pt-12">
+<div class="max-w-md mx-auto flex flex-col items-center gap-4">
+<button class="text-slate-500 font-medium hover:text-slate-300 transition-colors">Skip for now</button>
+<button class="w-full py-4 rounded-xl brand-gradient-bg text-white font-bold text-lg shadow-xl shadow-primary/30 flex items-center justify-center gap-2 group">
+        Next
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</footer>
+</body></html>

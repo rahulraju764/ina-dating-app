@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "gold-accent": "#FFD93D",
+                        "platinum-accent": "#D4AF37",
+                        "gold-gradient-start": "#ffafbd",
+                        "gold-gradient-end": "#ffc3a0",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "body": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .shimmer-top {
+            background: radial-gradient(circle at top, rgba(255, 217, 61, 0.08) 0%, transparent 70%);
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(236, 91, 19, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark text-slate-100 font-display selection:bg-primary/30">
+<div class="relative min-h-screen w-full flex flex-col overflow-x-hidden shimmer-top pb-10">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between p-4 sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md">
+<button class="text-slate-100 hover:bg-white/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">ഇണ Premium</h1>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center px-6 pt-8 pb-6">
+<div class="relative mb-4">
+<div class="absolute inset-0 bg-gold-accent/20 blur-2xl rounded-full"></div>
+<span class="text-5xl relative z-10">👑</span>
+</div>
+<h2 class="font-serif italic text-3xl md:text-4xl text-white mb-6">Unlock Your Full Potential</h2>
+<!-- Billing Toggle -->
+<div class="w-full max-w-sm bg-white/5 p-1 rounded-2xl flex items-center relative">
+<button class="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-white/10 text-white shadow-sm">
+                    Monthly
+                </button>
+<button class="flex-1 py-2.5 text-sm font-semibold rounded-xl text-slate-400 hover:text-white transition-all flex items-center justify-center gap-2">
+                    Annual
+                    <span class="bg-red-600 text-[10px] text-white px-1.5 py-0.5 rounded-md font-bold uppercase tracking-wider">-40%</span>
+</button>
+<div class="absolute -top-3 -right-2">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">Best Value</span>
+</div>
+</div>
+</section>
+<!-- Plan Cards Container -->
+<main class="flex flex-col gap-6 px-4 max-w-md mx-auto w-full">
+<!-- Free Card -->
+<div class="bg-white/5 border border-slate-700/50 rounded-2xl p-6 transition-transform hover:scale-[1.01]">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-xl font-bold text-slate-400">Free</h3>
+<p class="text-sm text-slate-500 font-body">Basic Experience</p>
+</div>
+</div>
+<ul class="space-y-3 mb-6 font-body text-sm text-slate-400">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                        10 swipes / day
+                    </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                        Basic matching
+                    </li>
+<li class="flex items-center gap-2 text-slate-600">
+<span class="material-symbols-outlined text-lg">cancel</span>
+                        Unlimited swipes
+                    </li>
+<li class="flex items-center gap-2 text-slate-600">
+<span class="material-symbols-outlined text-lg">cancel</span>
+                        Video calls
+                    </li>
+<li class="flex items-center gap-2 text-slate-600">
+<span class="material-symbols-outlined text-lg">cancel</span>
+                        See who liked you
+                    </li>
+</ul>
+<button class="w-full py-3 bg-slate-800 text-slate-500 font-bold rounded-xl cursor-not-allowed">
+                    Current Plan
+                </button>
+</div>
+<!-- Gold Card (Featured) -->
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 via-primary to-coral-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
+<div class="relative bg-[#1A100B] border-2 border-primary/50 rounded-2xl p-6 gold-border-glow">
+<div class="absolute -top-3 right-6 bg-gold-accent text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-xl">
+                        Most Popular
+                    </div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-primary">⭐ Gold</h3>
+<p class="text-sm text-primary/80 font-bold mt-1">$9.99 / month</p>
+</div>
+</div>
+<ul class="space-y-3 mb-8 font-body text-sm text-slate-200">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">verified</span>
+                            Unlimited swipes
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">videocam</span>
+                            High-quality video calls
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+                            See who liked you
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">public</span>
+                            Passport to any location
+                        </li>
+</ul>
+<button class="w-full py-4 bg-gradient-to-r from-pink-500 to-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                        Get Gold ⭐
+                    </button>
+</div>
+</div>
+<!-- Platinum Card -->
+<div class="bg-black border border-platinum-accent/30 rounded-2xl p-6 relative overflow-hidden">
+<!-- Shimmer Overlay -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-platinum-accent/50 to-transparent"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-3xl font-black text-platinum-accent">💎 Platinum</h3>
+<p class="text-sm text-platinum-accent/60 font-bold mt-1">$19.99 / month</p>
+</div>
+</div>
+<ul class="space-y-3 mb-8 font-body text-sm text-slate-300">
+<li class="flex items-center gap-2 font-bold text-white">
+<span class="material-symbols-outlined text-platinum-accent">add_moderator</span>
+                        Includes all Gold features
+                    </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-platinum-accent">rocket_launch</span>
+                        Priority discovery
+                    </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-platinum-accent">bolt</span>
+                        Unlimited profile boosts
+                    </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-platinum-accent">chat_bubble</span>
+                        Message before matching
+                    </li>
+</ul>
+<button class="w-full py-4 bg-platinum-accent text-black font-bold rounded-xl hover:bg-gold-accent active:scale-95 transition-all">
+                    Get Platinum 💎
+                </button>
+</div>
+<!-- Compare Link -->
+<button class="flex items-center justify-center gap-2 text-slate-400 text-sm font-medium hover:text-white py-4 transition-colors">
+                Compare all features
+                <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</main>
+<!-- Footer Area -->
+<footer class="mt-auto px-6 pt-8 pb-12 flex flex-col items-center gap-8">
+<!-- Payment Badges -->
+<div class="flex items-center gap-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-2xl">ios</span>
+<span class="font-bold text-sm tracking-tight">Pay</span>
+</div>
+<div class="h-4 w-[1px] bg-slate-700"></div>
+<div class="flex items-center gap-1.5">
+<img alt="GPay Icon" class="w-5 h-5" data-alt="Google Pay logo placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXCnW3pLO1QBJ5P1cpLUnUwDNwJUkbY6ndrxhixvgIsBksjNuzKmX9cF0iBFNy9kW5Z3wXQJpSroi-15fKAAgP_zbcVyLkOkgGHD0a_8Bp3rM4Jntq3pLuXKUiQGpDKu3CKvNyRcR4Ek0s1ddpHLBJrHkQas4-P95LCveOPV894l3TLO-cmVXxYbRgVoBrVMh1bB9BCpF921vVvpcsGrI7LppyNJX3N979-c3Rbe3NnBIn4-dE4h4Ij3saq53UcPqTGC3yOLesUl-O"/>
+<span class="font-bold text-sm tracking-tight">Pay</span>
+</div>
+</div>
+<!-- Legal Links -->
+<div class="flex flex-col items-center gap-4">
+<button class="text-primary text-sm font-bold tracking-wide hover:underline">
+                    Restore Purchases
+                </button>
+<div class="flex items-center gap-4 text-xs text-slate-500">
+<a class="hover:text-slate-300" href="#">Terms of Service</a>
+<span class="w-1 h-1 bg-slate-700 rounded-full"></span>
+<a class="hover:text-slate-300" href="#">Privacy Policy</a>
+</div>
+</div>
+<!-- Compliance text -->
+<p class="text-[10px] text-slate-600 text-center max-w-xs leading-relaxed">
+                Subscriptions will automatically renew unless canceled at least 24 hours before the end of the current period. Manage your subscription in your Account Settings.
+            </p>
+</footer>
+</div>
+</body></html>

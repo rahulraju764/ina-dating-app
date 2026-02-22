@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="ml"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Splash Screen</title>
+<!-- BEGIN: Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet"/>
+<!-- END: Fonts -->
+<!-- BEGIN: Scripts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#e42588',
+            accent: '#FF6B6B',
+            dark: '#0D0D0D',
+            muted: '#B0B0C3'
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Playfair Display', 'serif'],
+            tagline: ['DM Sans', 'sans-serif']
+          },
+          borderRadius: {
+            'custom': '8px'
+          },
+          animation: {
+            'spring-bounce': 'springBounce 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate',
+            'float-up': 'floatUp 8s linear infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite'
+          },
+          keyframes: {
+            springBounce: {
+              '0%': { transform: 'scale(0.95)' },
+              '100%': { transform: 'scale(1.05)' }
+            },
+            floatUp: {
+              '0%': { transform: 'translateY(100vh) scale(0)', opacity: '0' },
+              '10%': { opacity: '0.05' },
+              '90%': { opacity: '0.05' },
+              '100%': { transform: 'translateY(-10vh) scale(1)', opacity: '0' }
+            },
+            glowPulse: {
+              '0%, 100%': { opacity: '0.05', transform: 'scale(1)' },
+              '50%': { opacity: '0.15', transform: 'scale(1.2)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Scripts -->
+<style data-purpose="layout-and-atmosphere">
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0D0D0D;
+      overflow: hidden;
+      width: 390px;
+      height: 844px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Container to mimic mobile screen aspect ratio */
+    .mobile-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #0D0D0D;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+<style data-purpose="particle-system">
+    .particle {
+      position: absolute;
+      color: #E91E8C;
+      pointer-events: none;
+      opacity: 0.05;
+    }
+  </style>
+</head>
+<body class="text-white">
+<!-- BEGIN: SplashContainer -->
+<main class="mobile-screen" data-purpose="splash-screen-container">
+<!-- Background Radial Glow -->
+<div class="absolute w-[300px] h-[300px] rounded-full bg-primary blur-[80px] opacity-10 animate-glow-pulse" data-purpose="logo-bloom-effect"></div>
+<!-- BEGIN: ParticleLayer -->
+<div class="absolute inset-0 z-0 pointer-events-none" data-purpose="drifting-hearts-container" id="particles">
+<!-- Particles injected by JavaScript -->
+</div>
+<!-- END: ParticleLayer -->
+<!-- BEGIN: BrandingContent -->
+<section class="z-10 flex flex-col items-center gap-8" data-purpose="brand-identity">
+<!-- Logo: Interlinked 'ഇ' Hearts -->
+<div class="relative w-32 h-32 flex items-center justify-center animate-spring-bounce" data-purpose="animated-logo">
+<svg fill="none" height="120" viewbox="0 0 100 100" width="120" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="heartGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#E91E8C"></stop>
+<stop offset="100%" stop-color="#FF6B6B"></stop>
+</lineargradient>
+</defs>
+<!-- Stylized interlinked heart shape using the Malayalam curve of 'ഇ' -->
+<path d="M50 85C50 85 15 65 15 35C15 18 35 15 50 30C65 15 85 18 85 35C85 65 50 85 50 85Z" fill="none" stroke="url(#heartGradient)" stroke-linecap="round" stroke-width="8"></path>
+<path d="M50 70C50 70 25 55 25 35C25 25 38 23 50 35C62 23 75 25 75 35C75 55 50 70 50 70Z" fill="url(#heartGradient)" opacity="0.8"></path>
+</svg>
+</div>
+<!-- App Name and Tagline -->
+<div class="text-center space-y-2">
+<h1 class="font-display text-[48px] font-bold leading-tight" data-purpose="app-name">
+          ഇണ
+        </h1>
+<p class="font-tagline text-[16px] text-muted tracking-wide" data-purpose="app-tagline">
+          കൂടെ ഉണ്ടാകും
+        </p>
+</div>
+</section>
+<!-- END: BrandingContent -->
+</main>
+<!-- END: SplashContainer -->
+<!-- BEGIN: ParticleScript -->
+<script data-purpose="particle-logic">
+    // Logic to create subtle floating hearts
+    const particleContainer = document.getElementById('particles');
+    const heartCount = 25;
+
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'particle animate-float-up';
+      
+      // Randomize position, size and delay
+      const left = Math.random() * 100;
+      const size = 10 + Math.random() * 15;
+      const delay = Math.random() * 8;
+      const duration = 6 + Math.random() * 6;
+
+      heart.style.left = `${left}%`;
+      heart.style.fontSize = `${size}px`;
+      heart.style.animationDelay = `${delay}s`;
+      heart.style.animationDuration = `${duration}s`;
+      
+      // Simple heart character
+      heart.innerHTML = '❤';
+      
+      particleContainer.appendChild(heart);
+    }
+  </script>
+<!-- END: ParticleScript -->
+</body></html>

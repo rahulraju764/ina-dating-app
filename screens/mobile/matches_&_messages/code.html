@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ina Matches Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700&amp;family=DM+Sans:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "accent-pink": "#E91E8C",
+                        "accent-coral": "#FF6B6B",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "surface-dark": "#1A1A1A",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "body": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .pulsing-pink {
+            box-shadow: 0 0 0 0 rgba(233, 30, 140, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(233, 30, 140, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(233, 30, 140, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(233, 30, 140, 0); }
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-body text-slate-100 min-h-screen flex flex-col">
+<!-- Header Section -->
+<header class="sticky top-0 z-20 bg-background-dark/90 backdrop-blur-md px-4 pt-6 pb-2">
+<div class="flex items-center justify-between mb-6">
+<h1 class="font-serif text-[26px] text-white">ഇണകൾ</h1>
+<div class="flex gap-4">
+<button class="text-white">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<button class="text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full mb-4">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-surface-dark border-none rounded-xl py-3 pl-12 pr-4 text-slate-200 placeholder:text-slate-500 focus:ring-1 focus:ring-accent-pink/50 transition-all" placeholder="Search your matches..." type="text"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 pb-24 overflow-y-auto">
+<!-- New Matches Section -->
+<section class="mb-8">
+<h2 class="text-accent-pink text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-1">
+                New Matches ✨
+            </h2>
+<div class="flex gap-5 overflow-x-auto hide-scrollbar py-2">
+<!-- Swipe Button -->
+<div class="flex flex-col items-center gap-2 shrink-0">
+<button class="w-[72px] h-[72px] rounded-full border-2 border-dashed border-primary flex items-center justify-center bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<span class="text-[13px] text-slate-400">Swipe</span>
+</div>
+<!-- Meera (New/Pulsing) -->
+<div class="flex flex-col items-center gap-2 shrink-0">
+<div class="relative">
+<div class="w-[72px] h-[72px] rounded-full p-[3px] pulsing-pink bg-accent-pink">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close up portrait of Meera smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAeCrs0B48lZ7xnWnMsMGCnUSEtEYg6w6Ge2ZsM5i3nGMN5Dy8Vpz2d20x8mVGRqCVUxT4UefMv7g7TYQbzZRDOKduP9981lNXaGT62YyOunk8OQjIfRO54sbmKC58oeyvK-42eF1ROOazYXCkdu3s3F7OFi1qMbqRJ-DN5DXb1inR2rSTa-2-fg4diCDXAtkAwr8eY8YO1QwMpZpuO5do2tvFRMBdO1SoAiwJFQutjI_6DMfRreAv1ZtMg7RTH_q0674Yl4U3nKKo"/>
+</div>
+</div>
+<span class="text-[13px] text-white font-medium">Meera</span>
+</div>
+<!-- Arjun (Expiring) -->
+<div class="flex flex-col items-center gap-2 shrink-0">
+<div class="relative">
+<div class="w-[72px] h-[72px] rounded-full p-[2px] bg-accent-coral/30">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of Arjun looking at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8qxNq7rPisM71dV53ejm_DB8_KNXOOOQ1fdr8kOwNEk2FM2LA9lsevJESg1zjch6gGA7fsBsPTkdYkhp_-mwgsGadD4KP-ofgwLS_R6qtfYty_a0c7iO-J6C40AGCuRYEQZesCo7dm0PrRMTv0UlZoSLQBA33LhWK41MYFFGgwzAdMIFo_DytGB7_clDLwy-gUQfFrozkGOwKu4o-6O_qJM1p4Fpg1rk8fNnsOAExcIxm51mzao5rixZz5nhd1_eZKcXNsIajfbEd"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-accent-coral text-white text-[10px] rounded-full p-1 border-2 border-background-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">schedule</span>
+</div>
+</div>
+<span class="text-[13px] text-white font-medium">Arjun</span>
+</div>
+<!-- Sana -->
+<div class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[72px] h-[72px] rounded-full">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of Sana with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC02_aJ5tuqBnaZUrehRppxH6HaJZjjIYcDHiZO8IwALynbpMcmexmJnP9qL2GR8kCc3ntk7kK4B6dLovu_JkdQwiK_wTerooh3F9Vw4-823Foa6jS5_rglfxCYsWjUyvvRjUY-ltwtp0irzZh1pmdp1CUfCAk2Blmy0v0SFtc_mMkPz5ZIzUiplzOhl3_Vxsx1UMYEVy_KmyqLokmWFZpzn1TvuXzPuQ2DSEJvvKlqmldhGzcRgrnFBiDm_HWpVH-LIHhwl_Rr-rkc"/>
+</div>
+<span class="text-[13px] text-white font-medium">Sana</span>
+</div>
+<!-- Rahul -->
+<div class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[72px] h-[72px] rounded-full">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of Rahul wearing a shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA86EkH4DsbbOFE6xdB6GVovH_bgxjBxu4jNywI0-0YdUMVhUKe0CxGl8uee4sg3AqIVXRMFtPcupb1g-hGdIQwRh6Mu_4_f5Mk3RjIKSnd037ydSMc5vci3KVfx0fwGYpA4sIpcJLWjdI8MgD2tE9fJPCL7evi0iqrmoQEPlpyKz2Klk0rAhyFtFEzBuViflBDl7cRcTJBUQHsST_vbkJ9-jJY77JCFpAty6eDnTR4hrWrfRz32cxqgp-GRHVj0dKKSMxuJWQNEf6n"/>
+</div>
+<span class="text-[13px] text-white font-medium">Rahul</span>
+</div>
+</div>
+</section>
+<!-- Conversation List -->
+<section class="space-y-1">
+<h2 class="text-white text-lg font-bold mb-4">Messages</h2>
+<!-- Meera Item -->
+<a class="flex items-center gap-4 p-3 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors" href="#">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Meera profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGhIYzIoCgyD2FtnXukUgk67sL2nhy4dUlKfwvX0tcv1Qg63sCqvYfb1BUBhrQBnrnDVPDX7hauuQ0bVJcy_BHmC9qv9Iayr6zGtJxsAT9NSTIAaTjE_mykkZG0FVVm7MZPeG6LapThMPq4u5HfJ-KIP-C9DOcJ2PM7MyoCNrDZgEZAPlHS4QebH8mz4JHP1ufFRVurOv-5JFz-22xQBjm-Gmd4rlp6YuLuNl9_gujev0s_2FhruzIUKhqF7tVnMcUwIJzhfMVanS3"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-background-dark rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<h3 class="text-white font-semibold truncate">Meera</h3>
+<span class="text-[11px] text-accent-pink font-medium">Just now</span>
+</div>
+<p class="text-sm text-slate-100 font-medium truncate">Say hi! 👋</p>
+</div>
+<div class="flex flex-col items-end gap-1 shrink-0">
+<div class="w-5 h-5 bg-accent-pink text-[10px] text-white font-bold flex items-center justify-center rounded-full">1</div>
+</div>
+</a>
+<!-- Arjun Item -->
+<a class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors" href="#">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Arjun profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBewPvS9fXbpBzXqk9kAOdwTU5HZEVJmOVw5sqZMc0G2xy_qQLhWEh3p94gYOIS3-4WoYgiT_JgfA-Mpfn9M7jpl-J9WzKZWfHjtc_vmeCHqW_Q-oeXU1CYu3rVYeSOFl8S8FHmk49dAavK6M29lf_VsKSr9gZAXyJYVu9OUWIcqXIj4S_WsJVNprOjQx3mxTe3Ld7Fnyor3ADJcJJHuWZgJTcFf8TGJWgF-c-ldOq83mxIFaNaFnMYdZHXVBWAhIjEqqkaHiHGH4yn"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-background-dark rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<h3 class="text-white font-semibold truncate">Arjun</h3>
+<span class="text-[11px] text-slate-500">2m ago</span>
+</div>
+<p class="text-sm text-slate-400 truncate">Hey, are you free this weekend?</p>
+</div>
+</a>
+<!-- Siddharth Item -->
+<a class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors" href="#">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Siddharth profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjeKFUSTxDEQ6t0maMkiJ_y5fkwDgFUxh1MdZAEMKoqSnKh8mhYyPGi8QQ37CMM9egPTC3rn936d-3Pbrjr_gp995PzYf2D1V330y_dE4Qi8nHyMySamBAaLp1NVltIvWAvjdqq8Kh7lud4EFywhC-fxOlR5m53OiWxcvI2Kf9GDyhrNcDLofDVq_s7_knFrHVi3mlPDP_noLORFkhcwvOTa4AowHme8vAZiHzoglwrN09jaJaKRLon3X20NficQo-X0hjhRvfMG4K"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<div class="flex items-center gap-1 min-w-0">
+<h3 class="text-white font-semibold truncate">Siddharth</h3>
+<span class="material-symbols-outlined text-[16px] text-blue-400 fill-1">verified</span>
+</div>
+<span class="text-[11px] text-slate-500">2h ago</span>
+</div>
+<p class="text-sm text-slate-400 truncate">That was so funny 😂</p>
+</div>
+</a>
+<!-- Kavya Item -->
+<a class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors" href="#">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Kavya profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9QtHYNmZ498rwVeTlmDT4PjKJpxN_crFOiQDOaD1j6EcYCsF4xTVCH-y1Ut1_ZZQH7oTzuNu2lQYmGC-BU7VWvelAgtJ-ORgUaQ425Vl_NRIrrssh5qIUsp6wlSOW-KhkKeMewd1oAOjH65iEAWkOkNdVQxKPzc7kfUdKY5k7_8jMuLGn-i2d3G2TJGVglNUWNzd3kiTq_5BGuoYq9Y39Q93XhXrl7IZ8SEex4Jxlz0RsJpVozpYM1rvA-DHQIE1y2dMWvF1aoWdi"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<h3 class="text-white font-semibold truncate">Kavya</h3>
+<span class="text-[11px] text-slate-500">Yesterday</span>
+</div>
+<p class="text-sm text-slate-400 truncate">I love that cafe too!</p>
+</div>
+</a>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full bg-background-dark/80 backdrop-blur-xl border-t border-white/10 z-30">
+<div class="flex justify-around items-center px-2 py-3">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">explore</span>
+<p class="text-[10px] text-slate-400 font-medium">Discover</p>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined text-accent-pink fill-1">favorite</span>
+<p class="text-[10px] text-white font-medium">Matches</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chat_bubble</span>
+<p class="text-[10px] text-slate-400 font-medium">Chat</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">featured_seasonal_and_gifts</span>
+<p class="text-[10px] text-slate-400 font-medium">Gifts</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">person</span>
+<p class="text-[10px] text-slate-400 font-medium">Profile</p>
+</a>
+</div>
+</nav>
+</body></html>

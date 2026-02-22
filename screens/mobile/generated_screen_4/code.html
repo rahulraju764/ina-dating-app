@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="ml"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ina - Incoming Call</title>
+<!-- Google Fonts: Playfair Display for names, DM Sans for UI -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&amp;family=Playfair+Display:ital,wght@1,600&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandPink: '#E91E8C',
+            brandCoral: '#FF6B6B',
+            declineRed: '#FF4757',
+            acceptGreen: '#00C896',
+            darkBg: '#0D0D0D',
+          },
+          fontFamily: {
+            dm: ['"DM Sans"', 'sans-serif'],
+            playfair: ['"Playfair Display"', 'serif'],
+          },
+        },
+      },
+    }
+  </script>
+<style data-purpose="animations">@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+        } 100% {
+        transform: scale(2);
+        opacity: 0;
+        }
+    }
+.ring-animation {
+    animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite
+    }
+.ring-2 {
+    animation-delay: 1s
+    }
+.ring-3 {
+    animation-delay: 2s
+    }
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(233, 30, 140, 0.5);
+        } 50% {
+        box-shadow: 0 0 30px rgba(233, 30, 140, 0.8);
+        }
+    }
+.glow-avatar {
+    animation: pulse-glow 2s ease-in-out infinite
+    }
+@keyframes button-pulse {
+    0%, 100% {
+        transform: scale(1);
+        } 50% {
+        transform: scale(1.05);
+        }
+    }
+.pulse-btn {
+    animation: button-pulse 1.5s infinite
+    }
+.blur-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAOfiZhOssQGKrOKU8qiIg-MibjbodEIc9aJWrDIR7S-qVM5P_yP37eDDMeDNx7ifkDQ21EavgIlawigihXwEBX5m-roHA5r63yVGp24LHI0VSzsBionGinp5GZF183giW_cTDid-XXCxXICR-Gi8m4XDB9d04zyvH-GwlCygZZP97uoJRFfDI_soHIp81wRf_t9hiAuADTSkJBRj8qrlEybiyN3HCD1P3v5u1lNhKLvnKSCtwge6dHmEpCx4GsMD7wJUPy1CZ38fpI);
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px);
+    transform: scale(1.1);
+    /* Prevent white edges from blur */
+    }</style>
+</head>
+<body class="bg-darkBg text-white font-dm h-screen w-screen overflow-hidden antialiased">
+<!-- BEGIN: Background Overlay -->
+<div class="fixed inset-0 z-0">
+<!-- Blurred Background Image -->
+<div class="absolute inset-0 blur-bg"></div>
+<!-- 70% Dark Overlay -->
+<div class="absolute inset-0 bg-black/70"></div>
+</div>
+<!-- END: Background Overlay -->
+<main class="relative z-10 h-full flex flex-col justify-between py-12 px-6">
+<!-- BEGIN: Top Section -->
+<section class="flex flex-col items-center gap-2" data-purpose="header-section">
+<div class="text-3xl font-bold bg-gradient-to-r from-brandPink to-brandCoral bg-clip-text text-transparent">
+        ഇണ
+      </div>
+<div class="text-[14px] text-white/60 tracking-wider uppercase font-medium">
+        Incoming Call
+      </div>
+</section>
+<!-- END: Top Section -->
+<!-- BEGIN: Center Profile Section -->
+<section class="flex flex-col items-center" data-purpose="caller-info">
+<div class="relative flex items-center justify-center mb-10">
+<!-- Animated Rings -->
+<div class="absolute w-[120px] h-[120px] border-2 border-brandPink/30 rounded-full ring-animation"></div>
+<div class="absolute w-[120px] h-[120px] border-2 border-brandPink/30 rounded-full ring-animation ring-2"></div>
+<div class="absolute w-[120px] h-[120px] border-2 border-brandPink/30 rounded-full ring-animation ring-3"></div>
+<!-- Avatar -->
+<div class="relative w-[120px] h-[120px] rounded-full border-[3px] border-white overflow-hidden glow-avatar z-20">
+<img alt="Meera" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaWZjmODcVa3i0l4qtLVNVyK9ZAIHCZQe8juMxsVzq6XFv3Y2bgymgf5e_Tz-B-Hy62esZAv6jXYNCgFoCkKECuZpw7RUZoetIs3uxH3Ah1GBAIpBrm7Y_ggBZWqEzxKMQBYsnaaqixcLWe5wDA1WyJQ3AeW_6VzVX-EHPEKLXfI4YFH-OYCYc9REB7YvgN3tUsU_DNLLbetSRBV2slgBAOMr37Hru-eAiyqUreZfgWtoD6RzG26jFOMTWqOZXokWgqaOb1FHRThB6"/>
+</div>
+</div>
+<h1 class="font-playfair italic text-[36px] text-white mb-2">Meera</h1>
+<p class="text-[16px] text-white/70 flex items-center gap-2">
+<span>📹</span> Video Call
+      </p>
+</section>
+<!-- END: Center Profile Section -->
+<!-- BEGIN: Bottom Action Area -->
+<section class="flex flex-col items-center gap-12" data-purpose="call-actions">
+<div class="flex justify-between w-full max-w-[280px]">
+<!-- Decline Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-[72px] h-[72px] bg-declineRed rounded-full flex items-center justify-center pulse-btn shadow-lg" id="decline-btn">
+<!-- Rotated Phone Icon -->
+<svg class="w-8 h-8 text-white rotate-[135deg]" fill="currentColor" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path>
+</svg>
+</button>
+<span class="text-xs text-white/80 font-medium">Decline</span>
+</div>
+<!-- Accept Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-[72px] h-[72px] bg-acceptGreen rounded-full flex items-center justify-center pulse-btn shadow-lg" id="accept-btn">
+<svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path>
+</svg>
+</button>
+<span class="text-xs text-white/80 font-medium">Accept</span>
+</div>
+</div>
+<!-- Countdown -->
+<div class="text-[13px] text-white/50 tracking-wide font-light">
+        Call ends in 00:28
+      </div>
+</section>
+<!-- END: Bottom Action Area -->
+</main>
+</body></html>

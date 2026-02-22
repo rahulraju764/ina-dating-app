@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ml"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=DM+Mono:wght@400;500&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4257b",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#111827",
+                        "sidebar-dark": "#0D0D0D",
+                        "gold": "#FFD700",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "heading": ["DM Sans", "sans-serif"],
+                        "mono": ["DM Mono", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'DM Sans', sans-serif; }
+        .font-mono { font-family: 'DM Mono', monospace; }
+        .sidebar-active {
+            border-left: 3px solid #f4257b;
+            color: #f4257b;
+            background: rgba(244, 37, 123, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-[240px] bg-sidebar-dark flex flex-col justify-between h-screen border-r border-slate-800 shrink-0">
+<div class="flex flex-col">
+<!-- Logo Section -->
+<div class="p-6 flex items-center gap-3">
+<div class="text-white text-3xl font-bold font-heading">ഇണ</div>
+<div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Admin</div>
+</div>
+<!-- Navigation -->
+<nav class="mt-4 px-3 flex flex-col gap-1">
+<a class="sidebar-active flex items-center gap-3 px-3 py-2.5 rounded-r-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+<span class="text-sm font-medium">Moderation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-sm font-medium">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">featured_seasonal_and_gifts</span>
+<span class="text-sm font-medium">Gift Catalogue</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+<span class="text-sm font-medium">Push Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Bottom -->
+<div class="p-4 border-t border-slate-800 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 overflow-hidden">
+<img class="size-full object-cover" data-alt="Admin user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmcIacqcGtrSqlbuJkkynKdBwPq8jeMljDIdGNfmk678s79sT2KDNgHXvOHP_BCNl_c6yMKPvHty45XYX7DMslADy5MquOnHVr7HpLLKON8TywZxMjx6GHkWZgiALFf9507AZxRgXICJyucr36OuCRGk6i68ysZTlQHIq5Dpkpx1YMfhW9nHian44ARYUS803ivVupVHweShLQ_poOX7Rb20pl7EXugHS-TJeycdM_MJC67DkOuF-sjsN_Ziv8esrcp70FW6UeyZc"/>
+</div>
+<div class="flex flex-col min-w-0">
+<p class="text-sm font-medium text-slate-200 truncate leading-tight">Admin User</p>
+<p class="text-xs text-slate-500 truncate">admin@ina.app</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white py-2 rounded-lg text-sm font-bold transition-all">
+<span class="material-symbols-outlined text-sm">logout</span>
+                Logout
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-8 relative">
+<!-- Header -->
+<header class="flex items-center justify-between mb-8">
+<div>
+<h1 class="text-[22px] font-bold font-heading dark:text-white">Good morning, Admin 👋</h1>
+<p class="text-slate-500 text-sm">October 24, 2023</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-sm font-medium border border-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                    Refresh
+                </button>
+</div>
+</header>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-sidebar-dark border border-slate-800 p-6 rounded-xl flex flex-col gap-2">
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Total Users</p>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-mono font-bold dark:text-white">102,483</p>
+</div>
+<div class="flex items-center gap-1 text-emerald-400 text-sm">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+<span>1.2% today</span>
+</div>
+</div>
+<div class="bg-sidebar-dark border border-slate-800 p-6 rounded-xl flex flex-col gap-2 relative overflow-hidden">
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Daily Active</p>
+<p class="text-3xl font-mono font-bold dark:text-white">14,821</p>
+<div class="mt-2 h-8 w-full">
+<!-- Muted Sparkline SVG -->
+<svg class="w-full h-full opacity-30" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0 15 Q 10 5, 20 18 T 40 10 T 60 15 T 80 5 T 100 12" fill="none" stroke="#f4257b" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="bg-sidebar-dark border border-slate-800 p-6 rounded-xl flex flex-col gap-2">
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Active Matches</p>
+<p class="text-3xl font-mono font-bold dark:text-white">6,204</p>
+<div class="flex items-center gap-1 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-sm">equalizer</span>
+<span>Stable trend</span>
+</div>
+</div>
+<div class="bg-sidebar-dark border border-slate-800 p-6 rounded-xl flex flex-col gap-2">
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Today's Revenue</p>
+<p class="text-3xl font-mono font-bold text-gold">$842</p>
+<div class="flex items-center gap-1 text-emerald-400 text-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+5.4%</span>
+</div>
+</div>
+</div>
+<!-- Moderation Alert Card -->
+<div class="bg-red-900/10 border border-red-500/20 p-5 rounded-xl flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-red-500/20 rounded-full flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<h3 class="font-bold dark:text-white">🚨 12 images pending review</h3>
+<p class="text-slate-400 text-sm">Moderation queue requires immediate attention to maintain safety standards.</p>
+</div>
+</div>
+<button class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-bold text-sm transition-colors shadow-lg shadow-red-500/20">
+                Review Now
+            </button>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-10 gap-8 mb-8">
+<!-- Line Chart (60%) -->
+<div class="lg:col-span-6 bg-sidebar-dark border border-slate-800 p-6 rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-heading font-bold dark:text-white">30-Day DAU Trend</h3>
+<div class="flex items-center gap-2 text-primary font-mono text-sm font-bold">
+                        14.8k Average
+                    </div>
+</div>
+<div class="h-64 w-full relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 500 150">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#f4257b" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#f4257b" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0 120 L50 80 L100 110 L150 60 L200 70 L250 40 L300 80 L350 30 L400 60 L450 20 L500 50 V150 H0 Z" fill="url(#chartGradient)"></path>
+<path d="M0 120 L50 80 L100 110 L150 60 L200 70 L250 40 L300 80 L350 30 L400 60 L450 20 L500 50" fill="none" stroke="#f4257b" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+<!-- Chart Legend Mocks -->
+<div class="absolute bottom-0 left-0 w-full flex justify-between px-2 pt-2 border-t border-slate-800">
+<span class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Oct 01</span>
+<span class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Oct 15</span>
+<span class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Oct 30</span>
+</div>
+</div>
+</div>
+<!-- Donut Chart (40%) -->
+<div class="lg:col-span-4 bg-sidebar-dark border border-slate-800 p-6 rounded-xl flex flex-col">
+<h3 class="font-heading font-bold dark:text-white mb-6">Subscriber Distribution</h3>
+<div class="flex-1 flex flex-col items-center justify-center gap-8">
+<!-- CSS Donut Chart Mock -->
+<div class="relative size-40 rounded-full border-[15px] border-primary" style="background: conic-gradient(#f4257b 0% 60%, #FFD700 60% 85%, #492232 85% 100%); border: none;">
+<div class="absolute inset-[15px] bg-sidebar-dark rounded-full flex flex-col items-center justify-center">
+<span class="text-xs text-slate-500 uppercase tracking-tighter">Total</span>
+<span class="text-xl font-mono font-bold dark:text-white">100%</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="w-full flex flex-col gap-3">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary"></span>
+<span class="text-slate-400">Free Users</span>
+</div>
+<span class="font-mono font-bold">60%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-gold"></span>
+<span class="text-slate-400">Gold Tier</span>
+</div>
+<span class="font-mono font-bold">25%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-[#492232]"></span>
+<span class="text-slate-400">Platinum Tier</span>
+</div>
+<span class="font-mono font-bold">15%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Table -->
+<div class="bg-sidebar-dark border border-slate-800 rounded-xl overflow-hidden mb-8">
+<div class="p-6 border-b border-slate-800 flex items-center justify-between">
+<h3 class="font-heading font-bold dark:text-white text-lg">Recent Registrations</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All Users →</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-white/5 text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+<tr>
+<th class="px-6 py-4">User</th>
+<th class="px-6 py-4">Email Address</th>
+<th class="px-6 py-4">Join Time</th>
+<th class="px-6 py-4">Tier</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<!-- Table Row Mockup -->
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<img class="size-8 rounded-full border border-slate-700" data-alt="User avatar profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAXZ0uY9IgD6hAiKsXAvQyzTcCj8J2Rxz6eE55AyPMLijZwF8QMKBB4H5hz6KP_Of9YXruVM4e9vjEF8BYQKiXkU_y6oFDuEkxBBxZoD0JL8fSStQ1qQuCVCCaYriv8nDQKFQWDFwJMLJikWjzNPF63kvLxXJWBKnRSn_k8CvpUAcZ_HqZUyec7E0u5mZWbfzEpWK3R-6z4eQXrWctzzmtRH1Mu7fXt3Befj21qHOdxJYWxMCJjHC2QzPdtc2dCsuDMf1sp5Bjtxw"/>
+<span class="text-sm font-medium dark:text-slate-200">Rahul Nair</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400 font-mono">rahul.n@gmail.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">2 mins ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-gold/20 text-gold text-[10px] font-bold uppercase border border-gold/30 tracking-wider">Gold</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<img class="size-8 rounded-full border border-slate-700" data-alt="User avatar profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDn2ksBE1KGL8G_MccF_4Wc_yLTIGDuLl_wnl-L_xC3NmPAoZL_gUNFsn2L4p37UR_uEn7qRiLkVw97uOuZMd0ggN7MHqJ0zYBUckDW-8Mi1iD-60AcSJSAUrw6gFmm86Il7NBoP9TXbVLHexK1JNjlUCgEKEI98D-on9ju8NXtAag7sHsptFRR-ieuFL5BQhnJfYNmykqqfDkN3seXPtTI6H8HH5bseqdtAWOgebcqh0KpfATyBV0SFGIaC9wGCHkmInVZ9k4crs"/>
+<span class="text-sm font-medium dark:text-slate-200">Anjali K.</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400 font-mono">anjali.k@outlook.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">14 mins ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-primary/20 text-primary text-[10px] font-bold uppercase border border-primary/30 tracking-wider">Platinum</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<img class="size-8 rounded-full border border-slate-700" data-alt="User avatar profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5tSu8NXxmWpH-X1J-DB69rpxZFvY_yNOXOG94cUKHpAvuiL4k0G-P0im4-WkiFOZuNO3Lx5_KvOh4Y_MqcKij4D452xn98NmxcqRANUtZscNKHuIE8Ll0Ds2eCyYw7HmJie8vAmA_2fwB5NqpyIxVt7Vm3LMwGBP_EjJMNKE1gScfBPX5WiwU_dqCGqn5cGc8QMbMb64tWKzeug6s9qQFsh9ZDz358E8FDy5XYraBvboTVv42ME0cyYmZ-ohUiqvuBIwVvw_m3m0"/>
+<span class="text-sm font-medium dark:text-slate-200">Mohammed S.</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400 font-mono">m.sid@mail.in</td>
+<td class="px-6 py-4 text-sm text-slate-400">32 mins ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-800 text-slate-400 text-[10px] font-bold uppercase border border-slate-700 tracking-wider">Free</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<img class="size-8 rounded-full border border-slate-700" data-alt="User avatar profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB25npNIgaanskl8-FeTHQKoy7_xH-p2prmARInTXVCYtsfCKOd-GOx68aU1rhevAf92K34znQcFM8jRUNmKNiKeqjqTlcEg4y7O4xGugVewRHLIVjiNbAxIY8KuTSgS3Fsf1OSIJ0qZEbvcbf0bvRIA2c4AbcCfis6t2D9tzl8V38SU33nq9bIXq-b6zgw-UIugmZwbC-7p4rTNSjKkAaX6X-m5Z1NR4nIbgjWjeF0zPzPkUK_WiQMij8CubtTSRgm-42woCxVmMQ"/>
+<span class="text-sm font-medium dark:text-slate-200">Priya Das</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400 font-mono">p.das99@gmail.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">1 hour ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-gold/20 text-gold text-[10px] font-bold uppercase border border-gold/30 tracking-wider">Gold</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<img class="size-8 rounded-full border border-slate-700" data-alt="User avatar profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn7vGw04zGYXx6AeSTrCzuqnJnuSVC-jUwYcemC84fSFK84OSDAd6FsAjtddHPegaFmj1G8dLfPPMcSQx5B7GFBtxRPuv75tqMRBLQhXx6f5fTLdBkrWiWOUZjD7uWqceem32TctGlQI3xQANmpURUErEtjmk2C6zTXDpUTHIC1_elBzN3CPnNu_zd8QODv5TRGEO7m-bLHaEwQArlSxigpaUvfsm43eQ17z9CKN7cVKANUIenoXa7yemSJ1UEbghOha-AI0zaRIs"/>
+<span class="text-sm font-medium dark:text-slate-200">Sreeram V.</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400 font-mono">svishnu@yahoo.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">2 hours ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-800 text-slate-400 text-[10px] font-bold uppercase border border-slate-700 tracking-wider">Free</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

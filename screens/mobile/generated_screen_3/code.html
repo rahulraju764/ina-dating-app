@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ina - Match Celebration</title>
+<!-- Google Fonts: Playfair Display and DM Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Playfair+Display:ital,wght@1,400..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'playfair': ['"Playfair Display"', 'serif'],
+            'dm-sans': ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            'ina-pink': '#E91E8C',
+            'ina-coral': '#FF6B6B',
+            'ina-dark': '#0D0D0D',
+          },
+          backgroundImage: {
+            'gradient-primary': 'linear-gradient(to right, #E91E8C, #FF6B6B)',
+          },
+          animation: {
+            'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'confetti': 'confetti-fall 4s linear infinite',
+            'float': 'float 3s ease-in-out infinite',
+          },
+          keyframes: {
+            'confetti-fall': {
+              '0%': { transform: 'translateY(-10vh) rotate(0deg)', opacity: '1' },
+              '100%': { transform: 'translateY(110vh) rotate(360deg)', opacity: '0' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    /* Custom CSS for gradient text and complex animations */
+    .text-gradient {
+      background: linear-gradient(to right, #E91E8C, #FF6B6B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      top: -20px;
+      z-index: 5;
+    }
+
+    /* Generating random-ish start positions for confetti */
+    .confetti-piece:nth-child(1) { left: 10%; animation-delay: 0.1s; color: #E91E8C; }
+    .confetti-piece:nth-child(2) { left: 25%; animation-delay: 0.5s; color: #FF6B6B; }
+    .confetti-piece:nth-child(3) { left: 45%; animation-delay: 1.2s; color: #FFFFFF; }
+    .confetti-piece:nth-child(4) { left: 65%; animation-delay: 0.8s; color: #E91E8C; }
+    .confetti-piece:nth-child(5) { left: 85%; animation-delay: 1.5s; color: #FF6B6B; }
+    .confetti-piece:nth-child(6) { left: 35%; animation-delay: 2.1s; color: #E91E8C; }
+    .confetti-piece:nth-child(7) { left: 55%; animation-delay: 2.5s; color: #FF6B6B; }
+    .confetti-piece:nth-child(8) { left: 75%; animation-delay: 3.0s; color: #FFFFFF; }
+  </style>
+<style data-purpose="layout-tweaks">
+    /* Ensuring the mobile view takes full height */
+    body, html {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+  </style>
+</head>
+<body class="font-dm-sans text-white">
+<!-- BEGIN: Blurred Background Simulator -->
+<!-- This represents the discovery screen behind the overlay -->
+<div class="fixed inset-0 z-0">
+<img alt="Discovery Screen Background" class="w-full h-full object-cover blur-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi26lYwaCo5NWFAn6I6j7gzz1w6NuijfyDHFhjhJpb_NZt1Z8S9GaO91TF2oUsK3En8h7zY5QwAftsWT8_SKLv1PlQFBp_bqkU4gHOfcSFMCFPWn0O-zus48fn2XXmTmrn16pCjpxaD2s6XJtX1H4VUMg0eFvF5NA4E0VNlMNMdho2MT5SrQfL87cvSOZCrZ7X-8MvArn5lJTV-6UXWDrRoUnwX3j0f9KV1TxZnBWpB3W_ZDMbKgUbcvjJuCow-38aieAMG1RStHu5"/>
+</div>
+<!-- END: Blurred Background Simulator -->
+<!-- BEGIN: Celebration Overlay -->
+<div class="fixed inset-0 z-10 bg-ina-dark/90 flex flex-col items-center justify-center px-6 overflow-hidden">
+<!-- BEGIN: Confetti Animation -->
+<div class="absolute inset-0 pointer-events-none" data-purpose="confetti-container">
+<div class="confetti-piece animate-confetti">❤</div>
+<div class="confetti-piece animate-confetti">✨</div>
+<div class="confetti-piece animate-confetti">❤</div>
+<div class="confetti-piece animate-confetti">✨</div>
+<div class="confetti-piece animate-confetti">❤</div>
+<div class="confetti-piece animate-confetti">❤</div>
+<div class="confetti-piece animate-confetti">✨</div>
+<div class="confetti-piece animate-confetti">❤</div>
+</div>
+<!-- END: Confetti Animation -->
+<!-- BEGIN: Header Section -->
+<div class="text-center mb-12 animate-float">
+<h1 class="font-playfair italic text-[42px] leading-tight text-gradient mb-2">
+        It's a Match! 💘
+      </h1>
+<p class="text-white/80 text-base font-normal">
+        You and Meera both liked each other
+      </p>
+</div>
+<!-- END: Header Section -->
+<!-- BEGIN: Profiles Section -->
+<div class="relative flex items-center justify-center gap-4 mb-10" data-purpose="profile-match-display">
+<!-- Current User Photo -->
+<div class="relative">
+<div class="w-[100px] h-[100px] rounded-full border-4 border-ina-pink shadow-[0_0_20px_rgba(233,30,140,0.5)] overflow-hidden">
+<img alt="Your Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmJr-hi-C22jj9UISsoeHSN1Z2J-iasOo7Eur0aikLe7kMmKx2ENTaMgO5fx4x7W4Ks81uQI9haPJYcphHHBmhkbpOmiIGve5QRYRTnV0jnnt0d5-1_oaQz_AOPmLijRD_5wyMi2jD7OYXiq2_VLvNGb2u9kLd5BJUPoe57cZL7b9KUj7HzBo_ARPbwgHhv0M1ZSwNZwmZZfA-pM0A58HEyMGwld2DTEx2vfun7vf8cdVux4251d4a2BkSKdFDVxzRS7MASZojWbfz"/>
+</div>
+</div>
+<!-- Pulsing Heart Icon -->
+<div class="absolute z-20 bg-ina-dark rounded-full p-2">
+<svg class="w-8 h-8 text-ina-pink animate-pulse" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001Z"></path>
+</svg>
+</div>
+<!-- Match User Photo (Meera) -->
+<div class="relative">
+<div class="w-[100px] h-[100px] rounded-full border-4 border-ina-pink shadow-[0_0_20px_rgba(233,30,140,0.5)] overflow-hidden">
+<img alt="Meera's Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ2Z0oBQ6DyXkc451sw3hGAkaDXyxIrXDWo-fZpIJ6pvMoRv7eeBk_Zj26V8HJqoAfG8MXdXYKDC0YVoreSNB3myompsQoAneRIjqllXscPVffKP2zsJ2z8iFCcsxP4ryXZpSUwcEImqL1n04kClXvehgjWTxUtgzXfv5OCn0kQ2yvxXK-AoWt1CIS3IdjpjQ40kNUtChFc-Yq7GQSGcnJpqWadwKGHyInxdqQdqCXk0NhIQv3i_uf4dwlDMz4xqx5Qro1WDEHiPSa"/>
+</div>
+</div>
+</div>
+<!-- END: Profiles Section -->
+<!-- BEGIN: Status Banner -->
+<div class="mb-16">
+<p class="text-[18px] text-white/60 font-light italic tracking-wide">
+        ഇണ found: Meera ✨
+      </p>
+</div>
+<!-- END: Status Banner -->
+<!-- BEGIN: Actions Section -->
+<div class="w-full space-y-4 max-w-xs" data-purpose="interaction-buttons">
+<!-- Primary Action -->
+<button class="w-full bg-gradient-primary h-14 rounded-full font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg shadow-ina-pink/20">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.14 6.337.408 1.92.25 3.463 1.803 3.725 3.736.279 2.057.419 4.167.419 6.305 0 2.138-.14 4.248-.419 6.305-.262 1.933-1.805 3.486-3.725 3.736-2.075.27-4.19.408-6.337.408-2.147 0-4.262-.14-6.337-.408-1.92-.25-3.463-1.803-3.725-3.736A38.147 38.147 0 0 1 1.05 12.658c0-2.138.14-4.248.419-6.305.262-1.933 1.805-3.486 3.725-3.736Z"></path>
+<path d="m11.33 12.984-2.883 1.73a.75.75 0 0 0 .196 1.374l2.577.43a.75.75 0 0 0 .596-.24l3.877-3.877a.75.75 0 0 0-1.06-1.061l-3.307 3.307-.4-2.4a.75.75 0 0 0-1.06-.596Z"></path>
+</svg>
+        Send Message
+      </button>
+<!-- Secondary Action -->
+<button class="w-full h-14 rounded-full border-2 border-white/20 font-medium text-white/70 flex items-center justify-center gap-2 active:bg-white/5 transition-colors">
+        Keep Swiping →
+      </button>
+</div>
+<!-- END: Actions Section -->
+</div>
+<!-- END: Celebration Overlay -->
+</body></html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ina Admin - Moderation Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4257b",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#0D0D0D",
+                        "panel-dark": "#121212",
+                        "border-dark": "#222222",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-[240px] flex-shrink-0 bg-background-dark border-r border-border-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Ina Admin</h1>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">shield_person</span>
+<span class="text-sm font-medium">Moderation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-sm font-medium">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto border-t border-border-dark">
+<div class="flex items-center gap-3 px-2 py-2 bg-white/5 rounded-lg">
+<div class="size-8 rounded-full bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold">Admin User</span>
+<span class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Moderator</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Left Panel: Moderation Queue List (380px) -->
+<main class="w-[380px] flex-shrink-0 flex flex-col border-r border-border-dark bg-panel-dark">
+<header class="p-4 border-b border-border-dark">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Moderation Queue</h2>
+<span class="bg-primary/20 text-primary text-[11px] font-bold px-2 py-0.5 rounded-full">23 Pending</span>
+</div>
+<div class="flex gap-4 border-b border-border-dark">
+<button class="pb-2 text-sm font-semibold border-b-2 border-primary text-primary">Images (18)</button>
+<button class="pb-2 text-sm font-semibold text-slate-500 hover:text-slate-300">Profiles (3)</button>
+<button class="pb-2 text-sm font-semibold text-slate-500 hover:text-slate-300">Chats (2)</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto no-scrollbar">
+<!-- Selected Item -->
+<div class="h-20 flex items-center gap-3 px-4 bg-primary/5 border-l-4 border-primary cursor-pointer border-b border-border-dark">
+<div class="size-12 rounded-lg overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Profile thumbnail of reported user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN22J-bkTaIHAjsGTF4oE8Z_mbQF7JjMS53_A71K7jyZYPEU2Jcxtdf0VrK8W1TlqYnqzhQTDv2rCmzjJ2tKHWbObMig9wZDxUFDBrAPkHf9GdEHZOE_fSLuK_wH_4pfRKTX9QC1QrywA_8JEstLSZwQJggBe3UqJOFmjoJT4P_Ih2lsc6i2AiRXHsGCjCtxTNZyfZGrwYXYonswMGbDIKTKLTYiuBjAFNaA6DTl_ilii4jZsu977fFvEU-T-RJyo7Q1nBy-znluE"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<span class="text-[11px] font-bold text-red-500 uppercase">NSFW Detected</span>
+<span class="text-[10px] text-slate-500">2m ago</span>
+</div>
+<p class="text-sm font-medium truncate">Image violation #4922</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-red-500/10 text-red-500 text-[10px] font-bold px-1.5 rounded">HIGH</span>
+</div>
+</div>
+</div>
+<!-- Repeatable Cards -->
+<div class="h-20 flex items-center gap-3 px-4 hover:bg-white/5 cursor-pointer border-b border-border-dark transition-colors">
+<div class="size-12 rounded-lg overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Thumbnail of reported profile image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNaXncyZCOvA9X74g1r4BON5QzoZbSQTtXxCsW2SUAhI6SwQWK6nDtPLNdEPa08oRbgkH8HHE9K7bhGKVoabySy_LlpMwRnL84rqYWxijOvOFxOpkEQ2Rp2Wt816r180YSAG4G9oz0WH4rA3Odl_-rHxYm4_w9O6QU69feNaW7Y3dy0uFGFmijKbH7dlH2f7VIZmLuuKfCXf5875De3OCLpDGBuxXtk_KOcLKc5akhrJnV2Y0GTsrWbViC1JYw5oMfWgw5tRW11eY"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<span class="text-[11px] font-bold text-slate-400 uppercase">User Reported</span>
+<span class="text-[10px] text-slate-500">15m ago</span>
+</div>
+<p class="text-sm font-medium truncate">Harassment report</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-orange-500/10 text-orange-500 text-[10px] font-bold px-1.5 rounded">MEDIUM</span>
+</div>
+</div>
+</div>
+<div class="h-20 flex items-center gap-3 px-4 hover:bg-white/5 cursor-pointer border-b border-border-dark transition-colors">
+<div class="size-12 rounded-lg overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Thumbnail of flagged image content" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFM6ux-WmHdstI7N_nHskoNGJoCDJaqNpOuNbq1nWcs9sMK8TrMswpt1536E7NNchKWEtj4Djr6NyDMiJqFa02KlTF0mmFe389D1ZngwbAoi-n-bVV0iscpD5HTPTTD-T6-XHmWXSuvcgqv13h9_Kl1iKlmzq49XsmkYLnSMp35fYZ-cfEbVtzC1a0794pqsa_RlMyahbn0rZ6Jrw1VV76tqaNgPkyjhxY-csB9nQ78toBMasT4foNjfgAOPVAM0AzHWyDxHJIDC0"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<span class="text-[11px] font-bold text-red-500 uppercase">NSFW Detected</span>
+<span class="text-[10px] text-slate-500">42m ago</span>
+</div>
+<p class="text-sm font-medium truncate">Image violation #4918</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-red-500/10 text-red-500 text-[10px] font-bold px-1.5 rounded">HIGH</span>
+</div>
+</div>
+</div>
+<div class="h-20 flex items-center gap-3 px-4 hover:bg-white/5 cursor-pointer border-b border-border-dark transition-colors">
+<div class="size-12 rounded-lg overflow-hidden flex-shrink-0 relative bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-600">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<span class="text-[11px] font-bold text-slate-400 uppercase">User Reported</span>
+<span class="text-[10px] text-slate-500">1h ago</span>
+</div>
+<p class="text-sm font-medium truncate">Inappropriate bio</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-orange-500/10 text-orange-500 text-[10px] font-bold px-1.5 rounded">MEDIUM</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Panel: Review Area -->
+<section class="flex-1 flex flex-col bg-background-dark relative">
+<header class="h-14 border-b border-border-dark px-6 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-sm font-semibold">Report #ID-4922</span>
+<span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+<span class="text-sm text-slate-400 uppercase tracking-widest font-bold">NSFW Image Detection</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-1 hover:bg-white/5 rounded text-slate-400"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-1 hover:bg-white/5 rounded text-slate-400"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<!-- Center Area: Image Review -->
+<div class="flex-1 p-8 flex flex-col items-center justify-center overflow-y-auto no-scrollbar">
+<div class="max-w-[400px] w-full rounded-xl overflow-hidden shadow-2xl border border-border-dark bg-panel-dark p-2">
+<img class="w-full aspect-square object-cover rounded-lg" data-alt="Full size review of the flagged image content" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOg7L3MZyK16R54C5bA-DDUA2GDjl3WffvMsL_Q_HFqDygQYjpZi43UCC4vR_8q-gxsJJ1rer1mcydXR1Wx53fTSemzmK5UdMbwXXzYJ7Ydc3Ko4yQVADQk-lu_EWZG3o93GV3qqug9AaU7Obe0TOl7ltLAUembkbH_kOUm2WXbDtQTOPtDK2WotBQvPT4fiA8DTdYsFxxepFhwimueKBHeh0l9VcOJrG6qTQbKw8lEnllGJp5kO2ypXx1a_uIR62Ar6e4Jtja5IY"/>
+</div>
+<div class="max-w-[400px] w-full mt-6 space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold text-red-500">NSFW Score: 0.82</span>
+<span class="text-[10px] text-slate-500">Threshold: 0.70</span>
+</div>
+<div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-red-600 rounded-full" style="width: 82%;"></div>
+</div>
+</div>
+</div>
+<!-- Detail Panel (Right Sidebar) -->
+<div class="w-[320px] border-l border-border-dark bg-panel-dark p-6 overflow-y-auto no-scrollbar">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Uploader Info</h3>
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Avatar of the user who uploaded the image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyq_aigKzNTyFo60UEBvQbb-vBI0abfW5YjS4lNDK-0clYvymRyglSUbw36OmAfmDYybICi5MvaT7YYWiU6pSLCScX74EELjBM7q72Bec1lutoe88htjO2YZ1oL0X_4xH5vrC9Oc6_73vz9Jv6rhl3ITz8gzHbJtQdHwYl10jr1GoV1gOioe2p8HL8RA1qcA_vvhyTE8suXFytvLYBWpgI6oBCMTK2gUCyjKcgRk1cGK-NaBHiiYeDcqsdDc35mNj_JmNaTaTrVgg"/>
+</div>
+<div>
+<p class="text-sm font-bold">Sophie Bennett</p>
+<p class="text-[11px] text-slate-500">Member since Aug 2023</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="p-3 rounded-lg bg-background-dark border border-border-dark">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Reports</p>
+<p class="text-lg font-bold">3</p>
+</div>
+<div class="p-3 rounded-lg bg-background-dark border border-border-dark">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Violations</p>
+<p class="text-lg font-bold text-red-500">1</p>
+</div>
+</div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Moderator Notes</h3>
+<textarea class="w-full h-32 bg-background-dark border border-border-dark rounded-lg p-3 text-sm focus:ring-primary focus:border-primary placeholder:text-slate-700 resize-none mb-6" placeholder="Add context for this action..."></textarea>
+<div class="space-y-2">
+<button class="w-full py-2.5 rounded-lg border border-emerald-500 text-emerald-500 font-bold text-sm hover:bg-emerald-500/10 transition-colors">
+                            Approve Image
+                        </button>
+<button class="w-full py-2.5 rounded-lg bg-red-600 text-white font-bold text-sm hover:bg-red-700 transition-colors">
+                            Remove Image
+                        </button>
+<button class="w-full py-2.5 rounded-lg bg-orange-600/10 text-orange-600 border border-orange-600/30 font-bold text-sm hover:bg-orange-600/20 transition-colors">
+                            Suspend User (7 days)
+                        </button>
+<button class="w-full py-2.5 rounded-lg bg-red-950 text-red-500 border border-red-900 font-bold text-sm hover:bg-red-900 transition-colors">
+                            Ban User
+                        </button>
+</div>
+</div>
+</div>
+<!-- Detail View Footer -->
+<footer class="h-12 border-t border-border-dark flex items-center justify-between px-6 bg-panel-dark/50 backdrop-blur-sm">
+<div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
+<span class="material-symbols-outlined text-sm">history</span>
+                    Last action: <span class="text-slate-300">approved by admin@spark.app</span> · 3 mins ago
+                </div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-border-dark text-[10px] font-bold text-slate-400">←</kbd>
+<kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-border-dark text-[10px] font-bold text-slate-400">→</kbd>
+<span class="text-[10px] text-slate-500 font-bold uppercase">Navigate</span>
+</div>
+<div class="w-px h-3 bg-border-dark"></div>
+<div class="flex items-center gap-1.5">
+<kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-border-dark text-[10px] font-bold text-slate-400">A</kbd>
+<span class="text-[10px] text-slate-500 font-bold uppercase">Approve</span>
+</div>
+<div class="flex items-center gap-1.5">
+<kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-border-dark text-[10px] font-bold text-slate-400">D</kbd>
+<span class="text-[10px] text-slate-500 font-bold uppercase">Remove</span>
+</div>
+<div class="flex items-center gap-1.5">
+<kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-border-dark text-[10px] font-bold text-slate-400">S</kbd>
+<span class="text-[10px] text-slate-500 font-bold uppercase">Suspend</span>
+</div>
+</div>
+</footer>
+</section>
+</div>
+</body></html>

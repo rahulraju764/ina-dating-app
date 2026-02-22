@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ഇണ (Ina) - Create Account</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0D0D0D",
+                        "surface-dark": "#1A1A2E",
+                        "border-dark": "#2A2A3E",
+                        "accent-pink": "#E91E8C",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "14px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .mesh-gradient {
+            background-image: radial-gradient(at 100% 0%, rgba(233, 30, 140, 0.15) 0%, transparent 50%), 
+                              radial-gradient(at 80% 10%, rgba(107, 46, 80, 0.1) 0%, transparent 40%);
+        }
+        .floating-label-input:focus-within label,
+        .floating-label-input input:not(:placeholder-shown) + label,
+        .floating-label-input select:not([value=""]) + label {
+            transform: translateY(-1.5rem) scale(0.85);
+            color: #E91E8C;
+        }
+        .form-input-custom {
+            transition: all 0.2s ease-in-out;
+        }
+        .form-input-custom:focus {
+            border-color: #E91E8C !important;
+            box-shadow: 0 0 0 1px #E91E8C;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen mesh-gradient">
+<div class="max-w-md mx-auto px-6 py-8 flex flex-col min-h-screen">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between mb-8">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Create Account</h1>
+<div class="w-10"></div> <!-- Spacer -->
+</header>
+<!-- Profile Photo Upload -->
+<div class="flex flex-col items-center mb-8">
+<div class="relative">
+<div class="w-20 h-20 rounded-full border-2 border-dashed border-accent-pink flex items-center justify-center bg-surface-dark overflow-hidden">
+<span class="material-symbols-outlined text-accent-pink/50 text-3xl">person</span>
+</div>
+<button class="absolute bottom-0 right-0 bg-accent-pink w-7 h-7 rounded-full flex items-center justify-center border-2 border-background-dark shadow-lg">
+<span class="material-symbols-outlined text-white text-sm">photo_camera</span>
+</button>
+</div>
+<p class="text-xs text-slate-400 mt-3 font-medium">Add Profile Picture</p>
+</div>
+<!-- Registration Form -->
+<form class="flex flex-col gap-5 flex-grow">
+<!-- Full Name -->
+<div class="relative floating-label-input">
+<input class="form-input-custom w-full h-14 bg-surface-dark border-border-dark rounded-2xl px-4 pt-4 text-white focus:ring-0 focus:outline-none placeholder-transparent" placeholder=" " type="text"/>
+<label class="absolute left-4 top-4 text-slate-400 pointer-events-none transition-all duration-200 origin-left">Full Name</label>
+</div>
+<!-- Email -->
+<div class="relative floating-label-input">
+<input class="form-input-custom w-full h-14 bg-surface-dark border-border-dark rounded-2xl px-4 pt-4 text-white focus:ring-0 focus:outline-none placeholder-transparent" placeholder=" " type="email"/>
+<label class="absolute left-4 top-4 text-slate-400 pointer-events-none transition-all duration-200 origin-left">Email Address</label>
+</div>
+<!-- Password -->
+<div>
+<div class="relative floating-label-input">
+<input class="form-input-custom w-full h-14 bg-surface-dark border-border-dark rounded-2xl px-4 pt-4 pr-12 text-white focus:ring-0 focus:outline-none placeholder-transparent" placeholder=" " type="password"/>
+<label class="absolute left-4 top-4 text-slate-400 pointer-events-none transition-all duration-200 origin-left">Password</label>
+<button class="absolute right-4 top-4 text-slate-400" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<!-- Password Strength Meter -->
+<div class="flex gap-1 mt-2 px-1">
+<div class="h-1 flex-1 bg-accent-pink rounded-full"></div>
+<div class="h-1 flex-1 bg-accent-pink rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-dark border border-border-dark rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-dark border border-border-dark rounded-full"></div>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="relative floating-label-input">
+<input class="form-input-custom w-full h-14 bg-surface-dark border-border-dark rounded-2xl px-4 pt-4 text-white focus:ring-0 focus:outline-none placeholder-transparent" placeholder=" " type="password"/>
+<label class="absolute left-4 top-4 text-slate-400 pointer-events-none transition-all duration-200 origin-left">Confirm Password</label>
+</div>
+<!-- Date of Birth -->
+<div>
+<div class="relative floating-label-input">
+<input class="form-input-custom w-full h-14 bg-surface-dark border-red-500/50 rounded-2xl px-4 pt-4 pr-12 text-white focus:ring-0 focus:outline-none placeholder-transparent" placeholder=" " type="text" value="DD/MM/YYYY"/>
+<label class="absolute left-4 top-4 text-slate-400 pointer-events-none transition-all duration-200 origin-left">Date of Birth</label>
+<span class="material-symbols-outlined absolute right-4 top-4 text-slate-400">calendar_today</span>
+</div>
+<p class="text-[11px] text-red-400 mt-1.5 ml-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                    Must be 18 or older
+                </p>
+</div>
+<!-- Gender -->
+<div class="relative floating-label-input">
+<select class="form-input-custom w-full h-14 bg-surface-dark border-border-dark rounded-2xl px-4 pt-4 text-white focus:ring-0 focus:outline-none appearance-none">
+<option disabled="" hidden="" selected="" value=""></option>
+<option value="male">Male</option>
+<option value="female">Female</option>
+<option value="non-binary">Non-binary</option>
+</select>
+<label class="absolute left-4 top-4 text-slate-400 pointer-events-none transition-all duration-200 origin-left">Gender</label>
+<span class="material-symbols-outlined absolute right-4 top-4 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+<!-- Create Account Button -->
+<button class="w-full h-14 mt-4 bg-gradient-to-r from-accent-pink to-primary rounded-2xl text-white font-bold text-lg shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all" type="submit">
+                Create Account
+            </button>
+</form>
+<!-- Social Auth -->
+<div class="mt-10 mb-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-[1px] flex-1 bg-border-dark"></div>
+<span class="text-slate-500 text-xs font-medium uppercase tracking-widest">— or sign up with —</span>
+<div class="h-[1px] flex-1 bg-border-dark"></div>
+</div>
+<div class="flex justify-center gap-4">
+<button class="w-14 h-14 rounded-2xl border border-border-dark bg-surface-dark flex items-center justify-center hover:bg-white/5 transition-colors">
+<img class="w-6 h-6" data-alt="Google colorful brand logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRd4xhRY0yWlmj9mhpp36QFvxeWxzci1lzEERhBQgnI3vHxxddJsMlaXK-bPXb9_xHp201a-HahQID09qIY06yw4cNmtv3bo9yg-mQpe35veMYzN9uMVb1Jp35_W5QzVLOE0xBjJXvrT9memzAMPIwHOqve7VEBmEYQClkhH-hFQq8ybsZR05D5Vvha8FID8_Xp6tYITWP8B2cH8GLZHtTMca0B_j2Riwkjd9kSQgI8acY1HtmnJhcIZxD1uDB79m9yJXo69sVyBb7"/>
+</button>
+<button class="w-14 h-14 rounded-2xl border border-border-dark bg-surface-dark flex items-center justify-center hover:bg-white/5 transition-colors">
+<img class="w-6 h-6" data-alt="Apple brand logo icon in white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5nruubE_ZdZvjjY6b-rkPieXro73uiQvxVOE_gVXPGCjfuVjgR8p1n8K0QsdTzsy2mfqyRw2XaJd9MopY0KlcB9lc5WWcdxqY4uRXU1w9ifIaAO5SryRpq2Rx2KvL4wxX31zMVgYUXJ88lBvPP-JO-G0QMOGI7SPrlMJnPFS6ubW2DM8GhzkqZ0aemrfTC7GQ6SI_p11FftjfHTn8BZ6UBmRgMRy4QUzGw6eQDqjbAMNotPbIQKHoivfpWR-mIzcFV20xVhG1OPNI"/>
+</button>
+<button class="w-14 h-14 rounded-2xl border border-border-dark bg-surface-dark flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-white">smartphone</span>
+</button>
+</div>
+</div>
+<!-- Footer Links -->
+<footer class="mt-auto pt-6 text-center">
+<p class="text-xs text-slate-500 leading-relaxed">
+                By clicking "Create Account", you agree to our <br/>
+<a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>
+</p>
+</footer>
+</div>
+</body></html>

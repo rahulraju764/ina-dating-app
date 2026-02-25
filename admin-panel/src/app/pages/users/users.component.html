@@ -1,0 +1,106 @@
+<div class="space-y-6 pb-12">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-bold text-white font-sans">Users</h2>
+            <p class="text-[#B0B0C3] mt-1">102,483 total users</p>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <lucide-icon [img]="Search"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#B0B0C3]"></lucide-icon>
+                <input type="text" placeholder="Search by name or email..."
+                    class="bg-[#1A1A2E] text-white pl-10 pr-4 py-2 rounded-full border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all w-64 text-sm font-sans" />
+            </div>
+
+            <button
+                class="flex items-center px-4 py-2 bg-[#1A1A2E] text-white border border-[#2A2A3E] rounded-full text-sm font-medium hover:bg-[#2A2A3E] transition-colors">
+                <lucide-icon [img]="Filter" class="w-4 h-4 mr-2 text-[#B0B0C3]"></lucide-icon>
+                Filter
+            </button>
+
+            <button
+                class="flex items-center px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                <lucide-icon [img]="Download" class="w-4 h-4 mr-2"></lucide-icon>
+                Export CSV
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
+                        <th class="py-4 px-6 font-medium">User</th>
+                        <th class="py-4 px-6 font-medium">Email</th>
+                        <th class="py-4 px-6 font-medium">Age</th>
+                        <th class="py-4 px-6 font-medium">Tier</th>
+                        <th class="py-4 px-6 font-medium">Joined</th>
+                        <th class="py-4 px-6 font-medium">Status</th>
+                        <th class="py-4 px-6 font-medium text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (user of users; track user.email) {
+                    <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
+                        <td class="py-4 px-6 flex items-center">
+                            <img [src]="user.avatar" alt="Avatar"
+                                class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E]" />
+                            <span class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
+                                user.name }}</span>
+                        </td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ user.email }}</td>
+                        <td class="py-4 px-6 text-white text-sm">{{ user.age }}</td>
+                        <td class="py-4 px-6">
+                            <span class="px-3 py-1 text-xs font-bold rounded-[20px] inline-block" [ngClass]="{
+                        'bg-[#2A2A3E] text-[#B0B0C3]': user.tier === 'Free',
+                        'bg-[#FFD93D]/20 text-[#FFD93D]': user.tier === 'Gold',
+                        'bg-[#9B1FDB]/20 text-[#9B1FDB]': user.tier === 'Platinum'
+                      }">
+                                {{ user.tier }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ user.joined }}</td>
+                        <td class="py-4 px-6">
+                            <span
+                                class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex flex-row items-center border"
+                                [ngClass]="{
+                        'border-[#00C896] text-[#00C896] bg-[#00C896]/10': user.status === 'Active',
+                        'border-[#FFD93D] text-[#FFD93D] bg-[#FFD93D]/10': user.status === 'Suspended',
+                        'border-[#FF4757] text-[#FF4757] bg-[#FF4757]/10': user.status === 'Banned'
+                      }">
+                                {{ user.status }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-right relative">
+                            <div class="flex items-center justify-end space-x-2">
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-brand-pink hover:bg-[#2A2A3E] rounded-full transition-colors tooltip-trigger relative">
+                                    <lucide-icon [img]="Eye" class="w-4 h-4"></lucide-icon>
+                                </button>
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors tooltip-trigger relative">
+                                    <lucide-icon [img]="MoreVertical" class="w-4 h-4"></lucide-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="px-6 py-4 flex items-center justify-between border-t border-[#2A2A3E]">
+            <p class="text-sm text-[#B0B0C3]">Showing 1–5 of 102,483</p>
+            <div class="flex items-center space-x-2">
+                <button
+                    class="px-3 py-1 bg-[#2A2A3E] text-[#B0B0C3] rounded disabled:opacity-50 text-sm font-medium hover:bg-[#3A3A4E] transition-colors"
+                    disabled>&larr; Prev</button>
+                <button
+                    class="px-3 py-1 bg-[#2A2A3E] text-white rounded text-sm font-medium hover:bg-[#3A3A4E] transition-colors">Next
+                    &rarr;</button>
+            </div>
+        </div>
+    </div>
+</div>

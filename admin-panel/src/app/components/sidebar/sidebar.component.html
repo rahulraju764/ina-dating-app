@@ -1,0 +1,38 @@
+<div class="h-screen w-64 bg-[#0D0D0D] flex flex-col text-white border-r border-[#2A2A3E]">
+  <!-- Logo -->
+  <div class="p-6 flex items-center space-x-3">
+    <div class="bg-gradient-to-br from-brand-pink to-brand-coral p-2 rounded-lg text-white font-serif italic font-bold">ഇണ</div>
+    <span class="text-xl font-bold font-display">Admin Panel</span>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
+    @for (item of menuItems; track item.label) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="bg-[#1A1A2E] text-brand-pink border-l-4 border-brand-pink"
+        class="flex items-center px-4 py-3 rounded-md text-[#B0B0C3] hover:text-white hover:bg-[#1A1A2E] transition-colors border-l-4 border-transparent"
+      >
+        <lucide-icon [img]="item.icon" class="w-5 h-5 mr-3"></lucide-icon>
+        <span class="font-medium text-[15px]">{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <!-- Admin Profile & Logout -->
+  <div class="p-4 border-t border-[#2A2A3E]">
+    <div class="flex flex-col space-y-4">
+      <div class="flex items-center px-2">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-brand-pink flex items-center justify-center font-bold">A</div>
+        <div class="ml-3">
+          <p class="text-sm font-bold text-white">Super Admin</p>
+          <p class="text-xs text-[#B0B0C3]">admin&#64;spark.app</p>
+        </div>
+      </div>
+      <button class="w-full flex items-center justify-center px-4 py-2 text-[#FF4757] hover:bg-[#1A1A2E] rounded-md transition-colors">
+        <lucide-icon [img]="LogOut" class="w-4 h-4 mr-2"></lucide-icon>
+        <span class="text-sm font-medium">Logout</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,10 @@ export const routes: Routes = [
             { path: 'subscriptions', component: SubscriptionsComponent },
             { path: 'gifts', component: GiftsComponent },
             { path: 'campaigns', component: CampaignsComponent },
+            { path: 'calls', loadComponent: () => import('./pages/calls/call-logs/call-logs.component').then(m => m.CallLogsComponent) },
+            { path: 'coins/packages', loadComponent: () => import('./pages/coins/coin-packages/coin-packages.component').then(m => m.CoinPackagesComponent) },
+            { path: 'coins/ledger', loadComponent: () => import('./pages/coins/coin-ledger/coin-ledger.component').then(m => m.CoinLedgerComponent) },
+            { path: 'coins/withdrawals', loadComponent: () => import('./pages/coins/withdrawals/withdrawals.component').then(m => m.WithdrawalsComponent) },
             { path: 'settings', component: SettingsComponent },
             { path: '**', redirectTo: 'dashboard' }
         ]

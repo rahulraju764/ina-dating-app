@@ -1,0 +1,129 @@
+<div class="space-y-6 pb-12 relative">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-bold text-white font-sans flex items-center">
+                <lucide-icon [img]="Video" class="w-8 h-8 mr-3 text-brand-pink"></lucide-icon>
+                Video & Audio Call Logs
+            </h2>
+            <p class="text-[#B0B0C3] mt-1 pr-4">Monitor call activity, durations, and connection statuses across the
+                platform.</p>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <button (click)="loadCallLogs()" [disabled]="isLoading" title="Refresh Logs"
+                class="p-2.5 bg-[#2A2A3E] text-[#B0B0C3] rounded-full hover:text-white hover:bg-[#3A3A4E] transition-colors disabled:opacity-50">
+                <lucide-icon [img]="RefreshCcw" class="w-5 h-5" [class.animate-spin]="isLoading"></lucide-icon>
+            </button>
+
+
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden relative">
+        @if (isLoading) {
+        <div class="absolute inset-0 z-10 bg-[#1A1A2E]/50 backdrop-blur-[2px] flex items-center justify-center">
+            <div class="w-8 h-8 rounded-full border-t-2 border-brand-pink animate-spin"></div>
+        </div>
+        }
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50 whitespace-nowrap">
+                        <th class="py-4 px-6 font-medium">Date & Time</th>
+                        <th class="py-4 px-6 font-medium">From (Caller)</th>
+                        <th class="py-4 px-6 font-medium">To (Receiver)</th>
+                        <th class="py-4 px-6 font-medium">Call Type</th>
+                        <th class="py-4 px-6 font-medium">Status</th>
+                        <th class="py-4 px-6 font-medium text-right">Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (log of callLogs; track log.id) {
+                    <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors text-sm">
+                        <!-- Date -->
+                        <td class="py-4 px-6 text-[#B0B0C3] whitespace-nowrap">
+                            <div class="flex items-center">
+                                <lucide-icon [img]="Calendar" class="w-4 h-4 mr-2 opacity-50"></lucide-icon>
+                                <span>{{ $any(log.startedAt) | date:'MMM d, y, h:mm a' }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Caller -->
+                        <td class="py-4 px-6">
+                            <div class="flex flex-col">
+                                <span class="text-white font-bold">{{ log.caller.name || 'Unknown' }}</span>
+                                <span class="text-xs text-[#B0B0C3]">{{ log.caller.email || log.callerId }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Receiver -->
+                        <td class="py-4 px-6">
+                            <div class="flex flex-col">
+                                <span class="text-white font-bold">{{ log.receiver.name || 'Unknown' }}</span>
+                                <span class="text-xs text-[#B0B0C3]">{{ log.receiver.email || log.receiverId }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Type -->
+                        <td class="py-4 px-6">
+                            <span class="flex items-center text-white capitalize">
+                                @if(log.type === 'video') {
+                                <lucide-icon [img]="Video" class="w-4 h-4 mr-2 text-[#00C896]"></lucide-icon>
+                                } @else {
+                                <lucide-icon [img]="PhoneCall" class="w-4 h-4 mr-2 text-brand-pink"></lucide-icon>
+                                }
+                                {{ log.type }}
+                            </span>
+                        </td>
+
+                        <!-- Status -->
+                        <td class="py-4 px-6">
+                            <span
+                                class="px-2 py-1 text-[11px] font-bold rounded-md inline-flex items-center uppercase tracking-wider"
+                                [ngClass]="{
+                                    'bg-[#00C896]/10 text-[#00C896]': log.status === 'completed',
+                                    'bg-[#FFD93D]/10 text-[#FFD93D]': log.status === 'ongoing',
+                                    'bg-[#FF4757]/10 text-[#FF4757]': log.status === 'missed' || log.status === 'rejected' || log.status === 'failed'
+                                }">
+                                @if(log.status === 'missed') { <lucide-icon [img]="PhoneMissed"
+                                    class="w-3 h-3 mr-1"></lucide-icon> }
+                                @if(log.status === 'rejected') { <lucide-icon [img]="PhoneOff"
+                                    class="w-3 h-3 mr-1"></lucide-icon> }
+                                {{ log.status }}
+                            </span>
+                        </td>
+
+                        <!-- Duration -->
+                        <td class="py-4 px-6 font-mono text-white text-right">
+                            @if(log.status === 'completed') {
+                            <span class="flex items-center justify-end">
+                                <lucide-icon [img]="Clock" class="w-3.5 h-3.5 mr-1.5 text-[#B0B0C3]"></lucide-icon>
+                                {{ formatDuration(log.durationInSeconds) }}
+                            </span>
+                            } @else if(log.status === 'ongoing') {
+                            <span class="text-[#FFD93D] flex items-center justify-end">
+                                <div class="w-2 h-2 rounded-full bg-[#FFD93D] animate-pulse mr-2"></div>
+                                Live
+                            </span>
+                            } @else {
+                            <span class="text-[#B0B0C3]/50">--</span>
+                            }
+                        </td>
+                    </tr>
+                    }
+                    @if (callLogs.length === 0 && !isLoading) {
+                    <tr>
+                        <td colspan="6" class="py-12 text-center text-[#B0B0C3]">
+                            <lucide-icon [img]="Video" class="w-12 h-12 mx-auto mb-3 opacity-50"></lucide-icon>
+                            <p class="text-lg">No call logs found across the platform.</p>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

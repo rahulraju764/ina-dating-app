@@ -47,7 +47,6 @@ spark/
 │   │   │   ├── chat/               # Private chat screen
 │   │   │   ├── calls/              # Video / audio call screen
 │   │   │   ├── gifts/              # Gift shop, sticker picker
-│   │   │   ├── coins/              # Coin wallet, packages, transactions, withdrawal
 │   │   │   ├── purchases/          # Subscription plans, IAP screen
 │   │   │   ├── notifications/      # Notification settings screen
 │   │   │   └── settings/           # Account settings, privacy, delete account
@@ -56,7 +55,6 @@ spark/
 │   │       ├── notification_service.dart
 │   │       ├── location_service.dart
 │   │       ├── call_service.dart   # Agora / WebRTC wrapper
-│   │       ├── coin_service.dart   # Coin balance, packages, transactions
 │   │       └── purchase_service.dart  # RevenueCat wrapper
 │   ├── test/
 │   │   ├── unit/
@@ -77,13 +75,6 @@ spark/
 │   │   │   └── sendProximityNotif.ts
 │   │   ├── purchases/
 │   │   │   └── verifyReceipt.ts    # Server-side IAP verification
-│   │   ├── coins/
-│   │   │   ├── onCoinPurchase.ts   # Verify payment, credit coins (idempotent)
-│   │   │   ├── onGameComplete.ts   # 98/2 payout split
-│   │   │   ├── onGiftSent.ts       # Deduct coins for gift send
-│   │   │   ├── onCallTick.ts       # Per-minute coin deduction for calls
-│   │   │   ├── onWithdrawalRequest.ts  # Validate KYC, lock coins
-│   │   │   └── adminAdjustCoins.ts # Callable — admin manual credit/deduct
 │   │   ├── moderation/
 │   │   │   └── moderateImage.ts    # Cloud Vision API integration
 │   │   └── gifts/
@@ -106,7 +97,6 @@ spark/
 │       │   ├── users/
 │       │   ├── moderation/
 │       │   ├── subscriptions/
-│       │   ├── coins/              # Coin packages, ledger, withdrawals, KYC, config
 │       │   ├── gifts/
 │       │   ├── notifications/
 │       │   └── analytics/
@@ -164,9 +154,6 @@ Firestore and Storage rules are the **last line of defence**. Rules must enforce
 - A user can only read a `chats/{chatId}` document if their `userId` is in `participants[]`.
 - A user can only write to `swipes/{fromId}_{toId}` if `fromId == request.auth.uid`.
 - Image uploads to `Storage` are restricted to authenticated users, max **2 MB**, allowed MIME types: `image/jpeg`, `image/png`, `image/webp`.
-- **`users/{userId}.coinBalance`** must be **write-protected from all clients**. Only authenticated Cloud Functions (service account) may write this field.
-- `coinTransactions` collection is **append-only** for all roles. No client or admin may update or delete transaction documents.
-- `withdrawalRequests` may be created by the owning user but only updated by Cloud Functions / admin service account.
 
 > ⚠️ **Agent Rule:** Never weaken Security Rules. If a feature requires a new data access pattern, add the minimum required permission, scoped as tightly as possible.
 
@@ -194,7 +181,6 @@ Firestore and Storage rules are the **last line of defence**. Rules must enforce
 | Image Upload & Gallery | `lib/data/datasources/storage_datasource.dart`, Firebase Storage `users/{uid}/photos/` |
 | Matched Profiles List | `lib/presentation/matches/`, `lib/data/repositories/match_repository.dart`, Firestore `matches/` |
 | Swipe to Send Request | `lib/presentation/discovery/`, `lib/domain/usecases/swipe_usecase.dart`, `functions/src/match/onSwipe.ts` |
-| **Coin System** | `lib/presentation/coins/`, `lib/data/repositories/coin_repository.dart`, `lib/services/coin_service.dart`, `functions/src/coins/` |
 
 ---
 
@@ -234,63 +220,8 @@ Firestore and Storage rules are the **last line of defence**. Rules must enforce
   },
   swipesRemainingToday: number,       // reset daily via Cloud Function
   superLikesRemainingToday: number,
-  // Coin System fields (coinBalance is WRITE-PROTECTED — Cloud Functions only)
-  coinBalance: number,
-  totalCoinsEarned: number,
-  totalCoinsSpent: number,
-  kycStatus: "none" | "pending" | "verified" | "rejected",
-  kycSubmittedAt: Timestamp | null,
-  withdrawalEligible: boolean,
-  lastWithdrawalAt: Timestamp | null,
   createdAt: Timestamp,
   updatedAt: Timestamp
-}
-```
-
-### `coinTransactions/{transactionId}`
-```typescript
-{
-  userId: string,
-  type: "purchase" | "spend" | "earn" | "withdrawal" | "refund" | "admin_adjustment",
-  amount: number,                       // positive = credit, negative = debit
-  balanceAfter: number,
-  referenceId: string,                  // paymentIntentId, gameId, giftId, etc.
-  referenceType: "payment" | "game" | "gift" | "call" | "withdrawal" | "admin",
-  description: string,
-  createdAt: Timestamp,
-  status: "completed" | "pending" | "failed" | "reversed",
-}
-```
-
-### `coinPackages/{packageId}`
-```typescript
-{
-  name: string,
-  emoji: string,
-  priceINR: number,
-  coinsAwarded: number,
-  bonusCoins: number,
-  isActive: boolean,
-  isFeatured: boolean,
-  sortOrder: number,
-  createdAt: Timestamp,
-  updatedAt: Timestamp,
-}
-```
-
-### `withdrawalRequests/{requestId}`
-```typescript
-{
-  userId: string,
-  coinsRequested: number,
-  inrEquivalent: number,
-  payoutMethod: "upi" | "bank" | "wallet",
-  payoutDetails: string,                // encrypted
-  status: "pending" | "processing" | "completed" | "rejected",
-  requestedAt: Timestamp,
-  processedAt: Timestamp | null,
-  adminNote: string | null,
-  processedBy: string | null,
 }
 ```
 
@@ -577,10 +508,6 @@ Before submitting or suggesting a code change, verify:
 - [ ] `flutter analyze` passes with zero errors.
 - [ ] `dart format lib/` has been run.
 - [ ] Image uploads validate file size (≤ 2 MB) and MIME type before uploading.
-- [ ] Any coin balance change goes through a Cloud Function — **never client-side**.
-- [ ] `onCoinPurchase.ts` uses `paymentIntentId` as idempotency key to prevent double-credit.
-- [ ] Game outcome functions (`onGameComplete.ts`) determine the winner server-side only.
-- [ ] Withdrawal flows check KYC status and balance threshold server-side before processing.
 
 ---
 
@@ -592,19 +519,11 @@ Feature flags are stored in Firebase Remote Config and fetched at app startup.
 |---|---|---|
 | `enable_video_calls` | `true` | Toggle video/audio call feature |
 | `enable_gift_shop` | `true` | Toggle gift & sticker shop |
-| `enable_coin_system` | `true` | Toggle entire coin system |
-| `enable_coin_games` | `true` | Toggle in-app games with coin wagering |
 | `match_expiry_days` | `7` | Days before an unmessaged match expires |
 | `free_daily_swipes` | `10` | Daily swipe limit for Free tier |
 | `proximity_radius_km` | `5` | Radius for proximity push notifications |
 | `image_moderation_enabled` | `true` | Enable/disable Cloud Vision moderation |
 | `superlike_free_daily` | `1` | Daily Super Likes for Free tier |
-| `coin_withdrawal_threshold` | `10000` | Minimum coins required to request withdrawal |
-| `coin_to_inr_rate` | `20` | Coins per ₹1 (i.e. 10,000 coins = ₹500) |
-| `call_voice_cost_per_min` | `5` | Coins deducted per minute for voice calls |
-| `call_video_cost_per_min` | `8` | Coins deducted per minute for video calls |
-| `game_platform_fee_pct` | `2` | Platform fee % on game coin pool |
-| `game_min_wager` | `10` | Minimum coins each player must wager |
 
 > When implementing a new major feature, wrap it in a Remote Config flag so it can be toggled without a new app release.
 
@@ -617,8 +536,6 @@ The following files/areas must **not** be modified without explicit confirmation
 - `firestore.rules` and `storage.rules` — security rule changes need security review.
 - `functions/src/match/onSwipe.ts` — core matching logic; any change needs a test + review.
 - `functions/src/purchases/verifyReceipt.ts` — payment verification; changes need QA sign-off.
-- `functions/src/coins/onCoinPurchase.ts` — coin credit logic; idempotency key must not be changed.
-- `functions/src/coins/onGameComplete.ts` — game payout logic; any change needs Finance + QA sign-off.
 - `lib/core/constants/firebase_options.dart` — auto-generated by FlutterFire CLI.
 - `.firebaserc` — project aliases (staging vs production).
 
@@ -642,4 +559,4 @@ The following files/areas must **not** be modified without explicit confirmation
 
 ---
 
-*Last updated: February 27, 2026 — v1.1 — Coin System added*
+*Last updated: February 22, 2026 — v1.0*

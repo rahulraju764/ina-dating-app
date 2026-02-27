@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h2 class="text-3xl font-bold text-white font-sans">Users</h2>
-            <p class="text-[#B0B0C3] mt-1">{{ filteredUsers.length }} total users</p>
+            <p class="text-[#B0B0C3] mt-1">{{ users.length }} displayed users</p>
         </div>
 
         <div class="flex items-center space-x-4">
@@ -12,12 +12,13 @@
                 <lucide-icon [img]="Search"
                     class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#B0B0C3]"></lucide-icon>
                 <input type="text" placeholder="Search by name or email..." [(ngModel)]="searchQuery"
+                    (ngModelChange)="loadUsers('initial')"
                     class="bg-[#1A1A2E] text-white pl-10 pr-4 py-2 rounded-full border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all w-64 text-sm font-sans" />
             </div>
 
             <!-- Filter Dropdown -->
             <div class="relative">
-                <select [(ngModel)]="filterStatus"
+                <select [(ngModel)]="filterStatus" (ngModelChange)="loadUsers('initial')"
                     class="appearance-none bg-[#1A1A2E] text-white pl-10 pr-8 py-2 border border-[#2A2A3E] rounded-full text-sm font-medium focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-colors">
                     <option value="All">All Statuses</option>
                     <option value="Active">Active</option>
@@ -33,6 +34,15 @@
                 </div>
             </div>
 
+            <!-- Delete Selected Button -->
+            @if (selectedUserIds.size > 0) {
+            <button (click)="deleteSelectedUsers()"
+                class="flex items-center px-4 py-2 bg-[#FF4757]/10 text-[#FF4757] border border-[#FF4757]/20 rounded-full text-sm font-bold hover:bg-[#FF4757]/20 transition-colors whitespace-nowrap">
+                <lucide-icon [img]="Trash2" class="w-4 h-4 mr-2"></lucide-icon>
+                Delete Selected ({{ selectedUserIds.size }})
+            </button>
+            }
+
             <!-- Add User Button -->
             <button (click)="openAddModal()"
                 class="flex items-center px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity whitespace-nowrap">
@@ -44,10 +54,22 @@
 
     <!-- Users Table -->
     <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
-        <div class="overflow-x-auto">
+
+        <!-- Loading overlay -->
+        @if (isLoading) {
+        <div class="absolute inset-0 z-10 bg-[#1A1A2E]/50 backdrop-blur-[2px] flex items-center justify-center">
+            <div class="w-8 h-8 rounded-full border-t-2 border-brand-pink animate-spin"></div>
+        </div>
+        }
+
+        <div class="overflow-x-auto relative">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
+                        <th class="py-4 px-6 w-12">
+                            <input type="checkbox" [checked]="selectAll" (change)="toggleAllSelection($event)"
+                                class="w-4 h-4 bg-[#111827] border-[#2A2A3E] rounded text-brand-pink focus:ring-brand-pink focus:ring-offset-[#1A1A2E]" />
+                        </th>
                         <th class="py-4 px-6 font-medium">User</th>
                         <th class="py-4 px-6 font-medium">Email</th>
                         <th class="py-4 px-6 font-medium">Age</th>
@@ -57,11 +79,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (user of filteredUsers; track user.id) {
+                    @for (user of users; track user.id) {
                     <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
+                        <td class="py-4 px-6">
+                            <input type="checkbox" [checked]="selectedUserIds.has(user.id)"
+                                (change)="toggleSelection(user.id)"
+                                class="w-4 h-4 bg-[#111827] border-[#2A2A3E] rounded text-brand-pink focus:ring-brand-pink focus:ring-offset-[#1A1A2E]" />
+                        </td>
                         <td class="py-4 px-6 flex items-center">
                             <img [src]="user.avatar" alt="Avatar"
-                                class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E]" />
+                                class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E] object-cover" />
                             <div class="flex items-center">
                                 <span class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
                                     user.name }}</span>
@@ -72,31 +99,31 @@
                             </div>
                         </td>
                         <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ user.email }}</td>
-                        <td class="py-4 px-6 text-white text-sm">{{ user.age }}</td>
+                        <td class="py-4 px-6 text-white text-sm">{{ user.age || 'N/A' }}</td>
                         <td class="py-4 px-6">
                             <span class="px-3 py-1 text-xs font-bold rounded-[20px] inline-block" [ngClass]="{
-                        'bg-[#2A2A3E] text-[#B0B0C3]': user.tier === 'Free',
-                        'bg-[#FFD93D]/20 text-[#FFD93D]': user.tier === 'Gold',
-                        'bg-[#9B1FDB]/20 text-[#9B1FDB]': user.tier === 'Platinum'
+                        'bg-[#2A2A3E] text-[#B0B0C3]': !user.isPremium,
+                        'bg-[#FFD93D]/20 text-[#FFD93D]': user.isPremium
                       }">
-                                {{ user.tier }}
+                                {{ user.tierLabel }}
                             </span>
                         </td>
                         <td class="py-4 px-6">
                             <span
                                 class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex flex-row items-center border"
                                 [ngClass]="{
-                        'border-[#00C896] text-[#00C896] bg-[#00C896]/10': user.status === 'Active',
-                        'border-[#FFD93D] text-[#FFD93D] bg-[#FFD93D]/10': user.status === 'Suspended',
-                        'border-[#FF4757] text-[#FF4757] bg-[#FF4757]/10': user.status === 'Banned'
+                        'border-[#00C896] text-[#00C896] bg-[#00C896]/10': user.statusLabel === 'Active',
+                        'border-[#FFD93D] text-[#FFD93D] bg-[#FFD93D]/10': user.statusLabel === 'Suspended',
+                        'border-[#FF4757] text-[#FF4757] bg-[#FF4757]/10': user.statusLabel === 'Banned',
+                        'border-[#B0B0C3] text-[#B0B0C3] bg-[#B0B0C3]/10': user.statusLabel === 'Inactive'
                       }">
-                                {{ user.status }}
+                                {{ user.statusLabel }}
                             </span>
                         </td>
                         <td class="py-4 px-6 text-right">
                             <div class="flex items-center justify-end space-x-1">
                                 <!-- Verify Toggle -->
-                                <button (click)="verifyUser(user)"
+                                <button type="button" (click)="verifyUser(user); $event.stopPropagation()"
                                     [title]="user.isVerified ? 'Remove Verification' : 'Verify User'"
                                     class="p-2 rounded-full transition-colors flex items-center justify-center"
                                     [ngClass]="user.isVerified ? 'text-[#00C896] hover:bg-[#00C896]/10' : 'text-[#B0B0C3] hover:text-[#00C896] hover:bg-[#00C896]/10'">
@@ -105,23 +132,24 @@
                                 </button>
 
                                 <!-- Suspend Toggle -->
-                                <button (click)="suspendUser(user)"
-                                    [title]="user.status === 'Suspended' ? 'Un-suspend User' : 'Suspend User'"
+                                <button type="button" (click)="suspendUser(user); $event.stopPropagation()"
+                                    [title]="user.statusLabel === 'Suspended' ? 'Un-suspend User' : 'Suspend User'"
                                     class="p-2 rounded-full transition-colors flex items-center justify-center"
-                                    [ngClass]="user.status === 'Suspended' ? 'text-[#FFD93D] hover:bg-[#FFD93D]/10' : 'text-[#B0B0C3] hover:text-[#FFD93D] hover:bg-[#FFD93D]/10'">
+                                    [ngClass]="user.statusLabel === 'Suspended' ? 'text-[#FFD93D] hover:bg-[#FFD93D]/10' : 'text-[#B0B0C3] hover:text-[#FFD93D] hover:bg-[#FFD93D]/10'">
                                     <lucide-icon [img]="UserMinus" class="w-4 h-4"></lucide-icon>
                                 </button>
 
                                 <!-- Ban Toggle -->
-                                <button (click)="banUser(user)"
-                                    [title]="user.status === 'Banned' ? 'Un-ban User' : 'Ban User'"
+                                <button type="button" (click)="banUser(user); $event.stopPropagation()"
+                                    [title]="user.statusLabel === 'Banned' ? 'Un-ban User' : 'Ban User'"
                                     class="p-2 rounded-full transition-colors flex items-center justify-center"
-                                    [ngClass]="user.status === 'Banned' ? 'text-[#FF4757] hover:bg-[#FF4757]/10' : 'text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10'">
+                                    [ngClass]="user.statusLabel === 'Banned' ? 'text-[#FF4757] hover:bg-[#FF4757]/10' : 'text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10'">
                                     <lucide-icon [img]="ShieldBan" class="w-4 h-4"></lucide-icon>
                                 </button>
 
                                 <!-- Delete -->
-                                <button (click)="deleteUser(user)" title="Delete User"
+                                <button type="button" (click)="deleteUser(user); $event.stopPropagation()"
+                                    title="Delete User"
                                     class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors flex items-center justify-center">
                                     <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
                                 </button>
@@ -130,9 +158,9 @@
                     </tr>
                     }
 
-                    @if (filteredUsers.length === 0) {
+                    @if (users.length === 0 && !isLoading) {
                     <tr>
-                        <td colspan="6" class="py-12 text-center text-[#B0B0C3]">
+                        <td colspan="7" class="py-12 text-center text-[#B0B0C3]">
                             <lucide-icon [img]="Search" class="w-12 h-12 mx-auto mb-3 opacity-50"></lucide-icon>
                             <p class="text-lg">No users found matching your filters.</p>
                         </td>
@@ -144,16 +172,17 @@
 
         <!-- Pagination Footer -->
         <div class="px-6 py-4 flex items-center justify-between border-t border-[#2A2A3E]">
-            <p class="text-sm text-[#B0B0C3]">Showing {{ filteredUsers.length > 0 ? 1 : 0 }}–{{ filteredUsers.length < 5
-                    ? filteredUsers.length : 5 }} of {{ filteredUsers.length }} matches</p>
-                    <div class="flex items-center space-x-2">
-                        <button
-                            class="px-3 py-1 bg-[#2A2A3E] text-[#B0B0C3] rounded disabled:opacity-50 text-sm font-medium hover:bg-[#3A3A4E] transition-colors"
-                            disabled>&larr; Prev</button>
-                        <button
-                            class="px-3 py-1 bg-[#2A2A3E] text-white rounded text-sm font-medium hover:bg-[#3A3A4E] transition-colors">Next
-                            &rarr;</button>
-                    </div>
+            <p class="text-sm text-[#B0B0C3]">Page {{ currentPage }} </p>
+            <div class="flex items-center space-x-2">
+                <button (click)="loadUsers('prev')" [disabled]="!hasPrevPage || isLoading"
+                    class="px-3 py-1 bg-[#2A2A3E] text-white rounded disabled:opacity-50 disabled:text-[#B0B0C3] text-sm font-medium hover:bg-[#3A3A4E] transition-colors cursor-pointer disabled:cursor-not-allowed">
+                    &larr; Prev
+                </button>
+                <button (click)="loadUsers('next')" [disabled]="!hasNextPage || isLoading"
+                    class="px-3 py-1 bg-[#2A2A3E] text-white rounded disabled:opacity-50 disabled:text-[#B0B0C3] text-sm font-medium hover:bg-[#3A3A4E] transition-colors cursor-pointer disabled:cursor-not-allowed">
+                    Next &rarr;
+                </button>
+            </div>
         </div>
     </div>
 
@@ -171,7 +200,8 @@
                     <lucide-icon [img]="Plus" class="w-5 h-5 mr-2 text-brand-pink"></lucide-icon>
                     Add New User
                 </h3>
-                <button (click)="closeAddModal()" class="text-[#B0B0C3] hover:text-white transition-colors">
+                <button (click)="closeAddModal()"
+                    class="text-[#B0B0C3] hover:text-white transition-colors cursor-pointer">
                     <lucide-icon [img]="UserX" class="w-5 h-5"></lucide-icon>
                 </button>
             </div>
@@ -206,8 +236,7 @@
                                 <select formControlName="tier"
                                     class="w-full appearance-none bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-pink transition-colors">
                                     <option value="Free">Free</option>
-                                    <option value="Gold">Gold</option>
-                                    <option value="Platinum">Platinum</option>
+                                    <option value="Gold">Gold/Premium</option>
                                 </select>
                                 <div
                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#B0B0C3]">
@@ -243,11 +272,14 @@
 
                     <div class="flex justify-end space-x-3 pt-4 border-t border-[#2A2A3E] mt-6">
                         <button type="button" (click)="closeAddModal()"
-                            class="px-4 py-2 bg-[#0D0D0D] text-white border border-[#2A2A3E] rounded-xl text-sm font-medium hover:bg-[#2A2A3E] transition-colors">
+                            class="px-4 py-2 bg-[#0D0D0D] text-white border border-[#2A2A3E] rounded-xl text-sm font-medium hover:bg-[#2A2A3E] transition-colors cursor-pointer">
                             Cancel
                         </button>
-                        <button type="submit" [disabled]="addUserForm.invalid"
-                            class="px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-xl text-sm font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button type="submit" [disabled]="addUserForm.invalid || isLoading"
+                            class="px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-xl text-sm font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex flex-row items-center cursor-pointer">
+                            @if (isLoading) {
+                            <div class="w-4 h-4 rounded-full border-t-2 border-white animate-spin mr-2"></div>
+                            }
                             Create User
                         </button>
                     </div>

@@ -5,9 +5,9 @@
 
 | Field | Details |
 |---|---|
-| **Document Version** | v1.1 |
+| **Document Version** | v1.0 |
 | **Status** | Draft |
-| **Date** | February 27, 2026 |
+| **Date** | February 22, 2026 |
 | **Product Type** | Mobile Application (iOS & Android) |
 | **Tech Stack** | Flutter · Firebase · Laravel / Next.js (Admin Panel) |
 
@@ -30,7 +30,6 @@
    - 5.8 [Image Upload & Gallery](#58-image-upload--gallery)
    - 5.9 [Matched Profiles List](#59-matched-profiles-list)
    - 5.10 [Swipe to Send Request](#510-swipe-to-send-request)
-   - 5.11 [🪙 Coin System](#511--coin-system)
 6. [Admin Panel Requirements](#6-admin-panel-requirements)
 7. [Non-Functional Requirements](#7-non-functional-requirements)
 8. [User Roles & Permissions](#8-user-roles--permissions)
@@ -52,7 +51,7 @@ A fully featured Admin Panel (built in Laravel or Next.js) enables the operation
 ## 2. Goals & Objectives
 
 ### Business Goals
-- Build a sustainable revenue model through subscription tiers, in-app purchases (gifts, stickers, premium features), and a **coin economy** enabling microtransactions.
+- Build a sustainable revenue model through subscription tiers and in-app purchases (gifts, stickers, premium features).
 - Grow to **100,000 registered users** within the first 6 months post-launch.
 - Achieve a **Day-30 retention rate of ≥ 30%**.
 
@@ -469,215 +468,6 @@ onSwipe(fromUserId, toUserId, action: "like" | "pass" | "superlike")
 
 ---
 
----
-
-### 5.11 🪙 Coin System
-
-**Priority:** 🔴 High
-
-**Description:**
-The Coin System is Spark's internal virtual currency layer. Users purchase coins with real money and spend them across the platform — sending digital gifts to partners, playing in-app games, making voice/video calls, and unlocking premium interactions. When a user wins a game, 98% of the wagered coin pool is credited to the winner (the platform retains a 2% fee). Once a user's coin balance reaches a defined withdrawal threshold, they can cash out coins to their linked real-world wallet or bank account.
-
----
-
-#### 5.11.1 Coin Packages
-
-Users can purchase coin bundles directly from the app via Stripe / in-app billing. The following packages are available at launch:
-
-| Package Name | Price (₹) | Coins Awarded | Bonus | Effective Rate |
-|---|---|---|---|---|
-| 🌱 Starter Pack | ₹100 | 200 coins | — | ₹0.50 / coin |
-| 🔥 Popular Pack | ₹250 | 550 coins | +50 bonus | ₹0.45 / coin |
-| 💎 Value Pack | ₹500 | 1,200 coins | +200 bonus | ₹0.42 / coin |
-| 👑 Premium Pack | ₹1,000 | 2,600 coins | +600 bonus | ₹0.38 / coin |
-| 🚀 Mega Pack | ₹2,000 | 5,500 coins | +1,500 bonus | ₹0.36 / coin |
-| 🌟 Elite Pack | ₹5,000 | 15,000 coins | +5,000 bonus | ₹0.33 / coin |
-
-> **Note:** Package prices and coin ratios are configurable by Admin without an app release (via Firebase Remote Config).
-
----
-
-#### 5.11.2 Functional Requirements
-
-| ID | Requirement |
-|---|---|
-| CS-01 | Users can view all available coin packages from the dedicated **Coins** section in the app. |
-| CS-02 | Coin purchases are processed via Stripe (web/Android) or App Store / Play Store in-app billing (iOS). |
-| CS-03 | Purchased coins are credited to the user's balance **immediately** upon successful payment confirmation, handled server-side via Firebase Function. |
-| CS-04 | Users can view their current coin balance at all times in the app top bar / wallet screen. |
-| CS-05 | A full coin transaction history is available to the user (purchases, spends, earnings, withdrawals). |
-| CS-06 | Coins can be used to **send digital gifts** to matched/accepted partners. Each gift has a defined coin cost. |
-| CS-07 | Coins are required to **initiate voice or video calls** with partners (per-minute deduction or flat fee per call, configurable). |
-| CS-08 | Coins can be used to **play in-app games** with matched partners (both users wager a coin amount before the game starts). |
-| CS-09 | When a game concludes, **98% of the total wagered coins** are credited to the winner's balance. The platform retains **2%** as a service fee. |
-| CS-10 | If a user's coin balance reaches the **withdrawal threshold** (default: 10,000 coins ≈ ₹500), they can request a withdrawal to their linked bank account / UPI / wallet. |
-| CS-11 | Withdrawals are processed within **3–5 business days** and require identity verification (KYC) before the first withdrawal. |
-| CS-12 | Coin balance can never go below zero. Transactions that would result in a negative balance are blocked. |
-| CS-13 | Admin can manually credit or deduct coins from any user account with a mandatory audit reason. |
-| CS-14 | Coins are **non-transferable** between users except through the defined game, gift, and call flows. |
-| CS-15 | Coin packages and their prices are displayed in the user's local currency (INR default; extensible). |
-| CS-16 | Users receive a push notification when coins are received (from game win or gift refund). |
-| CS-17 | Coin balance and all transactions are stored server-side; the client **never** self-credits coin balances. |
-| CS-18 | A minimum wager amount must be set for games (default: 10 coins). Admin can configure this. |
-| CS-19 | Failed / refunded purchases must not credit coins; Firebase Function must verify payment status before crediting. |
-| CS-20 | All coin flows must generate an immutable audit log entry in Firestore. |
-
----
-
-#### 5.11.3 Coin Usage Flows
-
-**Sending a Gift**
-1. User opens a matched partner's profile or chat.
-2. Taps **Send Gift** → browses the gift shop (items priced in coins).
-3. Confirms gift selection; coins are deducted atomically and gift is delivered to the recipient.
-4. Recipient receives a push notification: "🎁 [Name] sent you a [Gift Name]!"
-
-**Making a Call**
-1. User taps **Voice Call** or **Video Call** on a matched partner's profile.
-2. System checks coin balance against the minimum required (e.g., 20 coins for a voice call, 30 coins for video).
-3. If balance is sufficient, the call connects. Coins are deducted per minute (e.g., 5 coins/min voice, 8 coins/min video) or as a flat session fee — configurable.
-4. If the balance runs out mid-call, the user is warned at 60 seconds remaining and the call ends gracefully.
-
-**Playing a Game**
-1. User challenges a matched partner to a game (e.g., trivia, spin-the-wheel).
-2. Both users agree on a wager amount (e.g., 50 coins each = 100 coins total pool).
-3. Coins are escrowed from both accounts before the game begins.
-4. On game completion, the Firebase Function distributes: **winner receives 98 coins**, **platform retains 2 coins**.
-5. Both users receive a result notification with updated balances.
-
-**Withdrawing Coins**
-1. User opens **Wallet → Withdraw**.
-2. System verifies balance ≥ withdrawal threshold (default 10,000 coins).
-3. If KYC is not complete, user is directed to complete identity verification.
-4. User inputs withdrawal amount and confirms linked payout method (UPI / bank / wallet).
-5. Withdrawal request is created in Firestore; Finance team processes via admin panel within 3–5 business days.
-6. User receives confirmation notification when payout is processed.
-
----
-
-#### 5.11.4 Coin Package Display (Mobile UI)
-
-The **Coins** section in the mobile app (accessible from the main navigation) must display:
-
-- Current coin balance (prominent, top of screen)
-- "Buy Coins" grid showing all packages with visual hierarchy (highlight the Popular Pack)
-- "How to Earn / Use Coins" info section
-- Transaction history list (last 50 entries with pagination)
-- "Withdraw" CTA (visible only when balance ≥ withdrawal threshold)
-- KYC status indicator (Verified / Pending / Required)
-
----
-
-#### 5.11.5 Firestore Data Schema
-
-**`coinTransactions/{transactionId}`**
-```typescript
-{
-  userId: string,                       // owner of this transaction
-  type: "purchase" | "spend" | "earn" | "withdrawal" | "refund" | "admin_adjustment",
-  amount: number,                       // positive = credit, negative = debit
-  balanceAfter: number,                 // snapshot of balance after this tx
-  referenceId: string,                  // paymentIntentId, gameId, giftId, etc.
-  referenceType: "payment" | "game" | "gift" | "call" | "withdrawal" | "admin",
-  description: string,                  // human-readable (e.g. "Sent Rose Gift")
-  createdAt: Timestamp,
-  status: "completed" | "pending" | "failed" | "reversed",
-}
-```
-
-**`users/{userId}` — additional fields**
-```typescript
-{
-  coinBalance: number,                  // current balance (integer, never negative)
-  totalCoinsEarned: number,             // lifetime earned (for analytics)
-  totalCoinsSpent: number,              // lifetime spent
-  kycStatus: "none" | "pending" | "verified" | "rejected",
-  kycSubmittedAt: Timestamp | null,
-  withdrawalEligible: boolean,          // true if balance ≥ threshold AND kyc verified
-  lastWithdrawalAt: Timestamp | null,
-}
-```
-
-**`coinPackages/{packageId}`** *(Admin-managed)*
-```typescript
-{
-  name: string,                         // e.g. "Popular Pack"
-  emoji: string,
-  priceINR: number,
-  coinsAwarded: number,
-  bonusCoins: number,
-  isActive: boolean,
-  isFeatured: boolean,                  // highlighted in UI
-  sortOrder: number,
-  createdAt: Timestamp,
-  updatedAt: Timestamp,
-}
-```
-
-**`withdrawalRequests/{requestId}`**
-```typescript
-{
-  userId: string,
-  coinsRequested: number,
-  inrEquivalent: number,                // coinsRequested × conversionRate
-  payoutMethod: "upi" | "bank" | "wallet",
-  payoutDetails: string,                // encrypted UPI ID / account number
-  status: "pending" | "processing" | "completed" | "rejected",
-  requestedAt: Timestamp,
-  processedAt: Timestamp | null,
-  adminNote: string | null,
-  processedBy: string | null,           // admin userId
-}
-```
-
----
-
-#### 5.11.6 Firebase Cloud Functions
-
-| Function | Trigger | Responsibility |
-|---|---|---|
-| `onCoinPurchase` | Stripe webhook / IAP webhook | Verify payment, credit coins atomically, create transaction record |
-| `onGameComplete` | Firestore `games/{gameId}` update | Distribute 98% to winner, 2% platform fee, update both balances |
-| `onGiftSent` | Firestore `gifts/{giftId}` create | Deduct coins from sender, create transaction records for both parties |
-| `onCallMinuteTick` | Callable / Agora webhook | Deduct per-minute coin cost; terminate call if balance insufficient |
-| `onWithdrawalRequest` | Firestore `withdrawalRequests` create | Validate KYC, validate balance, lock coins, notify admin |
-| `adminAdjustCoins` | Callable (Admin only) | Manually credit/deduct with audit log |
-
-> ⚠️ **Security Rule:** `coinBalance` on `users/{userId}` must be **write-protected** from the client. Only authenticated Cloud Functions may write to this field.
-
----
-
-#### 5.11.7 Admin Panel — Coin Management Module
-
-The Admin Panel must include a dedicated **Coins** section with the following capabilities:
-
-| Feature | Description |
-|---|---|
-| **Package Management** | Create, edit, activate/deactivate coin packages. Set price, coins awarded, bonus, and featured status. Changes take effect immediately without app release. |
-| **User Coin Ledger** | Search any user by UID / email and view their full transaction history. |
-| **Manual Adjustment** | Credit or deduct coins from a user with a mandatory reason field. All adjustments are immutably logged. |
-| **Withdrawal Queue** | List of pending withdrawal requests. Admin can approve (trigger payout) or reject (with reason). |
-| **KYC Review** | View submitted KYC documents; approve or reject user verification. |
-| **Revenue Dashboard** | Total coins sold, total INR collected, platform fee earned from games, total coins in circulation, total coins withdrawn. |
-| **Conversion Rate Config** | Set the coin-to-INR conversion rate for withdrawals (default: 10,000 coins = ₹500). |
-| **Withdrawal Threshold Config** | Set the minimum balance required before a user can withdraw. |
-| **Call Cost Config** | Set per-minute coin cost for voice and video calls. |
-| **Game Fee Config** | Set the platform fee percentage for game outcomes (default: 2%). |
-| **Fraud Alerts** | Flag users with anomalous coin earning patterns (e.g., repeatedly winning games against the same partner). |
-
----
-
-#### 5.11.8 Security & Anti-Fraud
-
-- Coin balance is **only writable by Cloud Functions** — Firebase Security Rules must block all direct client writes to `coinBalance`.
-- Game outcomes are determined **server-side** — client cannot report its own win.
-- Withdrawal requests lock the coins immediately (escrowed) to prevent double-spend.
-- Rate limiting: maximum 3 withdrawal requests per user per 30 days.
-- Anomaly detection: flag accounts where win rate in peer games exceeds 80% over 20+ games (possible collusion).
-- All coin transaction documents are **append-only** — no updates or deletes allowed by any role except a designated audit function.
-
----
-
 ## 6. Admin Panel Requirements
 
 The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or **Next.js (React)**, providing the operations team full control over the platform.
@@ -798,16 +588,12 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 | Rewind last swipe | ❌ | ✅ | ✅ | — |
 | Private Chat | ✅ | ✅ | ✅ | — |
 | Send images in chat | ✅ | ✅ | ✅ | — |
-| Voice / Video Call | ❌ | ✅ (coins req.) | ✅ (coins req.) | — |
-| Send digital gifts | Limited | ✅ (coins req.) | ✅ (coins req.) | — |
+| Voice / Video Call | ❌ | ✅ | ✅ | — |
+| Send digital gifts | Limited | ✅ | ✅ | — |
 | Premium sticker packs | ❌ | ✅ | ✅ | — |
 | Profile boost | ❌ | 1/month | Unlimited | — |
 | See who liked me | ❌ | ✅ | ✅ | — |
 | Ghost mode (location) | ❌ | ✅ | ✅ | — |
-| Purchase coins | ✅ | ✅ | ✅ | — |
-| Play games with coins | ✅ | ✅ | ✅ | — |
-| Withdraw coins | ✅ (KYC req.) | ✅ (KYC req.) | ✅ (KYC req.) | — |
-| Admin coin adjustment | ❌ | ❌ | ❌ | ✅ |
 | Admin panel access | ❌ | ❌ | ❌ | ✅ |
 
 ---
@@ -849,13 +635,11 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 | **Phase 2** | Matching Logic, Matched List, Private Chat | 4 weeks | Week 10 |
 | **Phase 3** | Push Notifications, Location-Based Matching | 3 weeks | Week 13 |
 | **Phase 4** | In-App Purchases, Subscription Tiers | 3 weeks | Week 16 |
-| **Phase 4B** | Coin System (packages, wallet, transactions, withdrawal, KYC) | 3 weeks | Week 19 |
-| **Phase 5** | Video / Audio Calls (coin-gated), Digital Gifts & Stickers (coin-priced) | 4 weeks | Week 23 |
-| **Phase 5B** | In-App Games with coin wagering & 98/2 payout logic | 2 weeks | Week 25 |
-| **Phase 6** | Admin Panel (User Mgmt, Moderation, Analytics, Coin Management) | 4 weeks | Week 29 |
-| **Phase 7** | QA, Performance Testing, Bug Fixes | 3 weeks | Week 32 |
-| **Phase 8** | Beta Launch (TestFlight / Play Internal Testing) | 2 weeks | Week 34 |
-| **Phase 9** | Public Launch (App Store + Play Store) | 1 week | Week 35 |
+| **Phase 5** | Video / Audio Calls, Digital Gifts & Stickers | 4 weeks | Week 20 |
+| **Phase 6** | Admin Panel (User Mgmt, Moderation, Analytics) | 4 weeks | Week 24 |
+| **Phase 7** | QA, Performance Testing, Bug Fixes | 3 weeks | Week 27 |
+| **Phase 8** | Beta Launch (TestFlight / Play Internal Testing) | 2 weeks | Week 29 |
+| **Phase 9** | Public Launch (App Store + Play Store) | 1 week | Week 30 |
 
 ---
 
@@ -872,10 +656,6 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 | **Communication** | Message rate (matches → message) | ≥ 50% |
 | **Revenue** | Free-to-paid conversion rate | ≥ 5% |
 | **Revenue** | Monthly Recurring Revenue (MRR) | $25,000 |
-| **Coins** | Coin package conversion rate (registered → first purchase) | ≥ 8% |
-| **Coins** | Average coins purchased per buyer per month | ≥ 500 coins |
-| **Coins** | Coins used in games per DAU | ≥ 20 coins/day |
-| **Coins** | Withdrawal requests processed within SLA | ≥ 95% within 5 business days |
 | **Quality** | App Store / Play Store rating | ≥ 4.3 stars |
 | **Safety** | Reported content resolved < 24 hrs | ≥ 95% |
 
@@ -893,10 +673,6 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 | Q4 | Will physical gift delivery (v1.0) use a third-party fulfilment API? | Product | Week 3 |
 | Q5 | Target launch markets for geo-compliance (GDPR vs CCPA)? | Legal | Week 2 |
 | Q6 | Image moderation: **Google Cloud Vision** or **AWS Rekognition**? | Tech Lead | Week 3 |
-| Q7 | Coin withdrawal payout provider: **Razorpay**, **Cashfree**, or direct NEFT? | Finance / Tech Lead | Week 4 |
-| Q8 | KYC provider for withdrawal verification: **Digilocker API**, **Aadhaar-based**, or third-party (e.g., Hyperverge)? | Legal / Tech Lead | Week 4 |
-| Q9 | Should coin-to-INR conversion rate be fixed or dynamic (adjustable by admin)? | Product / Finance | Week 3 |
-| Q10 | Games list for v1.0: which games ship first? (Trivia? Spin-the-wheel? Word games?) | Product | Week 5 |
 
 ### Risks & Mitigations
 
@@ -909,11 +685,6 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 | GDPR non-compliance resulting in fines | Low | High | Legal review of privacy policy, data deletion flows, consent mechanisms |
 | Scalability bottleneck in GeoHash location queries | Medium | High | Benchmark at 50k users; implement query pagination and caching |
 | Video call quality degradation | Medium | Medium | Use Agora.io (managed infra) with adaptive bitrate; fallback to audio-only |
-| Coin balance manipulation via client-side exploits | Medium | High | coinBalance is write-protected by Firestore Security Rules; only Cloud Functions may write to it |
-| Game collusion (two users cooperating to farm coins) | Medium | High | Server-side win-rate anomaly detection; admin fraud alerts; 2% fee reduces incentive |
-| Withdrawal fraud / money laundering via coin system | Low | High | Mandatory KYC before first withdrawal; rate-limit 3 withdrawals / 30 days; finance team review |
-| Coin purchase double-credit (webhook retry) | Low | High | Idempotent `onCoinPurchase` function using paymentIntentId as idempotency key |
-| Regulatory classification of coins as gambling (RBI / gaming laws) | Medium | High | Legal review; games of skill vs. chance distinction; consult RBI virtual currency guidelines |
 
 ---
 
@@ -922,5 +693,5 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 ---
 
 **Document Owner:** Product Manager  
-**Last Updated:** February 27, 2026  
-**Version:** 1.1 — Coin System added (Feature 5.11)
+**Last Updated:** February 22, 2026  
+**Version:** 1.0 — Initial Draft

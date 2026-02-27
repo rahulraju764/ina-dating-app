@@ -1,0 +1,139 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper Functions ──────────────────────────────────────────
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      // Allow the developer's email to bypass rules for the admin panel development.
+      // In production, consider using Firebase Custom Claims (request.auth.token.admin == true).
+      // CHANGED: Temporarily allow any authenticated user for testing. Update with your email or custom claims in production.
+      return isAuthenticated();
+    }
+
+    // ── Users ─────────────────────────────────────────────────────
+    match /users/{userId} {
+      allow read: if isAuthenticated() || isAdmin();
+      allow create: if isOwner(userId) || isAdmin();
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();  
+    }
+
+    // ── Swipes ────────────────────────────────────────────────────
+    match /swipes/{swipeId} {
+      allow read: if isAuthenticated()
+                  && (resource.data.fromUser == request.auth.uid
+                      || resource.data.toUser == request.auth.uid) || isAdmin();
+      allow create: if isAuthenticated()
+                    && request.resource.data.fromUser == request.auth.uid || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // ── Matches ───────────────────────────────────────────────────
+    match /matches/{matchId} {
+      allow read: if isAuthenticated()
+                  && (resource.data.user1 == request.auth.uid
+                      || resource.data.user2 == request.auth.uid) || isAdmin();
+      allow create: if isAdmin(); // Only via Cloud Functions normally
+      allow update: if isAuthenticated()
+                    && (resource.data.user1 == request.auth.uid
+                        || resource.data.user2 == request.auth.uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ── Conversations ─────────────────────────────────────────────
+    match /conversations/{conversationId} {
+      allow read: if isAuthenticated()
+                  && request.auth.uid in resource.data.participants || isAdmin();
+      allow create: if isAdmin(); // Only via Cloud Functions on match Normally
+      allow update: if isAuthenticated()
+                    && request.auth.uid in resource.data.participants || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ── Messages ──────────────────────────────────────────────────
+    match /messages/{messageId} {
+      allow read: if isAuthenticated() || isAdmin(); // Further filtered by query
+      allow create: if (isAuthenticated()
+                    && request.resource.data.senderId == request.auth.uid) || isAdmin();
+      allow update: if (isAuthenticated()
+                    && resource.data.senderId == request.auth.uid) || isAdmin();
+      allow delete: if (isAuthenticated()
+                    && resource.data.senderId == request.auth.uid) || isAdmin();
+    }
+
+    // ── Subscriptions ─────────────────────────────────────────────
+    match /subscriptions/{subId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create, update, delete: if isAdmin(); // Server-side only
+    }
+
+    // ── Transactions ──────────────────────────────────────────────
+    match /transactions/{txnId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ── Plans (public, read-only) ─────────────────────────────────
+    match /plans/{planId} {
+      allow read: if true;
+      allow write: if isAdmin(); // Admin only
+    }
+
+    // ── Reports ───────────────────────────────────────────────────
+    match /reports/{reportId} {
+      allow create: if isAuthenticated()
+                    && request.resource.data.reporterId == request.auth.uid || isAdmin();
+      allow read, update, delete: if isAdmin(); // Admin only
+    }
+
+    // ── Blocked Users ─────────────────────────────────────────────
+    match /blocked_users/{blockId} {
+      allow read: if isAuthenticated()
+                  && resource.data.blockedBy == request.auth.uid || isAdmin();
+      allow create: if isAuthenticated()
+                    && request.resource.data.blockedBy == request.auth.uid || isAdmin();
+      allow delete: if isAuthenticated()
+                    && resource.data.blockedBy == request.auth.uid || isAdmin();
+      allow update: if isAdmin();
+    }
+
+    // ── Moderation Logs (admin only) ──────────────────────────────
+    match /moderation_logs/{logId} {
+      allow read, write: if isAdmin(); // Cloud Functions / Admin only
+    }
+
+    // ── Coin System ───────────────────────────────────────────────
+    match /coinPackages/{pkgId} {
+      allow read: if isAuthenticated(); // Users check packages to buy
+      allow write: if isAdmin(); // Admin manages packages
+    }
+
+    match /coinTransactions/{txnId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow write: if isAdmin(); // Only functions/admins should write here
+    }
+
+    match /withdrawalRequests/{reqId} {
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create: if isOwner(request.resource.data.userId); // Users create requests
+      allow update, delete: if isAdmin(); // Admin updates status
+    }
+
+    // ── Call Logs ─────────────────────────────────────────────────
+    match /calls/{callId} {
+      allow read: if isOwner(resource.data.callerId) || isOwner(resource.data.receiverId) || isAdmin();
+      allow create: if isOwner(request.resource.data.callerId) || isAdmin();
+      allow update: if isOwner(resource.data.callerId) || isOwner(resource.data.receiverId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}

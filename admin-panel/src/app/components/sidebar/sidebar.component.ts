@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { LucideAngularModule, LayoutDashboard, Users, ShieldAlert, CreditCard, Gift, Send, Settings, LogOut } from 'lucide-angular';
 
 @Component({
@@ -18,6 +19,9 @@ export class SidebarComponent {
   readonly Settings = Settings;
   readonly LogOut = LogOut;
 
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   menuItems = [
     { label: 'Dashboard', route: '/dashboard', icon: LayoutDashboard },
     { label: 'Users', route: '/users', icon: Users },
@@ -27,4 +31,9 @@ export class SidebarComponent {
     { label: 'Push Campaigns', route: '/campaigns', icon: Send },
     { label: 'Settings', route: '/settings', icon: Settings },
   ];
+
+  async logout() {
+    await this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

@@ -1,0 +1,179 @@
+<div class="space-y-6 pb-12">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-bold text-white font-sans">Subscriptions</h2>
+            <p class="text-[#B0B0C3] mt-1">Manage plans & revenue</p>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <lucide-icon [img]="Search"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#B0B0C3]"></lucide-icon>
+                <input type="text" placeholder="Search plans..."
+                    class="bg-[#1A1A2E] text-white pl-10 pr-4 py-2 rounded-full border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all w-64 text-sm font-sans" />
+            </div>
+            <button
+                class="flex items-center px-4 py-2 bg-[#1A1A2E] text-white border border-[#2A2A3E] rounded-full text-sm font-medium hover:bg-[#2A2A3E] transition-colors">
+                <lucide-icon [img]="Filter" class="w-4 h-4 mr-2 text-[#B0B0C3]"></lucide-icon>
+                Filter
+            </button>
+            <button
+                class="flex items-center px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                <lucide-icon [img]="Download" class="w-4 h-4 mr-2"></lucide-icon>
+                Export CSV
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-3 gap-6">
+        @for (stat of stats; track stat.label) {
+        <div class="bg-[#1A1A2E] rounded-[24px] p-6 shadow-lg border border-[#2A2A3E]">
+            <div class="flex items-center justify-between mb-4">
+                <p class="text-[#B0B0C3] font-sans font-medium text-sm">{{ stat.label }}</p>
+                <div class="w-10 h-10 rounded-xl bg-brand-pink/10 flex items-center justify-center">
+                    <lucide-icon [img]="stat.icon" class="w-5 h-5 text-brand-pink"></lucide-icon>
+                </div>
+            </div>
+            <div class="flex items-end justify-between">
+                <h3 class="text-3xl font-bold text-white font-mono">{{ stat.value }}</h3>
+                <div class="flex items-center text-sm px-2 py-1 rounded-md" [ngClass]="{
+                    'text-[#00C896] bg-[#00C896]/10': stat.positive,
+                    'text-[#FF4757] bg-[#FF4757]/10': !stat.positive
+                }">
+                    <lucide-icon [img]="stat.positive ? ArrowUpRight : ArrowDownRight"
+                        class="w-4 h-4 mr-1"></lucide-icon>
+                    {{ stat.change }}
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- Subscription Plans -->
+    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
+        <div class="px-6 py-5 border-b border-[#2A2A3E] flex items-center justify-between">
+            <h3 class="text-lg font-bold text-white">Subscription Plans</h3>
+            <button
+                class="px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                + Add Plan
+            </button>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
+                        <th class="py-4 px-6 font-medium">Plan</th>
+                        <th class="py-4 px-6 font-medium">Price</th>
+                        <th class="py-4 px-6 font-medium">Duration</th>
+                        <th class="py-4 px-6 font-medium">Features</th>
+                        <th class="py-4 px-6 font-medium">Active Users</th>
+                        <th class="py-4 px-6 font-medium">Status</th>
+                        <th class="py-4 px-6 font-medium text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (plan of plans; track plan.name) {
+                    <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
+                        <td class="py-4 px-6">
+                            <span class="px-3 py-1 text-xs font-bold rounded-[20px] inline-block" [ngClass]="{
+                                'bg-[#2A2A3E] text-[#B0B0C3]': plan.tier === 'Free',
+                                'bg-[#FFD93D]/20 text-[#FFD93D]': plan.tier === 'Gold',
+                                'bg-[#9B1FDB]/20 text-[#9B1FDB]': plan.tier === 'Platinum'
+                            }">
+                                {{ plan.name }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-white font-bold font-mono">{{ plan.price }}</td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ plan.duration }}</td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm max-w-[280px] truncate">{{ plan.features }}</td>
+                        <td class="py-4 px-6 text-white font-mono text-sm">{{ plan.activeUsers.toLocaleString() }}</td>
+                        <td class="py-4 px-6">
+                            <span
+                                class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex items-center border"
+                                [ngClass]="{
+                                'border-[#00C896] text-[#00C896] bg-[#00C896]/10': plan.status === 'Active',
+                                'border-[#FFD93D] text-[#FFD93D] bg-[#FFD93D]/10': plan.status === 'Paused'
+                            }">
+                                {{ plan.status }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-right">
+                            <div class="flex items-center justify-end space-x-2">
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-brand-pink hover:bg-[#2A2A3E] rounded-full transition-colors">
+                                    <lucide-icon [img]="Edit" class="w-4 h-4"></lucide-icon>
+                                </button>
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors">
+                                    <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
+        <div class="px-6 py-5 border-b border-[#2A2A3E]">
+            <h3 class="text-lg font-bold text-white">Recent Transactions</h3>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
+                        <th class="py-4 px-6 font-medium">User</th>
+                        <th class="py-4 px-6 font-medium">Plan</th>
+                        <th class="py-4 px-6 font-medium">Amount</th>
+                        <th class="py-4 px-6 font-medium">Date</th>
+                        <th class="py-4 px-6 font-medium">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (tx of transactions; track tx.email) {
+                    <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
+                        <td class="py-4 px-6 flex items-center">
+                            <img [src]="tx.avatar" alt="Avatar"
+                                class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E]" />
+                            <div>
+                                <p class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
+                                    tx.user }}
+                                </p>
+                                <p class="text-xs text-[#B0B0C3]">{{ tx.email }}</p>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6 text-white text-sm font-medium">{{ tx.plan }}</td>
+                        <td class="py-4 px-6 text-[#FFD93D] font-bold font-mono">{{ tx.amount }}</td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ tx.date }}</td>
+                        <td class="py-4 px-6">
+                            <span
+                                class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex items-center border"
+                                [ngClass]="{
+                                'border-[#00C896] text-[#00C896] bg-[#00C896]/10': tx.status === 'Completed',
+                                'border-[#FF4757] text-[#FF4757] bg-[#FF4757]/10': tx.status === 'Refunded'
+                            }">
+                                {{ tx.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="px-6 py-4 flex items-center justify-between border-t border-[#2A2A3E]">
+            <p class="text-sm text-[#B0B0C3]">Showing 1–5 of 1,284</p>
+            <div class="flex items-center space-x-2">
+                <button
+                    class="px-3 py-1 bg-[#2A2A3E] text-[#B0B0C3] rounded disabled:opacity-50 text-sm font-medium hover:bg-[#3A3A4E] transition-colors"
+                    disabled>&larr; Prev</button>
+                <button
+                    class="px-3 py-1 bg-[#2A2A3E] text-white rounded text-sm font-medium hover:bg-[#3A3A4E] transition-colors">Next
+                    &rarr;</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,319 @@
+<div class="flex h-[calc(100vh-8rem)] space-x-6 pb-6">
+    <!-- Left Sidebar Tabs -->
+    <div class="w-64 bg-[#1A1A2E] rounded-[24px] border border-[#2A2A3E] shadow-lg p-4 shrink-0">
+        <h2 class="text-xl font-bold text-white font-sans px-4 py-3 mb-2">Settings</h2>
+        <nav class="space-y-1">
+            @for (tab of tabs; track tab.label) {
+            <button class="w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors"
+                [ngClass]="{
+                    'bg-[#111827] text-brand-pink border-l-4 border-brand-pink': activeTab === tab.label,
+                    'text-[#B0B0C3] hover:text-white hover:bg-[#111827] border-l-4 border-transparent': activeTab !== tab.label
+                }" (click)="activeTab = tab.label">
+                <lucide-icon [img]="tab.icon" class="w-5 h-5 mr-3"></lucide-icon>
+                {{ tab.label }}
+            </button>
+            }
+        </nav>
+    </div>
+
+    <!-- Right Content -->
+    <div class="flex-1 overflow-y-auto space-y-6 pr-1">
+
+        <!-- General Settings -->
+        @if (activeTab === 'General') {
+        <div class="bg-[#1A1A2E] rounded-[24px] border border-[#2A2A3E] shadow-lg overflow-hidden">
+            <div class="px-6 py-5 border-b border-[#2A2A3E]">
+                <h3 class="text-lg font-bold text-white">General Settings</h3>
+                <p class="text-sm text-[#B0B0C3] mt-1">Configure basic app information</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">
+                            <lucide-icon [img]="Smartphone"
+                                class="w-4 h-4 inline-block align-middle mr-1"></lucide-icon>
+                            App Name
+                        </label>
+                        <input type="text" [value]="appName"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">
+                            <lucide-icon [img]="Mail" class="w-4 h-4 inline-block align-middle mr-1"></lucide-icon>
+                            Support Email
+                        </label>
+                        <input type="email" [value]="supportEmail"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">
+                            <lucide-icon [img]="Globe" class="w-4 h-4 inline-block align-middle mr-1"></lucide-icon>
+                            Default Language
+                        </label>
+                        <select
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all appearance-none">
+                            @for (lang of languages; track lang) {
+                            <option [selected]="lang === defaultLanguage">{{ lang }}</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Maintenance Mode</label>
+                        <div class="flex items-center mt-2">
+                            <button class="relative w-12 h-6 rounded-full transition-colors" [ngClass]="{
+                                'bg-brand-pink': maintenanceMode,
+                                'bg-[#2A2A3E]': !maintenanceMode
+                            }" (click)="maintenanceMode = !maintenanceMode">
+                                <span class="absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform"
+                                    [ngClass]="{
+                                    'left-[26px]': maintenanceMode,
+                                    'left-[2px]': !maintenanceMode
+                                }"></span>
+                            </button>
+                            <span class="ml-3 text-sm" [ngClass]="{
+                                'text-brand-pink font-bold': maintenanceMode,
+                                'text-[#B0B0C3]': !maintenanceMode
+                            }">{{ maintenanceMode ? 'Enabled' : 'Disabled' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        <!-- Notification Settings -->
+        @if (activeTab === 'Notifications') {
+        <div class="bg-[#1A1A2E] rounded-[24px] border border-[#2A2A3E] shadow-lg overflow-hidden">
+            <div class="px-6 py-5 border-b border-[#2A2A3E]">
+                <h3 class="text-lg font-bold text-white">Notification Preferences</h3>
+                <p class="text-sm text-[#B0B0C3] mt-1">Control system-wide notification channels</p>
+            </div>
+            <div class="p-6 space-y-1">
+                <!-- Toggle Row -->
+                @for (item of [
+                {label: 'Email Notifications', desc: 'Send transactional emails for account actions', key:
+                'emailNotifications'},
+                {label: 'Push Notifications', desc: 'Send push notifications for matches & messages', key:
+                'pushNotifications'},
+                {label: 'SMS Notifications', desc: 'Send SMS for account verification & alerts', key:
+                'smsNotifications'},
+                {label: 'Marketing Emails', desc: 'Send promotional and marketing campaign emails', key:
+                'marketingEmails'},
+                {label: 'Match Alerts', desc: 'Notify users when they receive a new match', key: 'matchAlerts'},
+                {label: 'Weekly Reports', desc: 'Send weekly activity summary to admin team', key: 'weeklyReports'}
+                ]; track item.key) {
+                <div
+                    class="flex items-center justify-between p-4 rounded-xl hover:bg-[#111827] transition-colors group">
+                    <div>
+                        <p class="text-white font-bold text-sm group-hover:text-brand-pink transition-colors">{{
+                            item.label }}</p>
+                        <p class="text-[#B0B0C3] text-xs mt-0.5">{{ item.desc }}</p>
+                    </div>
+                    <button class="relative w-12 h-6 rounded-full transition-colors" [ngClass]="{
+                        'bg-brand-pink': $any(this)[item.key],
+                        'bg-[#2A2A3E]': !$any(this)[item.key]
+                    }" (click)="$any(this)[item.key] = !$any(this)[item.key]">
+                        <span class="absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform" [ngClass]="{
+                            'left-[26px]': $any(this)[item.key],
+                            'left-[2px]': !$any(this)[item.key]
+                        }"></span>
+                    </button>
+                </div>
+                }
+            </div>
+        </div>
+        }
+
+        <!-- Security Settings -->
+        @if (activeTab === 'Security') {
+        <div class="bg-[#1A1A2E] rounded-[24px] border border-[#2A2A3E] shadow-lg overflow-hidden">
+            <div class="px-6 py-5 border-b border-[#2A2A3E]">
+                <h3 class="text-lg font-bold text-white">Security Settings</h3>
+                <p class="text-sm text-[#B0B0C3] mt-1">Configure authentication & session policies</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Toggle Items -->
+                <div class="space-y-1">
+                    <div
+                        class="flex items-center justify-between p-4 rounded-xl hover:bg-[#111827] transition-colors group">
+                        <div>
+                            <p class="text-white font-bold text-sm group-hover:text-brand-pink transition-colors">
+                                Two-Factor Authentication</p>
+                            <p class="text-[#B0B0C3] text-xs mt-0.5">Require 2FA for admin login</p>
+                        </div>
+                        <button class="relative w-12 h-6 rounded-full transition-colors" [ngClass]="{
+                            'bg-brand-pink': twoFactorAuth,
+                            'bg-[#2A2A3E]': !twoFactorAuth
+                        }" (click)="twoFactorAuth = !twoFactorAuth">
+                            <span class="absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform" [ngClass]="{
+                                'left-[26px]': twoFactorAuth,
+                                'left-[2px]': !twoFactorAuth
+                            }"></span>
+                        </button>
+                    </div>
+                    <div
+                        class="flex items-center justify-between p-4 rounded-xl hover:bg-[#111827] transition-colors group">
+                        <div>
+                            <p class="text-white font-bold text-sm group-hover:text-brand-pink transition-colors">
+                                Require Special Characters</p>
+                            <p class="text-[#B0B0C3] text-xs mt-0.5">Passwords must contain special characters</p>
+                        </div>
+                        <button class="relative w-12 h-6 rounded-full transition-colors" [ngClass]="{
+                            'bg-brand-pink': requireSpecialChars,
+                            'bg-[#2A2A3E]': !requireSpecialChars
+                        }" (click)="requireSpecialChars = !requireSpecialChars">
+                            <span class="absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform" [ngClass]="{
+                                'left-[26px]': requireSpecialChars,
+                                'left-[2px]': !requireSpecialChars
+                            }"></span>
+                        </button>
+                    </div>
+                    <div
+                        class="flex items-center justify-between p-4 rounded-xl hover:bg-[#111827] transition-colors group">
+                        <div>
+                            <p class="text-white font-bold text-sm group-hover:text-brand-pink transition-colors">
+                                IP Whitelisting</p>
+                            <p class="text-[#B0B0C3] text-xs mt-0.5">Restrict admin access to whitelisted IPs</p>
+                        </div>
+                        <button class="relative w-12 h-6 rounded-full transition-colors" [ngClass]="{
+                            'bg-brand-pink': ipWhitelisting,
+                            'bg-[#2A2A3E]': !ipWhitelisting
+                        }" (click)="ipWhitelisting = !ipWhitelisting">
+                            <span class="absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform" [ngClass]="{
+                                'left-[26px]': ipWhitelisting,
+                                'left-[2px]': !ipWhitelisting
+                            }"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Numeric settings -->
+                <div class="grid grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">
+                            <lucide-icon [img]="Clock" class="w-4 h-4 inline-block align-middle mr-1"></lucide-icon>
+                            Session Timeout (min)
+                        </label>
+                        <input type="number" [value]="sessionTimeout"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">
+                            <lucide-icon [img]="Key" class="w-4 h-4 inline-block align-middle mr-1"></lucide-icon>
+                            Min Password Length
+                        </label>
+                        <input type="number" [value]="passwordMinLength"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Max Login Attempts</label>
+                        <input type="number" [value]="maxLoginAttempts"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        <!-- App Config -->
+        @if (activeTab === 'App Config') {
+        <div class="bg-[#1A1A2E] rounded-[24px] border border-[#2A2A3E] shadow-lg overflow-hidden">
+            <div class="px-6 py-5 border-b border-[#2A2A3E]">
+                <h3 class="text-lg font-bold text-white">App Configuration</h3>
+                <p class="text-sm text-[#B0B0C3] mt-1">Matching & user experience parameters</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Matching Settings -->
+                <div>
+                    <h4 class="text-xs uppercase font-bold text-[#B0B0C3] mb-4">
+                        <lucide-icon [img]="Heart" class="w-3 h-3 inline-block align-middle mr-1"></lucide-icon>
+                        Matching Parameters
+                    </h4>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">
+                                <lucide-icon [img]="MapPin"
+                                    class="w-4 h-4 inline-block align-middle mr-1"></lucide-icon>
+                                Match Radius (km)
+                            </label>
+                            <input type="number" [value]="matchRadius"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Daily Swipe Limit</label>
+                            <input type="number" [value]="dailySwipeLimit"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age Settings -->
+                <div>
+                    <h4 class="text-xs uppercase font-bold text-[#B0B0C3] mb-4">
+                        <lucide-icon [img]="Users" class="w-3 h-3 inline-block align-middle mr-1"></lucide-icon>
+                        User Constraints
+                    </h4>
+                    <div class="grid grid-cols-4 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Min Age</label>
+                            <input type="number" [value]="minimumAge"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Max Age</label>
+                            <input type="number" [value]="maximumAge"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Min Photos</label>
+                            <input type="number" [value]="profilePhotoMin"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Max Photos</label>
+                            <input type="number" [value]="profilePhotoMax"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Features -->
+                <div>
+                    <h4 class="text-xs uppercase font-bold text-[#B0B0C3] mb-4">
+                        <lucide-icon [img]="Heart" class="w-3 h-3 inline-block align-middle mr-1"></lucide-icon>
+                        Premium Features
+                    </h4>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Super Likes / Day</label>
+                            <input type="number" [value]="superLikesPerDay"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Boost Duration (min)</label>
+                            <input type="number" [value]="boostDuration"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        <!-- Save Footer -->
+        <div class="flex items-center justify-end space-x-3 pb-4">
+            <button
+                class="flex items-center px-5 py-2.5 bg-[#2A2A3E] text-[#B0B0C3] rounded-full text-sm font-medium hover:bg-[#3A3A4E] transition-colors">
+                <lucide-icon [img]="RotateCcw" class="w-4 h-4 mr-2"></lucide-icon>
+                Reset Changes
+            </button>
+            <button
+                class="flex items-center px-6 py-2.5 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity shadow-lg shadow-brand-pink/20">
+                <lucide-icon [img]="Save" class="w-4 h-4 mr-2"></lucide-icon>
+                Save Settings
+            </button>
+        </div>
+    </div>
+</div>

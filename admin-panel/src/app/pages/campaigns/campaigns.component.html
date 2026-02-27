@@ -1,0 +1,175 @@
+<div class="space-y-6 pb-12">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-bold text-white font-sans">Push Campaigns</h2>
+            <p class="text-[#B0B0C3] mt-1">{{ campaigns.length }} campaigns total</p>
+        </div>
+        <button (click)="showCompose = !showCompose"
+            class="flex items-center px-5 py-2.5 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity shadow-lg shadow-brand-pink/20">
+            <lucide-icon [img]="Plus" class="w-4 h-4 mr-2"></lucide-icon>
+            New Campaign
+        </button>
+    </div>
+
+    <!-- Compose Panel (toggleable) -->
+    @if (showCompose) {
+    <div class="bg-[#1A1A2E] rounded-[24px] border border-brand-pink/30 shadow-lg shadow-brand-pink/5 overflow-hidden">
+        <div class="px-6 py-5 border-b border-[#2A2A3E] flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-lg bg-brand-pink/10 flex items-center justify-center mr-3">
+                    <lucide-icon [img]="Bell" class="w-4 h-4 text-brand-pink"></lucide-icon>
+                </div>
+                <h3 class="text-lg font-bold text-white">Compose Campaign</h3>
+            </div>
+        </div>
+        <div class="p-6 space-y-5">
+            <div>
+                <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Campaign Title</label>
+                <input type="text" placeholder="e.g. Weekend Special Offer"
+                    class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Message</label>
+                <textarea rows="3" placeholder="Type your push notification message..."
+                    class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all resize-none"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Target Audience</label>
+                    <select
+                        class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all appearance-none">
+                        @for (aud of audiences; track aud) {
+                        <option>{{ aud }}</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-[#B0B0C3] mb-2">Schedule</label>
+                    <input type="datetime-local"
+                        class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end space-x-3 pt-2">
+                <button (click)="showCompose = false"
+                    class="px-5 py-2.5 bg-[#2A2A3E] text-[#B0B0C3] rounded-full text-sm font-medium hover:bg-[#3A3A4E] transition-colors">
+                    Cancel
+                </button>
+                <button
+                    class="px-5 py-2.5 bg-[#2A2A3E] text-white rounded-full text-sm font-bold hover:bg-[#3A3A4E] transition-colors border border-[#2A2A3E]">
+                    <lucide-icon [img]="Clock" class="w-4 h-4 mr-1 inline-block align-middle"></lucide-icon>
+                    Save as Draft
+                </button>
+                <button
+                    class="flex items-center px-5 py-2.5 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity shadow-lg shadow-brand-pink/20">
+                    <lucide-icon [img]="Send" class="w-4 h-4 mr-2"></lucide-icon>
+                    Send Now
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-4 gap-6">
+        @for (stat of stats; track stat.label) {
+        <div class="bg-[#1A1A2E] rounded-[24px] p-6 shadow-lg border border-[#2A2A3E]">
+            <div class="flex items-center justify-between mb-4">
+                <p class="text-[#B0B0C3] font-sans font-medium text-sm">{{ stat.label }}</p>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center" [ngClass]="{
+                    'bg-brand-pink/10': stat.color === 'brand-pink',
+                    'bg-[#00C896]/10': stat.color === '[#00C896]',
+                    'bg-[#FFD93D]/10': stat.color === '[#FFD93D]',
+                    'bg-[#9B1FDB]/10': stat.color === '[#9B1FDB]'
+                }">
+                    <lucide-icon [img]="stat.icon" class="w-5 h-5" [ngClass]="{
+                        'text-brand-pink': stat.color === 'brand-pink',
+                        'text-[#00C896]': stat.color === '[#00C896]',
+                        'text-[#FFD93D]': stat.color === '[#FFD93D]',
+                        'text-[#9B1FDB]': stat.color === '[#9B1FDB]'
+                    }"></lucide-icon>
+                </div>
+            </div>
+            <h3 class="text-3xl font-bold text-white font-mono">{{ stat.value }}</h3>
+        </div>
+        }
+    </div>
+
+    <!-- Campaigns Table -->
+    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
+        <div class="px-6 py-5 border-b border-[#2A2A3E]">
+            <h3 class="text-lg font-bold text-white">Campaign History</h3>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
+                        <th class="py-4 px-6 font-medium">Campaign</th>
+                        <th class="py-4 px-6 font-medium">Audience</th>
+                        <th class="py-4 px-6 font-medium">Sent</th>
+                        <th class="py-4 px-6 font-medium">Delivered</th>
+                        <th class="py-4 px-6 font-medium">Opened</th>
+                        <th class="py-4 px-6 font-medium">CTR</th>
+                        <th class="py-4 px-6 font-medium">Status</th>
+                        <th class="py-4 px-6 font-medium">Date</th>
+                        <th class="py-4 px-6 font-medium text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (c of campaigns; track c.title) {
+                    <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
+                        <td class="py-4 px-6">
+                            <span class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
+                                c.title }}</span>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="flex items-center text-[#B0B0C3] text-sm">
+                                <lucide-icon [img]="Target" class="w-3 h-3 mr-1.5"></lucide-icon>
+                                {{ c.audience }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-white font-mono text-sm">{{ c.sent }}</td>
+                        <td class="py-4 px-6 text-white font-mono text-sm">{{ c.delivered }}</td>
+                        <td class="py-4 px-6 text-white font-mono text-sm">{{ c.opened }}</td>
+                        <td class="py-4 px-6 font-mono text-sm" [ngClass]="{
+                            'text-[#00C896]': c.status === 'Sent',
+                            'text-[#B0B0C3]': c.status !== 'Sent'
+                        }">{{ c.ctr }}</td>
+                        <td class="py-4 px-6">
+                            <span
+                                class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex items-center border"
+                                [ngClass]="{
+                                'border-[#00C896] text-[#00C896] bg-[#00C896]/10': c.status === 'Sent',
+                                'border-[#FFD93D] text-[#FFD93D] bg-[#FFD93D]/10': c.status === 'Scheduled',
+                                'border-[#2A2A3E] text-[#B0B0C3] bg-[#2A2A3E]': c.status === 'Draft'
+                            }">
+                                {{ c.status }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ c.date }}</td>
+                        <td class="py-4 px-6 text-right">
+                            <div class="flex items-center justify-end space-x-2">
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-brand-pink hover:bg-[#2A2A3E] rounded-full transition-colors">
+                                    <lucide-icon [img]="Eye" class="w-4 h-4"></lucide-icon>
+                                </button>
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-[#FFD93D] hover:bg-[#FFD93D]/10 rounded-full transition-colors">
+                                    <lucide-icon [img]="Copy" class="w-4 h-4"></lucide-icon>
+                                </button>
+                                <button
+                                    class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors">
+                                    <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

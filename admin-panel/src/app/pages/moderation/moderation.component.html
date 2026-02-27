@@ -5,7 +5,8 @@
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold text-white font-sans">Moderation Queue</h2>
                 <span
-                    class="bg-[#FF4757]/10 text-[#FF4757] px-2 py-1 rounded text-xs font-bold border border-[#FF4757]/20">23
+                    class="bg-[#FF4757]/10 text-[#FF4757] px-2 py-1 rounded text-xs font-bold border border-[#FF4757]/20">{{
+                    queue.length }}
                     pending</span>
             </div>
 
@@ -14,36 +15,46 @@
                 <button class="flex-1 py-1.5 text-xs font-bold rounded-md transition-colors" [ngClass]="{
                     'bg-[#2A2A3E] text-white': activeTab === tab,
                     'text-[#B0B0C3] hover:bg-[#111827]': activeTab !== tab
-                  }" (click)="activeTab = tab">
+                  }" (click)="switchTab(tab)">
                     {{ tab }}
                 </button>
                 }
             </div>
         </div>
 
-        <div class="flex-1 overflow-y-auto w-full p-2 space-y-2">
+        <div class="flex-1 overflow-y-auto w-full p-2 space-y-2 relative">
+            @if(isLoading) {
+            <div class="absolute inset-0 z-10 bg-[#1A1A2E]/50 backdrop-blur-[2px] flex items-center justify-center">
+                <div class="w-6 h-6 rounded-full border-t-2 border-brand-pink animate-spin"></div>
+            </div>
+            }
             @for (item of queue; track item.id) {
-            <div class="p-3 rounded-xl flex items-start space-x-3 cursor-pointer transition-colors border relative"
+            <div (click)="selectItem(item)"
+                class="p-3 rounded-xl flex items-start space-x-3 cursor-pointer transition-colors border relative"
                 [ngClass]="{
-                'bg-[#111827] border-brand-pink': item.active,
-                'bg-transparent border-transparent hover:bg-[#111827]': !item.active
+                'bg-[#111827] border-brand-pink': selectedItem?.id === item.id,
+                'bg-transparent border-transparent hover:bg-[#111827]': selectedItem?.id !== item.id
              }">
 
-                <img [src]="item.image" class="w-16 h-16 rounded-lg object-cover bg-[#0D0D0D]" />
+                <img [src]="item.imageUrl || item.uploader.avatar"
+                    class="w-16 h-16 rounded-lg object-cover bg-[#0D0D0D]" />
 
                 <div class="flex-1 min-w-0">
                     <div class="flex justify-between items-start mb-1">
-                        <span class="text-white text-sm font-bold truncate">{{ item.type }}</span>
+                        <span class="text-white text-sm font-bold truncate">{{ item.reason }}</span>
                     </div>
-                    <p class="text-xs text-[#B0B0C3] mb-2">{{ item.time }}</p>
+                    <p class="text-xs text-[#B0B0C3] mb-2">{{ item.createdAt | date:'shortTime' }}</p>
                     <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase inline-block" [ngClass]="{
-                    'bg-[#FF4757]/10 text-[#FF4757]': item.priority === 'High',
-                    'bg-[#FFD93D]/10 text-[#FFD93D]': item.priority === 'Medium'
+                    'bg-[#FF4757]/10 text-[#FF4757]': (item.nsfwScore || 0) > 0.7 || item.uploader.reports > 3,
+                    'bg-[#FFD93D]/10 text-[#FFD93D]': (item.nsfwScore || 0) <= 0.7 && item.uploader.reports <= 3
                   }">
-                        {{ item.priority }} Priority
+                        {{ ((item.nsfwScore || 0) > 0.7 || item.uploader.reports > 3) ? 'High' : 'Medium' }} Priority
                     </span>
                 </div>
             </div>
+            }
+            @if(!isLoading && queue.length === 0) {
+            <div class="text-center text-[#B0B0C3] py-8 text-sm">No pending items in queue</div>
             }
         </div>
     </div>
@@ -53,26 +64,37 @@
             <h2 class="text-xl font-bold text-white font-sans">Image Review</h2>
         </div>
 
-        <div class="flex-1 overflow-y-auto p-8 flex space-x-8">
+        <div class="flex-1 overflow-y-auto p-8 flex space-x-8 relative">
+            @if(isActionLoading) {
+            <div class="absolute inset-0 z-20 bg-[#1A1A2E]/60 backdrop-blur-[2px] flex items-center justify-center">
+                <div class="w-8 h-8 rounded-full border-t-2 border-brand-pink animate-spin"></div>
+            </div>
+            }
+            @if(selectedItem) {
             <div class="w-1/2 flex flex-col space-y-4">
                 <div class="bg-[#0D0D0D] p-2 rounded-2xl border border-[#2A2A3E]">
-                    <img [src]="selectedItem.imageUrl" class="w-full h-auto aspect-square object-cover rounded-xl" />
+                    <!-- If an image report, show image. Else show user avatar or content -->
+                    <img [src]="selectedItem.imageUrl || selectedItem.uploader.avatar"
+                        class="w-full h-auto max-h-[400px] object-cover rounded-xl" />
                 </div>
 
+                @if(selectedItem.nsfwScore !== undefined) {
                 <div class="bg-[#2A2A3E]/50 rounded-xl p-4 border border-[#2A2A3E]">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-sm font-bold text-white">NSFW Score</span>
-                        <span class="text-sm font-bold text-[#FF4757]">{{ selectedItem.nsfwScore * 100 }}%</span>
+                        <span class="text-sm font-bold text-[#FF4757]">{{ (selectedItem.nsfwScore * 100).toFixed(0)
+                            }}%</span>
                     </div>
                     <div class="h-2 w-full bg-[#111827] rounded-full overflow-hidden">
                         <div class="h-full bg-[#FF4757]" [style.width.%]="selectedItem.nsfwScore * 100"></div>
                     </div>
                 </div>
+                }
             </div>
 
             <div class="w-1/2 flex flex-col space-y-6">
                 <div>
-                    <h3 class="text-xs uppercase font-bold text-[#B0B0C3] mb-3">Uploader Details</h3>
+                    <h3 class="text-xs uppercase font-bold text-[#B0B0C3] mb-3">Target Details</h3>
                     <div class="bg-[#0D0D0D] rounded-xl p-4 border border-[#2A2A3E] flex items-center justify-between">
                         <div class="flex items-center">
                             <img [src]="selectedItem.uploader.avatar"
@@ -93,29 +115,29 @@
                     <h3 class="text-xs uppercase font-bold text-[#B0B0C3] mb-3">Moderator Action</h3>
 
                     <div class="space-y-4">
-                        <input type="text" placeholder="Add moderator notes (optional)..."
+                        <input type="text" [(ngModel)]="moderatorNotes" placeholder="Add moderator notes (optional)..."
                             class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all" />
 
                         <div class="grid grid-cols-2 gap-3">
-                            <button
+                            <button (click)="takeAction('Approve')" [disabled]="isActionLoading"
                                 class="flex items-center justify-center space-x-2 bg-transparent hover:bg-[#00C896]/10 border border-[#00C896] text-[#00C896] py-3 rounded-xl transition-colors font-bold text-sm">
                                 <lucide-icon [img]="Check" class="w-4 h-4"></lucide-icon>
-                                <span>Approve Image</span>
+                                <span>Approve {{selectedItem.type}}</span>
                             </button>
 
-                            <button
+                            <button (click)="takeAction('Remove')" [disabled]="isActionLoading"
                                 class="flex items-center justify-center space-x-2 bg-[#FF4757] hover:bg-[#FF4757]/90 text-white py-3 rounded-xl transition-colors font-bold text-sm shadow-lg shadow-[#FF4757]/20">
                                 <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
-                                <span>Remove Image</span>
+                                <span>Remove {{selectedItem.type}}</span>
                             </button>
 
-                            <button
+                            <button (click)="takeAction('Suspend')" [disabled]="isActionLoading"
                                 class="flex items-center justify-center space-x-2 bg-[#FFD93D]/10 hover:bg-[#FFD93D]/20 border border-[#FFD93D] text-[#FFD93D] py-3 rounded-xl transition-colors font-bold text-sm">
                                 <lucide-icon [img]="ShieldOff" class="w-4 h-4"></lucide-icon>
                                 <span>Suspend User (7d)</span>
                             </button>
 
-                            <button
+                            <button (click)="takeAction('Ban')" [disabled]="isActionLoading"
                                 class="flex items-center justify-center space-x-2 bg-transparent hover:bg-[#111827] border border-[#2A2A3E] text-[#FF4757] py-3 rounded-xl transition-colors font-bold text-sm">
                                 <lucide-icon [img]="Ban" class="w-4 h-4"></lucide-icon>
                                 <span>Ban User</span>
@@ -127,10 +149,16 @@
                 <div class="border-t border-[#2A2A3E] pt-4">
                     <p class="text-xs text-[#B0B0C3] flex items-center">
                         <lucide-icon [img]="ShieldAlert" class="w-3 h-3 mr-2"></lucide-icon>
-                        Last action: Auto-flagged by Vision API · 2 mins ago
+                        Reported Reason: {{ selectedItem.reason }} · {{ selectedItem.createdAt | date:'shortTime' }}
                     </p>
                 </div>
             </div>
+            } @else {
+            <div class="flex-1 flex flex-col items-center justify-center text-[#B0B0C3]">
+                <lucide-icon [img]="ShieldAlert" class="w-16 h-16 mb-4 opacity-50"></lucide-icon>
+                <p class="text-lg">Select a report from the queue to review</p>
+            </div>
+            }
         </div>
     </div>
 </div>

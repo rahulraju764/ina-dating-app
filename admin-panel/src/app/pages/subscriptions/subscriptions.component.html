@@ -50,16 +50,40 @@
         }
     </div>
 
+    <!-- Tabs -->
+    <div class="flex space-x-1 bg-[#1A1A2E] p-1 rounded-2xl w-fit border border-[#2A2A3E] mb-6">
+        <button (click)="activeTab = 'plans'" class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all"
+            [ngClass]="activeTab === 'plans' ? 'bg-gradient-to-r from-brand-pink to-brand-coral text-white shadow-lg' : 'text-[#B0B0C3] hover:text-white hover:bg-[#2A2A3E]'">
+            Subscription Plans
+        </button>
+        <button (click)="activeTab = 'transactions'" class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all"
+            [ngClass]="activeTab === 'transactions' ? 'bg-gradient-to-r from-brand-pink to-brand-coral text-white shadow-lg' : 'text-[#B0B0C3] hover:text-white hover:bg-[#2A2A3E]'">
+            Recent Transactions
+        </button>
+    </div>
+
     <!-- Subscription Plans -->
+    @if(activeTab === 'plans') {
     <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
         <div class="px-6 py-5 border-b border-[#2A2A3E] flex items-center justify-between">
             <h3 class="text-lg font-bold text-white">Subscription Plans</h3>
-            <button
-                class="px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
-                + Add Plan
-            </button>
+            <div class="flex space-x-3">
+                <button (click)="populateMockPlans()" [disabled]="isLoadingPlans"
+                    class="px-4 py-2 bg-[#2A2A3E] text-white rounded-full text-sm font-bold hover:bg-[#3A3A4E] transition-colors disabled:opacity-50">
+                    Load Demo Plans
+                </button>
+                <button (click)="openAddModal()"
+                    class="px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                    + Add Plan
+                </button>
+            </div>
         </div>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto relative min-h-[200px]">
+            @if (isLoadingPlans) {
+            <div class="absolute inset-0 z-10 bg-[#1A1A2E]/50 backdrop-blur-[2px] flex items-center justify-center">
+                <div class="w-8 h-8 rounded-full border-t-2 border-brand-pink animate-spin"></div>
+            </div>
+            }
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
@@ -73,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (plan of plans; track plan.name) {
+                    @for (plan of plans; track plan.id) {
                     <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
                         <td class="py-4 px-6">
                             <span class="px-3 py-1 text-xs font-bold rounded-[20px] inline-block" [ngClass]="{
@@ -86,8 +110,10 @@
                         </td>
                         <td class="py-4 px-6 text-white font-bold font-mono">{{ plan.price }}</td>
                         <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ plan.duration }}</td>
-                        <td class="py-4 px-6 text-[#B0B0C3] text-sm max-w-[280px] truncate">{{ plan.features }}</td>
-                        <td class="py-4 px-6 text-white font-mono text-sm">{{ plan.activeUsers.toLocaleString() }}</td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm max-w-[280px] truncate" [title]="plan.features">{{
+                            plan.features }}</td>
+                        <td class="py-4 px-6 text-white font-mono text-sm">{{ (plan.activeUsers || 0).toLocaleString()
+                            }}</td>
                         <td class="py-4 px-6">
                             <span
                                 class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex items-center border"
@@ -100,11 +126,11 @@
                         </td>
                         <td class="py-4 px-6 text-right">
                             <div class="flex items-center justify-end space-x-2">
-                                <button
+                                <button (click)="openEditModal(plan)"
                                     class="p-2 text-[#B0B0C3] hover:text-brand-pink hover:bg-[#2A2A3E] rounded-full transition-colors">
                                     <lucide-icon [img]="Edit" class="w-4 h-4"></lucide-icon>
                                 </button>
-                                <button
+                                <button (click)="deletePlan(plan.id!)"
                                     class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors">
                                     <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
                                 </button>
@@ -112,17 +138,31 @@
                         </td>
                     </tr>
                     }
+                    @if(plans.length === 0 && !isLoadingPlans) {
+                    <tr>
+                        <td colspan="7" class="py-8 text-center text-[#B0B0C3]">No subscription plans found. Add one or
+                            load demo plans.</td>
+                    </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
+    }
 
     <!-- Recent Transactions -->
-    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
-        <div class="px-6 py-5 border-b border-[#2A2A3E]">
-            <h3 class="text-lg font-bold text-white">Recent Transactions</h3>
+    @if(activeTab === 'transactions') {
+    <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden relative">
+        @if (isLoadingTxns) {
+        <div class="absolute inset-0 z-10 bg-[#1A1A2E]/50 backdrop-blur-[2px] flex items-center justify-center">
+            <div class="w-8 h-8 rounded-full border-t-2 border-brand-pink animate-spin"></div>
         </div>
-        <div class="overflow-x-auto">
+        }
+        <div class="px-6 py-5 border-b border-[#2A2A3E] flex items-center justify-between">
+            <h3 class="text-lg font-bold text-white">Recent Transactions</h3>
+            <span class="text-xs text-[#B0B0C3] italic">* Showing max 10 recent (mocks fallback if no real ops)</span>
+        </div>
+        <div class="overflow-x-auto min-h-[200px]">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="text-[#B0B0C3] text-sm border-b border-[#2A2A3E] bg-[#0D0D0D]/50">
@@ -131,49 +171,158 @@
                         <th class="py-4 px-6 font-medium">Amount</th>
                         <th class="py-4 px-6 font-medium">Date</th>
                         <th class="py-4 px-6 font-medium">Status</th>
+                        <th class="py-4 px-6 font-medium text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for (tx of transactions; track tx.email) {
+                    @for (tx of transactions; track tx.id) {
                     <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
                         <td class="py-4 px-6 flex items-center">
-                            <img [src]="tx.avatar" alt="Avatar"
+                            @if(tx.avatarUrl) {
+                            <img [src]="tx.avatarUrl" alt="Avatar"
                                 class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E]" />
+                            } @else {
+                            <div
+                                class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E] bg-[#2A2A3E] flex items-center justify-center text-white font-bold">
+                                {{ tx.userName.charAt(0) }}
+                            </div>
+                            }
                             <div>
                                 <p class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
-                                    tx.user }}
+                                    tx.userName }}
                                 </p>
-                                <p class="text-xs text-[#B0B0C3]">{{ tx.email }}</p>
+                                <p class="text-xs text-[#B0B0C3]">{{ tx.userEmail }}</p>
                             </div>
                         </td>
-                        <td class="py-4 px-6 text-white text-sm font-medium">{{ tx.plan }}</td>
+                        <td class="py-4 px-6 text-white text-sm font-medium">{{ tx.planName }}</td>
                         <td class="py-4 px-6 text-[#FFD93D] font-bold font-mono">{{ tx.amount }}</td>
-                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ tx.date }}</td>
+                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ tx.date | date:'mediumDate' }}</td>
                         <td class="py-4 px-6">
                             <span
                                 class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex items-center border"
                                 [ngClass]="{
                                 'border-[#00C896] text-[#00C896] bg-[#00C896]/10': tx.status === 'Completed',
-                                'border-[#FF4757] text-[#FF4757] bg-[#FF4757]/10': tx.status === 'Refunded'
+                                'border-[#FF4757] text-[#FF4757] bg-[#FF4757]/10': tx.status === 'Refunded' || tx.status === 'Failed'
                             }">
                                 {{ tx.status }}
                             </span>
+                        </td>
+                        <td class="py-4 px-6 text-right">
+                            @if(tx.status === 'Completed') {
+                            <button (click)="refundTransaction(tx)"
+                                class="px-3 py-1 bg-[#FF4757]/10 text-[#FF4757] text-xs font-bold rounded-full hover:bg-[#FF4757]/20 transition-colors">
+                                Refund
+                            </button>
+                            } @else {
+                            <span class="text-[#B0B0C3] text-xs italic">-</span>
+                            }
                         </td>
                     </tr>
                     }
                 </tbody>
             </table>
         </div>
-        <div class="px-6 py-4 flex items-center justify-between border-t border-[#2A2A3E]">
-            <p class="text-sm text-[#B0B0C3]">Showing 1–5 of 1,284</p>
-            <div class="flex items-center space-x-2">
-                <button
-                    class="px-3 py-1 bg-[#2A2A3E] text-[#B0B0C3] rounded disabled:opacity-50 text-sm font-medium hover:bg-[#3A3A4E] transition-colors"
-                    disabled>&larr; Prev</button>
-                <button
-                    class="px-3 py-1 bg-[#2A2A3E] text-white rounded text-sm font-medium hover:bg-[#3A3A4E] transition-colors">Next
-                    &rarr;</button>
+    </div>
+    }
+</div>
+
+<!-- Add/Edit Modal -->
+@if(isModalOpen) {
+<div class="fixed inset-0 z-50 flex items-center justify-center">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-[#0D0D0D]/80 backdrop-blur-sm" (click)="closeModal()"></div>
+
+    <!-- Modal -->
+    <div
+        class="relative w-full max-w-lg bg-[#1A1A2E] rounded-3xl border border-[#2A2A3E] shadow-2xl p-8 transform transition-all">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h3 class="text-2xl font-bold text-white font-sans">{{ isEditing ? 'Edit' : 'Create' }} Subscription
+                    Plan</h3>
+                <p class="text-[#B0B0C3] text-sm mt-1">Configure plan tiers and pricing</p>
             </div>
+            <button (click)="closeModal()"
+                class="p-2 text-[#B0B0C3] hover:text-white hover:bg-[#2A2A3E] rounded-full transition-colors">
+                <lucide-icon [img]="X" class="w-5 h-5"></lucide-icon>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <div class="space-y-6">
+            <!-- Name & Tier -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-[#B0B0C3]">Display Name</label>
+                    <input type="text" [(ngModel)]="currentPlan.name" placeholder="e.g. Gold Annual"
+                        class="w-full bg-[#0D0D0D] text-white px-4 py-3 rounded-xl border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all font-sans" />
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-[#B0B0C3]">Tier Badge</label>
+                    <select [(ngModel)]="currentPlan.tier"
+                        class="w-full bg-[#0D0D0D] text-white px-4 py-3 rounded-xl border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all font-sans">
+                        <option value="Free">Free</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinum">Platinum</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Price & Duration -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-[#B0B0C3]">Price (as string)</label>
+                    <input type="text" [(ngModel)]="currentPlan.price" placeholder="e.g. $14.99"
+                        class="w-full bg-[#0D0D0D] text-white px-4 py-3 rounded-xl border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all font-mono" />
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-[#B0B0C3]">Duration (as string)</label>
+                    <input type="text" [(ngModel)]="currentPlan.duration" placeholder="e.g. /month"
+                        class="w-full bg-[#0D0D0D] text-white px-4 py-3 rounded-xl border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all font-sans" />
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-[#B0B0C3]">Features Description</label>
+                <textarea [(ngModel)]="currentPlan.features" rows="3" placeholder="Comma separated list of features..."
+                    class="w-full bg-[#0D0D0D] text-white px-4 py-3 rounded-xl border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all font-sans resize-none"></textarea>
+            </div>
+
+            <!-- Status -->
+            <div class="space-y-2">
+                <label
+                    class="flex items-center justify-between p-4 bg-[#0D0D0D] rounded-xl border border-[#2A2A3E] cursor-pointer hover:border-brand-pink/50 transition-colors">
+                    <div>
+                        <p class="text-white font-medium">Plan Status</p>
+                        <p class="text-xs text-[#B0B0C3]">Set to paused to hide from users</p>
+                    </div>
+                    <div class="relative w-12 h-6 transition-colors rounded-full"
+                        [ngClass]="currentPlan.status === 'Active' ? 'bg-[#00C896]' : 'bg-[#2A2A3E]'"
+                        (click)="currentPlan.status = currentPlan.status === 'Active' ? 'Paused' : 'Active'">
+                        <div class="absolute top-[2px] left-[2px] bg-white w-5 h-5 rounded-full transition-transform"
+                            [ngClass]="currentPlan.status === 'Active' ? 'translate-x-6' : 'translate-x-0'">
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="flex items-center justify-end space-x-3 mt-8">
+            <button (click)="closeModal()"
+                class="px-5 py-2.5 text-white hover:bg-[#2A2A3E] rounded-xl font-medium transition-colors">
+                Cancel
+            </button>
+            <button (click)="savePlan()" [disabled]="isSaving || !currentPlan.name || !currentPlan.price"
+                class="px-6 py-2.5 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center">
+                @if(isSaving) {
+                <div class="w-4 h-4 rounded-full border-t-2 border-white animate-spin mr-2"></div>
+                }
+                {{ isEditing ? 'Update Plan' : 'Create Plan' }}
+            </button>
         </div>
     </div>
 </div>
+}

@@ -1,32 +1,48 @@
-<div class="space-y-6 pb-12">
+<div class="space-y-6 pb-12 relative">
+    <!-- Header row -->
     <div class="flex items-center justify-between">
         <div>
             <h2 class="text-3xl font-bold text-white font-sans">Users</h2>
-            <p class="text-[#B0B0C3] mt-1">102,483 total users</p>
+            <p class="text-[#B0B0C3] mt-1">{{ filteredUsers.length }} total users</p>
         </div>
 
         <div class="flex items-center space-x-4">
+            <!-- Search -->
             <div class="relative">
                 <lucide-icon [img]="Search"
                     class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#B0B0C3]"></lucide-icon>
-                <input type="text" placeholder="Search by name or email..."
+                <input type="text" placeholder="Search by name or email..." [(ngModel)]="searchQuery"
                     class="bg-[#1A1A2E] text-white pl-10 pr-4 py-2 rounded-full border border-[#2A2A3E] focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all w-64 text-sm font-sans" />
             </div>
 
-            <button
-                class="flex items-center px-4 py-2 bg-[#1A1A2E] text-white border border-[#2A2A3E] rounded-full text-sm font-medium hover:bg-[#2A2A3E] transition-colors">
-                <lucide-icon [img]="Filter" class="w-4 h-4 mr-2 text-[#B0B0C3]"></lucide-icon>
-                Filter
-            </button>
+            <!-- Filter Dropdown -->
+            <div class="relative">
+                <select [(ngModel)]="filterStatus"
+                    class="appearance-none bg-[#1A1A2E] text-white pl-10 pr-8 py-2 border border-[#2A2A3E] rounded-full text-sm font-medium focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-colors">
+                    <option value="All">All Statuses</option>
+                    <option value="Active">Active</option>
+                    <option value="Suspended">Suspended</option>
+                    <option value="Banned">Banned</option>
+                </select>
+                <lucide-icon [img]="Filter"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#B0B0C3]"></lucide-icon>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#B0B0C3]">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </div>
+            </div>
 
-            <button
-                class="flex items-center px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
-                <lucide-icon [img]="Download" class="w-4 h-4 mr-2"></lucide-icon>
-                Export CSV
+            <!-- Add User Button -->
+            <button (click)="openAddModal()"
+                class="flex items-center px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity whitespace-nowrap">
+                <lucide-icon [img]="Plus" class="w-4 h-4 mr-2"></lucide-icon>
+                Add User
             </button>
         </div>
     </div>
 
+    <!-- Users Table -->
     <div class="bg-[#1A1A2E] rounded-[24px] shadow-lg border border-[#2A2A3E] overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -36,19 +52,24 @@
                         <th class="py-4 px-6 font-medium">Email</th>
                         <th class="py-4 px-6 font-medium">Age</th>
                         <th class="py-4 px-6 font-medium">Tier</th>
-                        <th class="py-4 px-6 font-medium">Joined</th>
                         <th class="py-4 px-6 font-medium">Status</th>
                         <th class="py-4 px-6 font-medium text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for (user of users; track user.email) {
+                    @for (user of filteredUsers; track user.id) {
                     <tr class="border-b border-[#2A2A3E] hover:bg-[#111827] transition-colors group">
                         <td class="py-4 px-6 flex items-center">
                             <img [src]="user.avatar" alt="Avatar"
                                 class="w-10 h-10 rounded-full mr-3 border border-[#2A2A3E]" />
-                            <span class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
-                                user.name }}</span>
+                            <div class="flex items-center">
+                                <span class="text-white font-bold group-hover:text-brand-pink transition-colors">{{
+                                    user.name }}</span>
+                                @if (user.isVerified) {
+                                <lucide-icon [img]="BadgeCheck" class="w-4 h-4 text-[#00C896] ml-1.5"
+                                    title="Verified User"></lucide-icon>
+                                }
+                            </div>
                         </td>
                         <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ user.email }}</td>
                         <td class="py-4 px-6 text-white text-sm">{{ user.age }}</td>
@@ -61,7 +82,6 @@
                                 {{ user.tier }}
                             </span>
                         </td>
-                        <td class="py-4 px-6 text-[#B0B0C3] text-sm">{{ user.joined }}</td>
                         <td class="py-4 px-6">
                             <span
                                 class="px-3 py-1 rounded-[20px] text-xs font-bold font-sans inline-flex flex-row items-center border"
@@ -73,17 +93,48 @@
                                 {{ user.status }}
                             </span>
                         </td>
-                        <td class="py-4 px-6 text-right relative">
-                            <div class="flex items-center justify-end space-x-2">
-                                <button
-                                    class="p-2 text-[#B0B0C3] hover:text-brand-pink hover:bg-[#2A2A3E] rounded-full transition-colors tooltip-trigger relative">
-                                    <lucide-icon [img]="Eye" class="w-4 h-4"></lucide-icon>
+                        <td class="py-4 px-6 text-right">
+                            <div class="flex items-center justify-end space-x-1">
+                                <!-- Verify Toggle -->
+                                <button (click)="verifyUser(user)"
+                                    [title]="user.isVerified ? 'Remove Verification' : 'Verify User'"
+                                    class="p-2 rounded-full transition-colors flex items-center justify-center"
+                                    [ngClass]="user.isVerified ? 'text-[#00C896] hover:bg-[#00C896]/10' : 'text-[#B0B0C3] hover:text-[#00C896] hover:bg-[#00C896]/10'">
+                                    <lucide-icon [img]="user.isVerified ? UserX : UserCheck"
+                                        class="w-4 h-4"></lucide-icon>
                                 </button>
-                                <button
-                                    class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors tooltip-trigger relative">
-                                    <lucide-icon [img]="MoreVertical" class="w-4 h-4"></lucide-icon>
+
+                                <!-- Suspend Toggle -->
+                                <button (click)="suspendUser(user)"
+                                    [title]="user.status === 'Suspended' ? 'Un-suspend User' : 'Suspend User'"
+                                    class="p-2 rounded-full transition-colors flex items-center justify-center"
+                                    [ngClass]="user.status === 'Suspended' ? 'text-[#FFD93D] hover:bg-[#FFD93D]/10' : 'text-[#B0B0C3] hover:text-[#FFD93D] hover:bg-[#FFD93D]/10'">
+                                    <lucide-icon [img]="UserMinus" class="w-4 h-4"></lucide-icon>
+                                </button>
+
+                                <!-- Ban Toggle -->
+                                <button (click)="banUser(user)"
+                                    [title]="user.status === 'Banned' ? 'Un-ban User' : 'Ban User'"
+                                    class="p-2 rounded-full transition-colors flex items-center justify-center"
+                                    [ngClass]="user.status === 'Banned' ? 'text-[#FF4757] hover:bg-[#FF4757]/10' : 'text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10'">
+                                    <lucide-icon [img]="ShieldBan" class="w-4 h-4"></lucide-icon>
+                                </button>
+
+                                <!-- Delete -->
+                                <button (click)="deleteUser(user)" title="Delete User"
+                                    class="p-2 text-[#B0B0C3] hover:text-[#FF4757] hover:bg-[#FF4757]/10 rounded-full transition-colors flex items-center justify-center">
+                                    <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
                                 </button>
                             </div>
+                        </td>
+                    </tr>
+                    }
+
+                    @if (filteredUsers.length === 0) {
+                    <tr>
+                        <td colspan="6" class="py-12 text-center text-[#B0B0C3]">
+                            <lucide-icon [img]="Search" class="w-12 h-12 mx-auto mb-3 opacity-50"></lucide-icon>
+                            <p class="text-lg">No users found matching your filters.</p>
                         </td>
                     </tr>
                     }
@@ -91,16 +142,118 @@
             </table>
         </div>
 
+        <!-- Pagination Footer -->
         <div class="px-6 py-4 flex items-center justify-between border-t border-[#2A2A3E]">
-            <p class="text-sm text-[#B0B0C3]">Showing 1–5 of 102,483</p>
-            <div class="flex items-center space-x-2">
-                <button
-                    class="px-3 py-1 bg-[#2A2A3E] text-[#B0B0C3] rounded disabled:opacity-50 text-sm font-medium hover:bg-[#3A3A4E] transition-colors"
-                    disabled>&larr; Prev</button>
-                <button
-                    class="px-3 py-1 bg-[#2A2A3E] text-white rounded text-sm font-medium hover:bg-[#3A3A4E] transition-colors">Next
-                    &rarr;</button>
+            <p class="text-sm text-[#B0B0C3]">Showing {{ filteredUsers.length > 0 ? 1 : 0 }}–{{ filteredUsers.length < 5
+                    ? filteredUsers.length : 5 }} of {{ filteredUsers.length }} matches</p>
+                    <div class="flex items-center space-x-2">
+                        <button
+                            class="px-3 py-1 bg-[#2A2A3E] text-[#B0B0C3] rounded disabled:opacity-50 text-sm font-medium hover:bg-[#3A3A4E] transition-colors"
+                            disabled>&larr; Prev</button>
+                        <button
+                            class="px-3 py-1 bg-[#2A2A3E] text-white rounded text-sm font-medium hover:bg-[#3A3A4E] transition-colors">Next
+                            &rarr;</button>
+                    </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    @if (showAddModal) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-[#0D0D0D]/80 backdrop-blur-sm p-4">
+        <div
+            class="bg-[#1A1A2E] rounded-[24px] border border-[#2A2A3E] shadow-2xl w-full max-w-md overflow-hidden relative">
+            <div
+                class="absolute top-0 right-0 w-32 h-32 bg-brand-pink/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
+            </div>
+
+            <div class="px-6 py-5 border-b border-[#2A2A3E] flex justify-between items-center relative z-10">
+                <h3 class="text-xl font-bold text-white font-sans flex items-center">
+                    <lucide-icon [img]="Plus" class="w-5 h-5 mr-2 text-brand-pink"></lucide-icon>
+                    Add New User
+                </h3>
+                <button (click)="closeAddModal()" class="text-[#B0B0C3] hover:text-white transition-colors">
+                    <lucide-icon [img]="UserX" class="w-5 h-5"></lucide-icon>
+                </button>
+            </div>
+
+            <div class="p-6 relative z-10">
+                <form [formGroup]="addUserForm" (ngSubmit)="addUser()" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-1.5">Full Name</label>
+                        <input type="text" formControlName="name" placeholder="John Doe"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-pink transition-colors"
+                            [ngClass]="{'border-[#FF4757]': addUserForm.get('name')?.invalid && addUserForm.get('name')?.touched}" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-1.5">Email Address</label>
+                        <input type="email" formControlName="email" placeholder="john@example.com"
+                            class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-pink transition-colors"
+                            [ngClass]="{'border-[#FF4757]': addUserForm.get('email')?.invalid && addUserForm.get('email')?.touched}" />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-1.5">Age</label>
+                            <input type="number" formControlName="age" min="18"
+                                class="w-full bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-pink transition-colors"
+                                [ngClass]="{'border-[#FF4757]': addUserForm.get('age')?.invalid && addUserForm.get('age')?.touched}" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-[#B0B0C3] mb-1.5">Tier</label>
+                            <div class="relative">
+                                <select formControlName="tier"
+                                    class="w-full appearance-none bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-pink transition-colors">
+                                    <option value="Free">Free</option>
+                                    <option value="Gold">Gold</option>
+                                    <option value="Platinum">Platinum</option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#B0B0C3]">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#B0B0C3] mb-1.5">Initial Status</label>
+                        <div class="relative">
+                            <select formControlName="status"
+                                class="w-full appearance-none bg-[#0D0D0D] border border-[#2A2A3E] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-pink transition-colors">
+                                <option value="Active">Active</option>
+                                <option value="Suspended">Suspended</option>
+                                <option value="Banned">Banned</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#B0B0C3]">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-3 pt-4 border-t border-[#2A2A3E] mt-6">
+                        <button type="button" (click)="closeAddModal()"
+                            class="px-4 py-2 bg-[#0D0D0D] text-white border border-[#2A2A3E] rounded-xl text-sm font-medium hover:bg-[#2A2A3E] transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" [disabled]="addUserForm.invalid"
+                            class="px-4 py-2 bg-gradient-to-r from-brand-pink to-brand-coral text-white rounded-xl text-sm font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
+                            Create User
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    }
 </div>

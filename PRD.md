@@ -1,5 +1,5 @@
 # Product Requirements Document (PRD)
-## 💘 Dating App — "Spark"
+## 💘 Dating App — "Ina"
 
 ---
 
@@ -43,7 +43,7 @@
 
 ## 1. Executive Summary
 
-**Spark** is a mobile-first dating application built with Flutter and powered by Firebase, designed to help people find meaningful relationships based on shared interests and proximity. The app provides an intuitive, swipe-based discovery experience combined with rich communication tools — including private chat, video/audio calls, and digital gift sending — to guide users from first match to real connection.
+**Ina** is a mobile-first dating application built with Flutter and powered by Firebase, designed to help people find meaningful relationships based on shared interests and proximity. The app provides an intuitive, swipe-based discovery experience combined with rich communication tools — including private chat, video/audio calls, and digital gift sending — to guide users from first match to real connection.
 
 A fully featured Admin Panel (built in Laravel or Next.js) enables the operations team to manage users, moderate content, configure subscriptions, and monitor platform health.
 
@@ -316,7 +316,7 @@ Matched users can initiate voice or video calls directly within the app, facilit
 | VC-07 | Call duration is displayed on screen during the call. |
 | VC-08 | A missed call notification is sent if the recipient does not answer. |
 | VC-09 | Users can end the call at any time; call duration is logged in chat history. |
-| VC-10 | Calls are encrypted end-to-end. Spark does not record calls. |
+| VC-10 | Calls are encrypted end-to-end. Ina does not record calls. |
 | VC-11 | If a call is interrupted (network drop), the app attempts to reconnect for up to 30 seconds. |
 | VC-12 | Video/audio calls are a **Premium-only** feature (Gold and Platinum tiers). |
 
@@ -344,10 +344,10 @@ Users can send digital gifts and stickers to their matches as a fun, expressive 
 |---|---|
 | OG-01 | A gift shop is accessible from within a match's chat and from their profile. |
 | OG-02 | The gift catalogue includes animated sticker packs, virtual roses, hearts, and themed gift items. |
-| OG-03 | Gifts are purchased using in-app currency ("Sparks") or directly via real-money purchase. |
+| OG-03 | Gifts are purchased using in-app currency ("Inas") or directly via real-money purchase. |
 | OG-04 | The recipient receives a push notification and an in-chat notification when a gift is received. |
 | OG-05 | Sent gifts are displayed visually within the chat conversation thread. |
-| OG-06 | Users can redeem accumulated "Sparks" currency for premium features or gift items. |
+| OG-06 | Users can redeem accumulated "Inas" currency for premium features or gift items. |
 | OG-07 | Admin panel allows management of the gift catalogue: add, remove, price, and categorize items. |
 | OG-08 | Gift purchase transactions are recorded for revenue reporting in the admin panel. |
 | OG-09 | Sticker packs can be unlocked as one-time purchases or included in premium subscriptions. |
@@ -359,7 +359,7 @@ Users can send digital gifts and stickers to their matches as a fun, expressive 
 gifts/{giftId}
   ├── name: string
   ├── category: "sticker" | "rose" | "animated" | "premium"
-  ├── price: number (in Sparks or USD)
+  ├── price: number (in Inas or USD)
   ├── imageUrl: string
   ├── animationUrl: string (optional, Lottie)
   ├── isPremiumOnly: boolean
@@ -476,7 +476,7 @@ onSwipe(fromUserId, toUserId, action: "like" | "pass" | "superlike")
 **Priority:** 🔴 High
 
 **Description:**
-The Coin System is Spark's internal virtual currency layer. Users purchase coins with real money and spend them across the platform — sending digital gifts to partners, playing in-app games, making voice/video calls, and unlocking premium interactions. When a user wins a game, 98% of the wagered coin pool is credited to the winner (the platform retains a 2% fee). Once a user's coin balance reaches a defined withdrawal threshold, they can cash out coins to their linked real-world wallet or bank account.
+The Coin System is Ina's internal virtual currency layer. Users purchase coins with real money and spend them across the platform — sending digital gifts to partners, playing in-app games, making voice/video calls, and unlocking premium interactions. When a user wins a game, 98% of the wagered coin pool is credited to the winner (the platform retains a 2% fee). Once a user's coin balance reaches a defined withdrawal threshold, they can cash out coins to their linked real-world wallet or bank account.
 
 ---
 
@@ -721,7 +721,7 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 ### 6.6 Gift & Product Catalogue Management
 
 - Add / edit / deactivate gift items and sticker packs.
-- Set gift pricing in Sparks or USD.
+- Set gift pricing in Inas or USD.
 - View gift transaction history and revenue.
 
 ### 6.7 Push Notification Campaigns
@@ -760,7 +760,7 @@ The Admin Panel is a web application built in **Laravel (PHP + Blade/API)** or *
 - Firebase Security Rules must enforce that users can only read/write their own data.
 - Phone number and email are never exposed to other users via the API.
 - Passwords are managed entirely by Firebase Auth (never stored by the app).
-- Payment data is handled by Stripe / App Store / Play Store — never stored on Spark's servers.
+- Payment data is handled by Stripe / App Store / Play Store — never stored on Ina's servers.
 
 ### 7.3 Reliability & Availability
 

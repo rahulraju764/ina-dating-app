@@ -1,6 +1,6 @@
-# AGENT.md — Spark Dating App
+# AGENT.md — Ina Dating App
 
-> This file provides guidance for AI coding agents (e.g., Claude, Copilot, Cursor) working on the **Spark** dating app codebase. Read this before making any changes.
+> This file provides guidance for AI coding agents (e.g., Claude, Copilot, Cursor) working on the **Ina** dating app codebase. Read this before making any changes.
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Field | Value |
 |---|---|
-| **App Name** | Spark |
+| **App Name** | Ina |
 | **Type** | Mobile Dating App + Admin Panel |
 | **Mobile Stack** | Flutter (Dart) |
 | **Backend** | Firebase (Auth · Firestore · Storage · FCM · Functions) |
@@ -20,7 +20,7 @@
 ## Monorepo Structure
 
 ```
-spark/
+Ina/
 ├── mobile/                         # Flutter app
 │   ├── lib/
 │   │   ├── main.dart
@@ -336,7 +336,7 @@ Firestore and Storage rules are the **last line of defence**. Rules must enforce
 {
   name: string,
   category: "sticker" | "rose" | "animated" | "premium",
-  priceInSparks: number,
+  priceInInas: number,
   priceUSD?: number,
   imageUrl: string,
   animationUrl?: string,              // Lottie JSON URL
@@ -366,7 +366,7 @@ Firestore and Storage rules are the **last line of defence**. Rules must enforce
 ## Firebase Storage Structure
 
 ```
-spark-storage/
+Ina-storage/
 ├── users/
 │   └── {userId}/
 │       └── photos/

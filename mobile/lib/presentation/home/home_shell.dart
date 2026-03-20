@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../core/constants/app_colors.dart';
+import '../../core/constants/app_colors.dart';
 
 class HomeShell extends StatefulWidget {
   final Widget child;
@@ -12,7 +12,6 @@ class HomeShell extends StatefulWidget {
 }
 
 class _HomeShellState extends State<HomeShell> {
-  int _currentIndex = 0;
 
   final List<String> _routes = [
     '/home',
@@ -28,7 +27,7 @@ class _HomeShellState extends State<HomeShell> {
     } else {
       context.go(_routes[index]);
     }
-    setState(() => _currentIndex = index);
+    setState(() {});
   }
 
   int _getIndexFromLocation(String location) {
@@ -137,7 +136,7 @@ class _NavItem extends StatelessWidget {
               blendMode: BlendMode.srcIn,
               shaderCallback: (bounds) => isActive
                   ? AppColors.primaryGradient.createShader(bounds)
-                  : const LinearGradient(
+                  : LinearGradient(
                       colors: [AppColors.textSecondary, AppColors.textSecondary],
                     ).createShader(bounds),
               child: Icon(

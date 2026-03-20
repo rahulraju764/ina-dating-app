@@ -89,7 +89,7 @@ class AppTheme {
         color: AppColors.divider,
         thickness: 1,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.card,
         elevation: 0,
         shape: RoundedRectangleBorder(

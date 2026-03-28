@@ -9,7 +9,7 @@
 | **Status** | Draft |
 | **Date** | February 27, 2026 |
 | **Product Type** | Mobile Application (iOS & Android) |
-| **Tech Stack** | Flutter · Firebase · Laravel / Next.js (Admin Panel) |
+| **Tech Stack** | Flutter ·  Laravel (Admin Panel) |
 
 ---
 

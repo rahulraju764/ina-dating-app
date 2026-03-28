@@ -11,8 +11,8 @@
 | **App Name** | Ina |
 | **Type** | Mobile Dating App + Admin Panel |
 | **Mobile Stack** | Flutter (Dart) |
-| **Backend** | Firebase (Auth · Firestore · Storage · FCM · Functions) |
-| **Admin Panel** | Laravel (PHP) OR Next.js (React/TypeScript) |
+| **Backend** | Laravel · FCM · Functions |
+| **Admin Panel** | Laravel (PHP) |
 | **PRD Reference** | `PRD.md` — source of truth for all feature requirements |
 
 ---
@@ -64,32 +64,7 @@ Ina/
 │   │   └── integration/
 │   ├── pubspec.yaml
 │   └── firebase.json
-│
-├── functions/                      # Firebase Cloud Functions (Node.js / TypeScript)
-│   ├── src/
-│   │   ├── index.ts                # Function exports
-│   │   ├── match/
-│   │   │   ├── onSwipe.ts          # Match creation logic
-│   │   │   └── expireMatches.ts    # Scheduled match expiry
-│   │   ├── notifications/
-│   │   │   ├── sendMatchNotif.ts
-│   │   │   ├── sendMessageNotif.ts
-│   │   │   └── sendProximityNotif.ts
-│   │   ├── purchases/
-│   │   │   └── verifyReceipt.ts    # Server-side IAP verification
-│   │   ├── coins/
-│   │   │   ├── onCoinPurchase.ts   # Verify payment, credit coins (idempotent)
-│   │   │   ├── onGameComplete.ts   # 98/2 payout split
-│   │   │   ├── onGiftSent.ts       # Deduct coins for gift send
-│   │   │   ├── onCallTick.ts       # Per-minute coin deduction for calls
-│   │   │   ├── onWithdrawalRequest.ts  # Validate KYC, lock coins
-│   │   │   └── adminAdjustCoins.ts # Callable — admin manual credit/deduct
-│   │   ├── moderation/
-│   │   │   └── moderateImage.ts    # Cloud Vision API integration
-│   │   └── gifts/
-│   │       └── processGift.ts
-│   ├── package.json
-│   └── tsconfig.json
+
 │
 ├── admin/                          # Admin Panel
 │   ├── laravel/                    # If Laravel is chosen
@@ -99,20 +74,7 @@ Ina/
 │   │   │   └── Services/
 │   │   ├── routes/api.php
 │   │   └── ...
-│   └── nextjs/                     # If Next.js is chosen
-│       ├── app/
-│       │   ├── (auth)/
-│       │   ├── dashboard/
-│       │   ├── users/
-│       │   ├── moderation/
-│       │   ├── subscriptions/
-│       │   ├── coins/              # Coin packages, ledger, withdrawals, KYC, config
-│       │   ├── gifts/
-│       │   ├── notifications/
-│       │   └── analytics/
-│       ├── components/
-│       ├── lib/
-│       └── ...
+│ 
 │
 ├── firestore.rules                 # Firestore Security Rules
 ├── storage.rules                   # Firebase Storage Security Rules
